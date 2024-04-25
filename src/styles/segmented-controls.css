@@ -1,0 +1,80 @@
+.segmented-controls {
+  --framer-segmented-control-background-color: #f3f3f3;
+  --framer-segmented-control-item-background-selected-color: #ffffff;
+  --framer-segmented-control-item-text-color: #999999;
+  --framer-segmented-control-item-text-hover-color: #888888;
+  --framer-segmented-control-item-text-selected-color: #0099ff;
+  --framer-segmented-control-divider-color: #e6e6e6;
+}
+
+[data-framer-theme="dark"] .segmented-controls {
+  --framer-segmented-control-background-color: #2b2b2b;
+  --framer-segmented-control-item-background-selected-color: #555555;
+  --framer-segmented-control-item-text-color: #999999;
+  --framer-segmented-control-item-text-hover-color: #bbbbbb;
+  --framer-segmented-control-item-text-selected-color: #ffffff;
+  --framer-segmented-control-divider-color: #444444;
+}
+
+.segmented-controls {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--framer-segmented-control-background-color);
+  padding: 2px;
+  height: 30px;
+  color: var(--framer-segmented-control-item-text-color);
+}
+
+.segmented-controls span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  transition: color 0.2s;
+  z-index: 1;
+}
+
+/* 
+.segmented-controls span::before {
+  position: absolute;
+  content: "";
+  width: 1px;
+  height: 50%;
+  border-radius: 2px;
+  background-color: var(--framer-segmented-control-divider-color);
+  left: -2px;
+  opacity: 0.5;
+}
+
+.segmented-controls span:first-child::before,
+.segmented-controls span:last-child::before {
+  display: none;
+} */
+
+.segmented-controls span:hover {
+  color: var(--framer-segmented-control-item-text-hover-color);
+}
+
+.segmented-controls span.selected {
+  color: var(--framer-segmented-control-item-text-selected-color);
+  font-weight: 600;
+}
+
+.segmented-controls .indicator {
+  position: absolute;
+  background-color: var(
+    --framer-segmented-control-item-background-selected-color
+  );
+  border-radius: 6px;
+  z-index: 0;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+}

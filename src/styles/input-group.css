@@ -1,0 +1,29 @@
+.input-group {
+  display: grid;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  gap: 10px;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  user-select: none;
+}
+
+.input-group:has(label) {
+  grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(62px, 1fr));
+}
+
+.input-group label {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.input-group > * {
+  width: 100%;
+}
+
+.input-group.full > :nth-child(2) {
+  grid-column: 2 / -1;
+}
