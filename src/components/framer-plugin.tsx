@@ -43,18 +43,17 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
 
     const mergedProps = { ...defaultProps, ...props };
 
-    if (mergedProps.showOnMounted) {
-      framer.showUI(mergedProps.uiOptions);
-    }
-
     const { ref: mainRef } = useAutoSizer();
 
     useEffect(() => {
+      if (mergedProps.showOnMounted) {
+        framer.showUI(mergedProps.uiOptions);
+      }
       localforage.config({
         name: mergedProps.uiOptions?.title || "My Plugin",
         storeName: "stores",
       });
-    }, [showOnMounted, uiOptions]);
+    }, []);
 
     return (
       <main
