@@ -12,6 +12,7 @@
   "dependencies": {
     "framer-motion": "^11.1.7",
     "framer-plugin": "^0",
+    "localforage": "^1.10.0",
     "react": "^18",
     "react-dom": "^18",
     "vite-plugin-mkcert": "^1"

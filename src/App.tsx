@@ -10,12 +10,19 @@ import Button from "./components/button";
 import InputGroup from "./components/input-group";
 import NumberControls from "./components/number-controls";
 import TextControls from "./components/text-controls";
+import { useStore } from "./hooks/store";
+import localforage from "localforage";
 
 framer.showUI({
   title: "My Plugin",
   position: "top right",
   width: 240,
   height: 95,
+});
+
+localforage.config({
+  name: "My Plugin",
+  storeName: "stores",
 });
 
 const ITEMS: SegmentedControlItem[] = [
@@ -42,6 +49,10 @@ export function App() {
 
   const [elements, setElements] = useState<ReactNode[]>([]);
 
+  const [store, setStore, setStoreValue] = useStore("store", {
+    count: 0,
+  });
+
   useEffect(() => {
     const x = setInterval(() => {
       setElements((prev) => [
@@ -61,9 +72,30 @@ export function App() {
         {selection.length} {layer} selected.
       </p>
       <hr />
-      <Button>Primary Button</Button>
-      <Button variant="secondary">Secondary Button</Button>
-      <Button variant="destructive">Destructive Button</Button>
+      <p>{store.count}</p>
+      <Button
+        onClick={() => {
+          setStoreValue("count", store.count + 1);
+        }}
+      >
+        Primary Button
+      </Button>
+      <Button
+        onClick={() => {
+          setStoreValue("count", store.count - 1);
+        }}
+        variant="secondary"
+      >
+        Secondary Button
+      </Button>
+      <Button
+        onClick={() => {
+          setStore({ count: 0 });
+        }}
+        variant="destructive"
+      >
+        Destructive Button
+      </Button>
       <hr />
       <Button disabled>Primary Button</Button>
       <Button variant="secondary" disabled>
