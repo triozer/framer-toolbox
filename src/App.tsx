@@ -11,19 +11,6 @@ import InputGroup from "./components/input-group";
 import NumberControls from "./components/number-controls";
 import TextControls from "./components/text-controls";
 import { useStore } from "./hooks/store";
-import localforage from "localforage";
-
-framer.showUI({
-  title: "My Plugin",
-  position: "top right",
-  width: 240,
-  height: 95,
-});
-
-localforage.config({
-  name: "My Plugin",
-  storeName: "stores",
-});
 
 const ITEMS: SegmentedControlItem[] = [
   { value: "one", label: "A" },
