@@ -1,37 +1,55 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import localforage from "localforage";
+import { useFramerPlugin } from "../providers/framer-plugin";
 
 export function useStore<StoreType extends {}>(
   name: string,
-  initState?: StoreType
+  initState: StoreType
 ) {
-  const [store, setStore] = useState<Partial<StoreType>>(
-    Object.freeze(initState ?? {})
+  const { id } = useFramerPlugin();
+  const idb = useRef(
+    localforage.createInstance({
+      name: id,
+      storeName: name,
+    })
   );
 
+  const [store, setStore] = useState<StoreType>(initState);
+
   useEffect(() => {
-    localforage.getItem<Partial<StoreType>>(name).then((value) => {
-      if (value !== null) {
-        setState(value);
-      }
+    idb.current.iterate((value, key) => {
+      setStore((prev) => ({ ...prev, [key]: value }));
     });
   }, []);
 
   useEffect(() => {
-    if (store !== null) {
-      localforage.setItem(name, store);
+    for (const key in store) {
+      if (store[key] === undefined) {
+        idb.current.removeItem(key);
+        return;
+      }
+
+      idb.current.setItem(key, store[key]);
     }
-  }, [store]);
+  }, [JSON.stringify(store)]);
 
   const setState = (value: Partial<StoreType>) => {
-    setStore(value);
+    if (Object.keys(value).length === Object.keys(store).length) {
+      setStore(value as StoreType);
+      return;
+    }
+
+    setStore({
+      ...store,
+      ...value,
+    });
   };
 
-  const setKeyValue = (
-    key: keyof StoreType,
-    value: StoreType[keyof StoreType]
+  const setKeyValue = <Key extends keyof StoreType>(
+    key: Key,
+    value: StoreType[Key]
   ) => {
-    setState({ ...store, [key]: value });
+    setState({ [key]: value } as unknown as Partial<StoreType>);
   };
 
   return [store as StoreType, setState, setKeyValue] as const;
