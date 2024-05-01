@@ -1,20 +1,28 @@
 import React, { useEffect } from "react";
 import { useAutoSizer } from "../hooks/auto-sizer";
 import { UIOptions, framer } from "framer-plugin";
-import localforage from "localforage";
-
-type NumberValue = `0` | `${number}px`;
+import { useFramerPlugin } from "../providers/framer-plugin";
 
 type FramerPluginRealProps = {
-  padding:
-    | `${NumberValue} ${NumberValue} ${NumberValue} ${NumberValue}`
-    | `${NumberValue} ${NumberValue} ${NumberValue}`
-    | `${NumberValue} ${NumberValue}`
-    | `${NumberValue}`;
-  gap: `${NumberValue} ${NumberValue}` | `${NumberValue}`;
+  name: string;
+  padding: React.CSSProperties["padding"];
+  gap: React.CSSProperties["gap"];
   autoResize: boolean;
-  uiOptions: UIOptions;
+  uiOptions: Omit<UIOptions, "title">;
   showOnMounted: boolean;
+};
+
+const defaultProps: FramerPluginRealProps = {
+  name: "Framer Plugin",
+  padding: "0 15px 15px 15px",
+  gap: "10px",
+  autoResize: false,
+  showOnMounted: true,
+  uiOptions: {
+    position: "top right",
+    width: 240,
+    height: 95,
+  },
 };
 
 type FramerPluginProps = {
@@ -24,35 +32,41 @@ type FramerPluginProps = {
 
 const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
   (
-    { children, padding, gap, autoResize, showOnMounted, uiOptions, ...props },
+    {
+      children,
+      name,
+      padding,
+      gap,
+      autoResize,
+      showOnMounted,
+      uiOptions,
+      ...props
+    },
     ref
   ) => {
-    const defaultProps: FramerPluginRealProps = {
-      padding: "0 15px 15px 15px",
-      gap: "10px",
-      autoResize: false,
-      showOnMounted: true,
+    const { name: configName } = useFramerPlugin();
+
+    const mergedProps: FramerPluginRealProps = {
+      name: name ?? configName,
+      padding: padding ?? defaultProps.padding,
+      gap: gap ?? defaultProps.gap,
+      autoResize: autoResize ?? defaultProps.autoResize,
+      showOnMounted: showOnMounted ?? defaultProps.showOnMounted,
       uiOptions: {
-        title: "My Plugin",
-        position: "top right",
-        width: 240,
-        height: 95,
+        ...defaultProps.uiOptions,
         ...uiOptions,
       },
     };
-
-    const mergedProps = { ...defaultProps, ...props };
 
     const { ref: mainRef } = useAutoSizer();
 
     useEffect(() => {
       if (mergedProps.showOnMounted) {
-        framer.showUI(mergedProps.uiOptions);
+        framer.showUI({
+          title: mergedProps.name,
+          ...mergedProps.uiOptions,
+        });
       }
-      localforage.config({
-        name: mergedProps.uiOptions?.title || "My Plugin",
-        storeName: "stores",
-      });
     }, []);
 
     return (

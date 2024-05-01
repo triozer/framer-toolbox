@@ -1,8 +1,6 @@
 {
   "id": "3a5f7a",
-  "name": "Toolbox",
-  "modes": [
-    "default"
-  ],
+  "name": "Framer Toolbox",
+  "modes": ["default"],
   "icon": "/icon.svg"
 }
