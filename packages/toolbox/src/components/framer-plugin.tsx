@@ -45,8 +45,6 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     ref
   ) => {
     const { id, name: configName } = useFramerPlugin();
-    console.log("id", id);
-    console.log("name", configName);
 
     const mergedProps: FramerPluginRealProps = {
       name: name ?? configName,
