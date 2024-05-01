@@ -87,4 +87,4 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
   }
 );
 
-export default FramerPlugin;
+export { FramerPlugin };
