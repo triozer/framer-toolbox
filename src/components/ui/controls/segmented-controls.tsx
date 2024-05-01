@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { InputGroup } from "../input-group";
 
-import "../styles/segmented-controls.css";
+import "../../../styles/segmented-controls.css";
 
 /**
  * Type definition for a segmented control item
