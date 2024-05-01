@@ -1,14 +1,18 @@
-import { framer, CanvasNode } from "framer-plugin";
 import { useState, useEffect, ReactNode } from "react";
 import "./App.css";
-import { useAutoSizer } from "./hooks/auto-sizer";
-import { FramerPlugin } from "./components";
-import { SegmentedControls, SegmentedControlItem } from "./components";
-import { Button } from "./components";
-import { InputGroup } from "./components";
-import { NumberControls } from "./components";
-import { TextControls } from "./components";
-import { useStore } from "./hooks/store";
+
+import {
+  Button,
+  FramerPlugin,
+  InputGroup,
+  NumberControls,
+  SegmentedControlItem,
+  SegmentedControls,
+  TextControls,
+  useAutoSizer,
+  useSelection,
+  useStore,
+} from "@triozer/framer-toolbox";
 
 const ITEMS: SegmentedControlItem[] = [
   { value: "one", label: "A" },
@@ -16,23 +20,13 @@ const ITEMS: SegmentedControlItem[] = [
   { value: "three", label: "C" },
 ];
 
-function useSelection() {
-  const [selection, setSelection] = useState<CanvasNode[]>([]);
-
-  useEffect(() => {
-    return framer.subscribeToSelection(setSelection);
-  }, []);
-
-  return selection;
-}
-
 export function App() {
   const selection = useSelection();
   const layer = selection.length === 1 ? "layer" : "layers";
 
   const { ref } = useAutoSizer();
 
-  const [elements, setElements] = useState<ReactNode[]>([]);
+  const [_, setElements] = useState<ReactNode[]>([]);
 
   const [store, setStore, setStoreValue] = useStore("store", {
     count: 0,

@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
 import { InputGroup } from "../input-group";
-import { Icon } from "../../../icons";
+import { type Icon } from "@/components/icons";
 
 type TextControlsProps = {
   title?: string;
