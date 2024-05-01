@@ -1,5 +1,5 @@
 import "./globals.css";
-import "@triozer/framer-toolbox/dist/styles.css";
+import "@triozer/framer-toolbox/dist/index.css";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
