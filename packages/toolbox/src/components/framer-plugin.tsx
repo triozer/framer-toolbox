@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAutoSizer } from "../hooks/auto-sizer";
-import { UIOptions, framer } from "framer-plugin";
+import { type UIOptions, framer } from "framer-plugin";
 import { useFramerPlugin } from "../providers/framer-plugin";
 
 type FramerPluginRealProps = {
@@ -16,7 +16,7 @@ const defaultProps: FramerPluginRealProps = {
   name: "Framer Plugin",
   padding: "0 15px 15px 15px",
   gap: "10px",
-  autoResize: false,
+  autoResize: true,
   showOnMounted: true,
   uiOptions: {
     position: "top right",
@@ -44,7 +44,7 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     },
     ref
   ) => {
-    const { name: configName } = useFramerPlugin();
+    const { id, name: configName } = useFramerPlugin();
 
     const mergedProps: FramerPluginRealProps = {
       name: name ?? configName,

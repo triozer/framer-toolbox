@@ -1,10 +1,5 @@
 import { framer } from "framer-plugin";
-import {
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
 /**
  * Represents a set of dimensions (width and height) for an element.
