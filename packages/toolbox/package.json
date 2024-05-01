@@ -21,7 +21,7 @@
     }
   },
   "scripts": {
-    "dev": "tsup --watch",
+    "dev": "tsup --watch --onSuccess 'tsc -d'",
     "build": "tsup"
   },
   "peerDependencies": {

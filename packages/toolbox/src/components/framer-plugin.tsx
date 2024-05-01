@@ -16,7 +16,7 @@ const defaultProps: FramerPluginRealProps = {
   name: "Framer Plugin",
   padding: "0 15px 15px 15px",
   gap: "10px",
-  autoResize: false,
+  autoResize: true,
   showOnMounted: true,
   uiOptions: {
     position: "top right",
