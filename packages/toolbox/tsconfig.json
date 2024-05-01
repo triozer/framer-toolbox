@@ -13,6 +13,8 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,
+    "declaration": true,
+    "declarationMap": true,
 
     // Best practices
     "strict": true,
@@ -29,5 +31,6 @@
     "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }

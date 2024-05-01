@@ -44,97 +44,19 @@ export function App() {
   }, []);
 
   return (
-    <FramerPlugin ref={ref}>
-      <p>
-        Welcome! Check out the{" "}
-        <a href="https://developers.framer.wiki/">Docs</a> to start. You have{" "}
-        {selection.length} {layer} selected.
-      </p>
-      <hr />
-      <p>{store.count}</p>
-      <Button
-        onClick={() => {
-          setStoreValue("count", store.count + 1);
+    <FramerPlugin ref={ref} autoResize={true}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+          width: "100%",
         }}
       >
-        Primary Button
-      </Button>
-      <Button
-        onClick={() => {
-          setStoreValue("count", store.count - 1);
-        }}
-        variant="secondary"
-      >
-        Secondary Button
-      </Button>
-      <Button
-        onClick={() => {
-          setStore({ count: 0 });
-        }}
-        variant="destructive"
-      >
-        Destructive Button
-      </Button>
-      <hr />
-      <Button disabled>Primary Button</Button>
-      <Button variant="secondary" disabled>
-        Secondary Button
-      </Button>
-      <Button variant="destructive" disabled>
-        Destructive Button
-      </Button>
-      <hr />
-      <TextControls icon="search" placeholder="Search" />
-      <InputGroup>
-        <input
-          type="text"
-          onChange={(e) => console.log(e.target.value)}
-          placeholder="Tracking Code"
-        />
-      </InputGroup>
-      <hr />
-      <SegmentedControls
-        title="Segmented Controls"
-        items={ITEMS}
-        defaultValue="one"
-        onChange={(value) => console.log(value)}
-      />
-      <SegmentedControls
-        title="Distribute"
-        items={[
-          { value: "one", label: "A" },
-          { value: "two", label: "B" },
-          { value: "three", label: "C" },
-          { value: "four", label: "D" },
-          { value: "five", label: "E" },
-        ]}
-        defaultValue="one"
-        onChange={(value) => console.log(value)}
-      />
-      <hr />
-      <InputGroup title="Select">
-        <select onChange={(e) => console.log(e.target.value)}>
-          <option value="one">One</option>
-          <option value="two">Two</option>
-          <option value="three">Three</option>
-        </select>
-      </InputGroup>
-      <InputGroup title="Input">
-        <input
-          type="text"
-          onChange={(e) => console.log(e.target.value)}
-          placeholder="Text..."
-        />
-      </InputGroup>
-      <NumberControls title="Number" defaultValue={10} />
-      <NumberControls
-        title="Stepper"
-        defaultValue={2}
-        min={0}
-        max={10}
-        stepper
-      />
-      <NumberControls title="Gap" defaultValue={10} min={0} slider />
+        Welcome to my plugin! You have {selection.length} {layer} selected.
+      </div>
     </FramerPlugin>
   );
 }
