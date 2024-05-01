@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import InputGroup from "./input-group";
+import { InputGroup } from "../input-group";
 
 import "../styles/segmented-controls.css";
 
@@ -10,7 +10,7 @@ import "../styles/segmented-controls.css";
  * @property {string} value - The value of the item
  * @property {string} label - The label displayed for the item
  */
-export type SegmentedControlItem = {
+type SegmentedControlItem = {
   value: string;
   label: string;
 };
@@ -113,4 +113,4 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
   );
 };
 
-export default SegmentedControls;
+export { SegmentedControls, type SegmentedControlItem };

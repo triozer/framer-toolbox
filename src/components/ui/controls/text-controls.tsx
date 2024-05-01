@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
-import InputGroup from "./input-group";
-import { Icon } from "../icons";
+import { InputGroup } from "../input-group";
+import { Icon } from "../../../icons";
 
 type TextControlsProps = {
   title?: string;
@@ -42,4 +42,4 @@ const TextControls: React.FC<TextControlsProps> = ({
   );
 };
 
-export default TextControls;
+export { TextControls };

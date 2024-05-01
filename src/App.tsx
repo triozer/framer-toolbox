@@ -2,14 +2,12 @@ import { framer, CanvasNode } from "framer-plugin";
 import { useState, useEffect, ReactNode } from "react";
 import "./App.css";
 import { useAutoSizer } from "./hooks/auto-sizer";
-import FramerPlugin from "./components/framer-plugin";
-import SegmentedControls, {
-  SegmentedControlItem,
-} from "./components/segmented-controls";
-import Button from "./components/button";
-import InputGroup from "./components/input-group";
-import NumberControls from "./components/number-controls";
-import TextControls from "./components/text-controls";
+import { FramerPlugin } from "./components";
+import { SegmentedControls, SegmentedControlItem } from "./components";
+import { Button } from "./components";
+import { InputGroup } from "./components";
+import { NumberControls } from "./components";
+import { TextControls } from "./components";
 import { useStore } from "./hooks/store";
 
 const ITEMS: SegmentedControlItem[] = [

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-import "../styles/input-group.css";
+import "../../styles/input-group.css";
 
 type InputGroupProps = {
   title?: string;
@@ -21,4 +21,4 @@ const InputGroup: React.FC<InputGroupProps> = ({ title, children }) => {
   );
 };
 
-export default InputGroup;
+export { InputGroup };

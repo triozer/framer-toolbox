@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import InputGroup from "./input-group";
+import { InputGroup } from "../input-group";
 
 type NumberControlsProps = {
   title: string;
@@ -86,4 +86,4 @@ const NumberControls: React.FC<NumberControlsProps> = ({
   );
 };
 
-export default NumberControls;
+export { NumberControls };
