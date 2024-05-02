@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
-type FramerPluginContextProps = {
+type FramerPluginContextType = {
   id: string;
   name: string;
 };
 
-const FramerPluginContext = createContext<FramerPluginContextProps>({
+const FramerPluginContext = createContext<FramerPluginContextType>({
   id: "00000",
   name: "A Framer Plugin",
 });
