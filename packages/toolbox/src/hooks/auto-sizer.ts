@@ -26,13 +26,10 @@ type Options = {
  * @param {Options} options - The options for the responsive sizer.
  * @returns An object containing the element reference and the element size.
  */
-export function useAutoSizer(
-  options: Options = {
-    enableUIResizing: true,
-    defaultSize: { width: 240, height: 95 },
-  }
-) {
+export function useAutoSizer(options: Options) {
   const ref = useRef<HTMLDivElement>(null);
+  const isCurrentlyResizing = useRef(false);
+
   const [pluginDimensions, setPluginDimensions] = useState(options.defaultSize);
 
   const updatePluginDimensions = useCallback(
@@ -49,30 +46,50 @@ export function useAutoSizer(
     [options.enableUIResizing]
   );
 
+  const handleResize = useCallback(() => {
+    if (!ref.current) return;
+    if (isCurrentlyResizing.current) {
+      console.debug("Currently resizing, skipping resize");
+      return;
+    }
+
+    isCurrentlyResizing.current = true;
+
+    const { width, height } = ref.current.getBoundingClientRect();
+
+    const newDimensions = {
+      width: Math.max(pluginDimensions.width, width),
+      height: Math.max(pluginDimensions.height, height),
+    };
+
+    updatePluginDimensions(newDimensions, "auto");
+    isCurrentlyResizing.current = false;
+  }, [pluginDimensions, updatePluginDimensions]);
+
   useLayoutEffect(() => {
     if (!ref.current) return;
 
     ref.current.style.width = "fit-content";
     ref.current.style.height = "fit-content";
 
-    const resizeObserver = new ResizeObserver(async () => {
-      if (!ref.current) return;
+    const resizeObserver = new ResizeObserver(handleResize);
+    const mutationObserver = new MutationObserver(handleResize);
 
-      const { width, height } = ref.current.getBoundingClientRect();
-
-      const newDimensions = {
-        width: Math.max(options.defaultSize.width, width),
-        height: Math.max(options.defaultSize.height, height),
-      };
-
-      updatePluginDimensions(newDimensions, "auto");
+    mutationObserver.observe(ref.current, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["style"],
     });
 
     resizeObserver.observe(ref.current, {
       box: "content-box",
     });
 
-    return () => resizeObserver.disconnect();
+    return () => {
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
+    };
   }, [ref]);
 
   return { ref, pluginDimensions, updatePluginDimensions };

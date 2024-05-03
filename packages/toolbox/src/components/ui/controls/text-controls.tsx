@@ -6,7 +6,10 @@ import { type Icon } from "@/components/icons";
 type TextControlsProps = {
   title?: string;
   icon?: Icon;
-} & React.HTMLProps<HTMLInputElement>;
+} & React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
 
 const TextControls: React.FC<TextControlsProps> = ({
   title,

@@ -3,17 +3,19 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 type FramerPluginContextType = {
   id: string;
   name: string;
+  isLoaded: boolean;
 };
 
 const FramerPluginContext = createContext<FramerPluginContextType>({
   id: "00000",
   name: "A Framer Plugin",
+  isLoaded: false,
 });
 
 export const FramerPluginProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const isLoaded = useRef(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const [id, setId] = useState<string>();
   const [name, setName] = useState<string>();
@@ -25,17 +27,13 @@ export const FramerPluginProvider: React.FC<{
       setId(config.id);
       setName(config.name);
 
-      isLoaded.current = true;
+      setIsLoaded(true);
     })();
   }, []);
 
-  if (!isLoaded.current) {
-    return null;
-  }
-
   return (
-    <FramerPluginContext.Provider value={{ id: id!, name: name! }}>
-      {children}
+    <FramerPluginContext.Provider value={{ id: id!, name: name!, isLoaded }}>
+      {isLoaded && children}
     </FramerPluginContext.Provider>
   );
 };
@@ -43,7 +41,7 @@ export const FramerPluginProvider: React.FC<{
 export const useFramerPlugin = () => {
   const context = useContext(FramerPluginContext);
 
-  if (!context || !context.id || !context.name) {
+  if (!context) {
     throw new Error(
       "useFramerPlugin must be used within a FramerPluginProvider"
     );

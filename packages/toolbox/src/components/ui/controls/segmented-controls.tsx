@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { InputGroup } from "../input-group";
 
@@ -26,9 +26,13 @@ type SegmentedControlItem = {
 type SegmentedControlsProps = {
   title: string;
   items: SegmentedControlItem[];
-  defaultValue: string;
+  defaultValue?: string;
+  value?: string | null;
   onChange: (value: string) => void;
-} & React.HTMLProps<HTMLDivElement>;
+} & React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLSelectElement>,
+  HTMLSelectElement
+>;
 
 /**
  * SegmentedControls component
@@ -41,11 +45,14 @@ type SegmentedControlsProps = {
 const SegmentedControls: React.FC<SegmentedControlsProps> = ({
   title,
   items,
+  value,
   defaultValue,
   onChange,
 }: SegmentedControlsProps) => {
   const segmentedControlsRef = useRef<HTMLDivElement>(null);
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const [selectedValue, setSelectedValue] = useState(
+    value ?? defaultValue ?? items.length > 0 ? items[0].value : null
+  );
 
   const padding = useMemo(() => {
     if (!segmentedControlsRef.current)
@@ -89,6 +96,10 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
     setSelectedValue(value);
     onChange(value);
   };
+
+  useEffect(() => {
+    setSelectedValue(value ?? null);
+  }, [value]);
 
   return (
     <InputGroup title={title}>
