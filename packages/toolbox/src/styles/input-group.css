@@ -18,6 +18,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--framer-color-text-secondary);
 }
 
 .input-group > * {

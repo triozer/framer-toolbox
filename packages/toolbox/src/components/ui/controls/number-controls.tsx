@@ -6,9 +6,13 @@ type NumberControlsProps = {
   title: string;
   stepper?: boolean;
   slider?: boolean;
-} & React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
+  onChange?: (value: number) => void;
+} & Omit<
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >,
+  "onChange"
 >;
 
 const NumberControls: React.FC<NumberControlsProps> = ({
@@ -22,15 +26,15 @@ const NumberControls: React.FC<NumberControlsProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(+e.target.value);
-
-    if (props.onChange) {
-      props.onChange(e);
-    }
   };
 
   useEffect(() => {
     setValue(+(props.value || 0));
   }, [props.value]);
+
+  useEffect(() => {
+    props.onChange && props.onChange(value);
+  }, [value]);
 
   if (!stepper && !slider) {
     return (
