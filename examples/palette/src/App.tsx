@@ -269,6 +269,7 @@ export function App() {
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "10px",
+          width: "100%",
         }}
       >
         <button
