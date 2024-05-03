@@ -25,5 +25,9 @@ const Home = () => {
 };
 
 export function App() {
-  return <FramerPlugin autoResize={true} />;
+  return (
+    <FramerPlugin autoResize={true}>
+      <Home />
+    </FramerPlugin>
+  );
 }
