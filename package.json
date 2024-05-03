@@ -10,7 +10,9 @@
     "url": "git+https://github.com/triozer/framer-toolbox.git"
   },
   "scripts": {
-    "build": "pnpm -r --filter='./packages/*' run build"
+    "build:packages": "pnpm -r --filter='./packages/*' run build",
+    "build:examples": "pnpm -r --filter='./examples/*' run build",
+    "build": "pnpm run build:packages && pnpm run build:examples"
   },
   "packageManager": "pnpm@9.0.6",
   "devDependencies": {
