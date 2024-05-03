@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { m, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { framer, withBackgroundColor } from "framer-plugin";
 import {
   COLOR_SCHEMES,
@@ -18,6 +18,7 @@ import {
   useSelection,
   useStore,
   capitalizeWords,
+  Button,
 } from "@triozer/framer-toolbox";
 import * as htmlToImage from "html-to-image";
 
@@ -272,7 +273,8 @@ export function App() {
           width: "100%",
         }}
       >
-        <button
+        <Button
+          variant="secondary"
           onClick={async () => {
             const node = document.getElementById("colors");
             if (!node) return;
@@ -286,9 +288,9 @@ export function App() {
           }}
         >
           Export
-        </button>
-        <button
-          className="framer-button-primary"
+        </Button>
+        <Button
+          variant="primary"
           onClick={() => {
             setStoreValue(
               "colors",
@@ -297,7 +299,7 @@ export function App() {
           }}
         >
           Generate
-        </button>
+        </Button>
       </div>
     </FramerPlugin>
   );
