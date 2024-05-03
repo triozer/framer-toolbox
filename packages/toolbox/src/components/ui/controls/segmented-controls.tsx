@@ -27,11 +27,11 @@ type SegmentedControlsProps = {
   title: string;
   items: SegmentedControlItem[];
   defaultValue?: string;
-  value?: string | null;
-  onChange: (value: string) => void;
-} & React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLSelectElement>,
-  HTMLSelectElement
+  value?: string | boolean | null;
+  onChange: (value: string | boolean) => void;
+} & Omit<
+  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+  "onChange"
 >;
 
 /**
@@ -51,7 +51,7 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
 }: SegmentedControlsProps) => {
   const segmentedControlsRef = useRef<HTMLDivElement>(null);
   const [selectedValue, setSelectedValue] = useState(
-    value ?? defaultValue ?? items.length > 0 ? items[0].value : null
+    defaultValue ?? value ?? items.length > 0 ? items[0].value : false
   );
 
   const padding = useMemo(() => {
@@ -98,7 +98,7 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
   };
 
   useEffect(() => {
-    setSelectedValue(value ?? null);
+    setSelectedValue(value ?? false);
   }, [value]);
 
   return (

@@ -19,7 +19,7 @@ export function useStore<StoreType extends {}>(
   const [isStoreLoaded, setStoreLoaded] = useState(false);
 
   useEffect(() => {
-    let storedData: StoreType = {} as StoreType;
+    let storedData: StoreType = initState;
 
     idb.current.ready().then(() => {
       idb.current
