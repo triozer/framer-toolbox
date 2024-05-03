@@ -7,11 +7,11 @@ import "../../../styles/segmented-controls.css";
 /**
  * Type definition for a segmented control item
  *
- * @property {string} value - The value of the item
+ * @property {string | boolean} value - The value of the item
  * @property {string} label - The label displayed for the item
  */
 type SegmentedControlItem = {
-  value: string;
+  value: string | boolean;
   label: string;
 };
 
@@ -26,12 +26,12 @@ type SegmentedControlItem = {
 type SegmentedControlsProps = {
   title: string;
   items: SegmentedControlItem[];
-  defaultValue?: string;
-  value?: string | null;
-  onChange: (value: string) => void;
-} & React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLSelectElement>,
-  HTMLSelectElement
+  defaultValue?: string | boolean;
+  value?: string | boolean | null;
+  onChange: (value: string | boolean) => void;
+} & Omit<
+  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+  "onChange"
 >;
 
 /**
@@ -51,7 +51,7 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
 }: SegmentedControlsProps) => {
   const segmentedControlsRef = useRef<HTMLDivElement>(null);
   const [selectedValue, setSelectedValue] = useState(
-    value ?? defaultValue ?? items.length > 0 ? items[0].value : null
+    defaultValue ?? value ?? items.length > 0 ? items[0].value : false
   );
 
   const padding = useMemo(() => {
@@ -90,7 +90,7 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
     };
   }, [selectedValue, items, padding]);
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: string | boolean) => {
     if (value === selectedValue) return;
 
     setSelectedValue(value);
@@ -98,7 +98,7 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
   };
 
   useEffect(() => {
-    setSelectedValue(value ?? null);
+    setSelectedValue(value ?? false);
   }, [value]);
 
   return (
@@ -106,7 +106,7 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
       <div ref={segmentedControlsRef} className="segmented-controls">
         {items.map((item) => (
           <span
-            key={item.value}
+            key={`${title}-${item.value}`}
             onClick={() => handleChange(item.value)}
             className={item.value === selectedValue ? "selected" : ""}
           >
