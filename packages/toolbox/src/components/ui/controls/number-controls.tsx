@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { InputGroup } from "../input-group";
 
@@ -6,7 +6,10 @@ type NumberControlsProps = {
   title: string;
   stepper?: boolean;
   slider?: boolean;
-} & React.HTMLProps<HTMLInputElement>;
+} & React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
 
 const NumberControls: React.FC<NumberControlsProps> = ({
   title,
@@ -24,6 +27,10 @@ const NumberControls: React.FC<NumberControlsProps> = ({
       props.onChange(e);
     }
   };
+
+  useEffect(() => {
+    setValue(+(props.value || 0));
+  }, [props.value]);
 
   if (!stepper && !slider) {
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useAutoSizer } from "../hooks/auto-sizer";
 import { type UIOptions, framer } from "framer-plugin";
 import { useFramerPlugin } from "../providers/framer-plugin";
@@ -44,7 +44,7 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     },
     ref
   ) => {
-    const { id, name: configName } = useFramerPlugin();
+    const { name: configName } = useFramerPlugin();
 
     const mergedProps: FramerPluginRealProps = {
       name: name ?? configName,
@@ -58,7 +58,13 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
       },
     };
 
-    const { ref: mainRef } = useAutoSizer();
+    const { ref: mainRef } = useAutoSizer({
+      enableUIResizing: mergedProps.autoResize,
+      defaultSize: {
+        width: mergedProps.uiOptions.width ?? defaultProps.uiOptions.width!,
+        height: mergedProps.uiOptions.height ?? defaultProps.uiOptions.height!,
+      },
+    });
 
     useEffect(() => {
       if (mergedProps.showOnMounted) {
@@ -74,6 +80,9 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
         {...props}
         ref={mergedProps.autoResize ? mainRef : ref}
         style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "start",
           padding: mergedProps.padding,
           gap: mergedProps.gap,
           width: "100%",

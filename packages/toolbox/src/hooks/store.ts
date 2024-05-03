@@ -7,6 +7,7 @@ export function useStore<StoreType extends {}>(
   initState: StoreType
 ) {
   const { id } = useFramerPlugin();
+
   const idb = useRef(
     localforage.createInstance({
       name: id,
@@ -15,23 +16,34 @@ export function useStore<StoreType extends {}>(
   );
 
   const [store, setStore] = useState<StoreType>(initState);
+  const [isStoreLoaded, setStoreLoaded] = useState(false);
 
   useEffect(() => {
-    idb.current.iterate((value, key) => {
-      setStore((prev) => ({ ...prev, [key]: value }));
+    let storedData: StoreType = {} as StoreType;
+
+    idb.current.ready().then(() => {
+      idb.current
+        .iterate((value, key) => {
+          storedData = { ...storedData, [key]: value };
+        })
+        .then(() => {
+          setStore(storedData);
+          setStoreLoaded(true);
+        });
     });
   }, []);
 
   useEffect(() => {
+    if (!isStoreLoaded) return; // If the store is not loaded, we don't want to write to IndexedDB yet
+
     for (const key in store) {
       if (store[key] === undefined) {
         idb.current.removeItem(key);
-        return;
+        continue;
       }
-
-      idb.current.setItem(key, store[key]);
+      idb.current.setItem(key, store[key]); // Save to local storage
     }
-  }, [JSON.stringify(store)]);
+  }, [JSON.stringify(store), isStoreLoaded]); // add isStoreLoaded as dependency
 
   const setState = (value: Partial<StoreType>) => {
     if (Object.keys(value).length === Object.keys(store).length) {
@@ -52,5 +64,5 @@ export function useStore<StoreType extends {}>(
     setState({ [key]: value } as unknown as Partial<StoreType>);
   };
 
-  return [store as StoreType, setState, setKeyValue] as const;
+  return [store as StoreType, setState, setKeyValue, isStoreLoaded] as const;
 }

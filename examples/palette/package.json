@@ -1,0 +1,42 @@
+{
+  "name": "palett.es",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --base=${PREFIX_BASE_PATH:+/$npm_package_name}/",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@triozer/framer-toolbox": "workspace:*",
+    "clsx": "^2.1.0",
+    "color-scheme": "^1.0.1",
+    "dom-to-svg": "^0.12.2",
+    "framer-motion": "^11.1.7",
+    "framer-plugin": "^0",
+    "hex-rgb": "^5.0.0",
+    "html-to-image": "^1.11.11",
+    "ntc-ts": "^0.0.8",
+    "react": "^18",
+    "react-dom": "^18",
+    "rgb-hex": "^4.1.0",
+    "use-debounce": "^10.0.0",
+    "valibot": "^0.30.0",
+    "vite-plugin-mkcert": "^1"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^7",
+    "@vitejs/plugin-react-swc": "^3",
+    "eslint": "^8",
+    "eslint-plugin-react-hooks": "^4",
+    "eslint-plugin-react-refresh": "^0",
+    "typescript": "^5.3.3",
+    "vite": "^5",
+    "vite-plugin-framer": "^0"
+  }
+}

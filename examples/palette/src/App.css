@@ -1,0 +1,29 @@
+/* Your Plugin CSS */
+
+.colors {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.colors .color-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.colors .color-box > .color {
+  flex-grow: 1;
+  border-radius: 4px;
+}
+
+.colors .color-box > .color-name {
+  padding-top: 10px;
+}
