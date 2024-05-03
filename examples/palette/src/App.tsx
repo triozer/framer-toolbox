@@ -27,6 +27,8 @@ export function App() {
     variation: ColorVariationType;
     colors: ColorData[];
     mode: "hues" | "gradient";
+    showColorDetails: boolean;
+    detailsOpen: boolean;
   }>("store", {
     count: 2,
     scheme: "mono",
@@ -34,11 +36,18 @@ export function App() {
     colors: [],
     mode: "hues",
     showColorDetails: true,
+    detailsOpen: false,
   });
 
-  const { count, scheme, variation, colors, mode, showColorDetails } = store;
-
-  const [detailsOpen, setDetailsOpen] = useState(false);
+  const {
+    count,
+    scheme,
+    variation,
+    colors,
+    mode,
+    showColorDetails,
+    detailsOpen,
+  } = store;
 
   const selection = useSelection();
 
@@ -69,6 +78,12 @@ export function App() {
   }, [count, scheme, variation]);
 
   useEffect(() => {
+    if (isStoreLoaded && colors.length === 0) {
+      setStoreValue("colors", generateColorSet({ count, scheme, variation }));
+    }
+  }, [colors]);
+
+  useEffect(() => {
     if (mode === "gradient") {
       if (count < 2) {
         setStoreValue("count", 2);
@@ -95,7 +110,7 @@ export function App() {
     <FramerPlugin autoResize={true}>
       <details
         open={detailsOpen}
-        onToggle={(e) => setDetailsOpen(e.currentTarget.open)}
+        onToggle={(e) => setStoreValue("detailsOpen", e.currentTarget.open)}
         style={{
           width: "100%",
         }}
@@ -182,7 +197,9 @@ export function App() {
                 label: "No",
               },
             ]}
-            onChange={(value) => setStoreValue("showColorDetails", value)}
+            onChange={(value: boolean) =>
+              setStoreValue("showColorDetails", value)
+            }
           />
         </div>
       </details>
