@@ -269,11 +269,9 @@ export function App() {
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "10px",
-          width: "100%",
         }}
       >
         <button
-          style={{ width: "100%" }}
           onClick={async () => {
             const node = document.getElementById("colors");
             if (!node) return;
@@ -290,7 +288,6 @@ export function App() {
         </button>
         <button
           className="framer-button-primary"
-          style={{ width: "100%" }}
           onClick={() => {
             setStoreValue(
               "colors",
