@@ -7,11 +7,11 @@ import "../../../styles/segmented-controls.css";
 /**
  * Type definition for a segmented control item
  *
- * @property {string} value - The value of the item
+ * @property {string | boolean} value - The value of the item
  * @property {string} label - The label displayed for the item
  */
-type SegmentedControlItem = {
-  value: string;
+type SegmentedControlItem<Value> = {
+  value: Value;
   label: string;
 };
 
@@ -23,12 +23,12 @@ type SegmentedControlItem = {
  * @property {(value: string) => void} onChange - Callback function when the selected value changes
  * @extends React.HTMLProps<HTMLDivElement> - Additional props for the div element
  */
-type SegmentedControlsProps = {
+type SegmentedControlsProps<Value> = {
   title: string;
-  items: SegmentedControlItem[];
+  items: SegmentedControlItem<Value>[];
   defaultValue?: string;
-  value?: string | boolean | null;
-  onChange: (value: string | boolean) => void;
+  value?: Value | null;
+  onChange: (value: Value) => void;
 } & Omit<
   React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
   "onChange"
@@ -42,13 +42,13 @@ type SegmentedControlsProps = {
  * @param props - Props for the component
  * @returns The rendered component
  */
-const SegmentedControls: React.FC<SegmentedControlsProps> = ({
+function SegmentedControls<T>({
   title,
   items,
   value,
   defaultValue,
   onChange,
-}: SegmentedControlsProps) => {
+}: SegmentedControlsProps<T>) {
   const segmentedControlsRef = useRef<HTMLDivElement>(null);
   const [selectedValue, setSelectedValue] = useState(
     defaultValue ?? value ?? items.length > 0 ? items[0].value : false
@@ -90,7 +90,7 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
     };
   }, [selectedValue, items, padding]);
 
-  const handleChange = (value: string) => {
+  const handleChange = (value: T) => {
     if (value === selectedValue) return;
 
     setSelectedValue(value);
@@ -106,7 +106,7 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
       <div ref={segmentedControlsRef} className="segmented-controls">
         {items.map((item) => (
           <span
-            key={item.value}
+            key={`${title}-${item.value}`}
             onClick={() => handleChange(item.value)}
             className={item.value === selectedValue ? "selected" : ""}
           >
@@ -122,6 +122,6 @@ const SegmentedControls: React.FC<SegmentedControlsProps> = ({
       </div>
     </InputGroup>
   );
-};
+}
 
 export { SegmentedControls, type SegmentedControlItem };

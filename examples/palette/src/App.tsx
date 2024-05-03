@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { m, motion } from "framer-motion";
 import { framer, withBackgroundColor } from "framer-plugin";
 import {
   COLOR_SCHEMES,
@@ -17,6 +17,7 @@ import {
   SegmentedControls,
   useSelection,
   useStore,
+  capitalizeWords,
 } from "@triozer/framer-toolbox";
 import * as htmlToImage from "html-to-image";
 
@@ -39,15 +40,7 @@ export function App() {
     detailsOpen: false,
   });
 
-  const {
-    count,
-    scheme,
-    variation,
-    colors,
-    mode,
-    showColorDetails,
-    detailsOpen,
-  } = store;
+  const { count, scheme, variation, colors, mode, showColorDetails } = store;
 
   const selection = useSelection();
 
@@ -108,102 +101,6 @@ export function App() {
 
   return (
     <FramerPlugin autoResize={true}>
-      <details
-        open={detailsOpen}
-        onToggle={(e) => setStoreValue("detailsOpen", e.currentTarget.open)}
-        style={{
-          width: "100%",
-        }}
-      >
-        <summary>Options</summary>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "16px",
-            marginTop: ".5rem",
-            width: "100%",
-          }}
-        >
-          <SegmentedControls
-            title="Mode"
-            value={mode}
-            items={[
-              {
-                value: "hues",
-                label: "Hues",
-              },
-              {
-                value: "gradient",
-                label: "Gradient",
-              },
-            ]}
-            onChange={(value) =>
-              setStoreValue("mode", value as "hues" | "gradient")
-            }
-          />
-
-          <NumberControls
-            title="Count"
-            value={count}
-            onChange={(e) => setStoreValue("count", parseInt(e.target.value))}
-            min={mode === "hues" ? 1 : 2}
-            max={6}
-            disabled={scheme === "mono"}
-          />
-          <InputGroup title="Scheme">
-            <select
-              value={scheme}
-              onChange={(e) => {
-                setStoreValue("scheme", e.target.value as ColorSchemeType);
-              }}
-            >
-              {COLOR_SCHEMES.toSorted().map((scheme) => (
-                <option key={scheme} value={scheme}>
-                  {scheme}
-                </option>
-              ))}
-            </select>
-          </InputGroup>
-
-          <InputGroup title="Variation">
-            <select
-              value={variation}
-              onChange={(e) => {
-                setStoreValue(
-                  "variation",
-                  e.target.value as ColorVariationType
-                );
-              }}
-            >
-              {COLOR_VARIATIONS.toSorted().map((variation) => (
-                <option key={variation} value={variation}>
-                  {variation}
-                </option>
-              ))}
-            </select>
-          </InputGroup>
-
-          <SegmentedControls
-            title="Show Color Details"
-            value={showColorDetails}
-            items={[
-              {
-                value: true,
-                label: "Yes",
-              },
-              {
-                value: false,
-                label: "No",
-              },
-            ]}
-            onChange={(value: boolean) =>
-              setStoreValue("showColorDetails", value)
-            }
-          />
-        </div>
-      </details>
-
       <div
         id="colors"
         style={{
@@ -219,7 +116,8 @@ export function App() {
                   .map((color) => color.hex)
                   .join(", ")})`
               : "transparent",
-          // backgroundBlendMode: "soft-light",
+          backgroundBlendMode: "soft-light",
+          backdropFilter: mode === "gradient" ? "blur(10px)" : "none",
         }}
       >
         {colors.map((color, index) => (
@@ -296,26 +194,84 @@ export function App() {
         ))}
       </div>
 
+      <SegmentedControls
+        title="Mode"
+        value={mode}
+        items={[
+          {
+            value: "hues",
+            label: "Hues",
+          },
+          {
+            value: "gradient",
+            label: "Gradient",
+          },
+        ]}
+        onChange={(value: "hues" | "gradient") => setStoreValue("mode", value)}
+      />
+
+      <NumberControls
+        title="Count"
+        value={count}
+        onChange={(e) => setStoreValue("count", parseInt(e))}
+        min={mode === "hues" ? 1 : 2}
+        max={6}
+        disabled={scheme === "mono"}
+      />
+      <InputGroup title="Scheme">
+        <select
+          value={scheme}
+          onChange={(e) => {
+            setStoreValue("scheme", e.target.value as ColorSchemeType);
+          }}
+        >
+          {COLOR_SCHEMES.toSorted().map((scheme) => (
+            <option key={scheme} value={scheme}>
+              {capitalizeWords(scheme)}
+            </option>
+          ))}
+        </select>
+      </InputGroup>
+
+      <InputGroup title="Variation">
+        <select
+          value={variation}
+          onChange={(e) => {
+            setStoreValue("variation", e.target.value as ColorVariationType);
+          }}
+        >
+          {COLOR_VARIATIONS.toSorted().map((variation) => (
+            <option key={variation} value={variation}>
+              {capitalizeWords(variation)}
+            </option>
+          ))}
+        </select>
+      </InputGroup>
+
+      <SegmentedControls
+        title="Show Details"
+        value={showColorDetails}
+        items={[
+          {
+            value: true,
+            label: "Yes",
+          },
+          {
+            value: false,
+            label: "No",
+          },
+        ]}
+        onChange={(value: boolean) => setStoreValue("showColorDetails", value)}
+      />
+
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: ".75fr .25fr",
-          gap: "8px",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "10px",
           width: "100%",
         }}
       >
-        <button
-          className="framer-button-primary"
-          style={{ width: "100%" }}
-          onClick={() => {
-            setStoreValue(
-              "colors",
-              generateColorSet({ count, scheme, variation })
-            );
-          }}
-        >
-          Generate
-        </button>
         <button
           style={{ width: "100%" }}
           onClick={async () => {
@@ -331,6 +287,18 @@ export function App() {
           }}
         >
           Export
+        </button>
+        <button
+          className="framer-button-primary"
+          style={{ width: "100%" }}
+          onClick={() => {
+            setStoreValue(
+              "colors",
+              generateColorSet({ count, scheme, variation })
+            );
+          }}
+        >
+          Generate
         </button>
       </div>
     </FramerPlugin>
