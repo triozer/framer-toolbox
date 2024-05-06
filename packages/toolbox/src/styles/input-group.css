@@ -19,6 +19,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--framer-color-text-secondary);
+  padding-left: 15px;
 }
 
 .input-group > * {
