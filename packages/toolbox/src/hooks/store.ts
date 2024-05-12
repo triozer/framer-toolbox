@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import localforage from "localforage";
 import { useFramerPlugin } from "../providers/framer-plugin";
 
@@ -6,14 +6,28 @@ export function useStore<StoreType extends {}>(
   name: string,
   initState: StoreType
 ) {
-  const { id } = useFramerPlugin();
+  let storeId = useRef<string>();
 
-  const idb = useRef(
-    localforage.createInstance({
-      name: id,
+  try {
+    const { id } = useFramerPlugin();
+    storeId.current = id;
+  } catch (error) {
+    console.error(
+      "useStore must be used within a FramerPluginProvider. Defaulting to plugin id (by fetch call)."
+    );
+    fetch("/framer.json")
+      .then((res) => res.json())
+      .then((config) => {
+        storeId.current = config.id;
+      });
+  }
+
+  const idb = useMemo(() => {
+    return localforage.createInstance({
+      name: storeId.current,
       storeName: name,
-    })
-  );
+    });
+  }, [name, storeId.current]);
 
   const [store, setStore] = useState<StoreType>(initState);
   const [isStoreLoaded, setStoreLoaded] = useState(false);
@@ -21,8 +35,8 @@ export function useStore<StoreType extends {}>(
   useEffect(() => {
     let storedData: StoreType = initState;
 
-    idb.current.ready().then(() => {
-      idb.current
+    idb.ready().then(() => {
+      idb
         .iterate((value, key) => {
           storedData = { ...storedData, [key]: value };
         })
@@ -38,10 +52,10 @@ export function useStore<StoreType extends {}>(
 
     for (const key in store) {
       if (store[key] === undefined) {
-        idb.current.removeItem(key);
+        idb.removeItem(key);
         continue;
       }
-      idb.current.setItem(key, store[key]); // Save to local storage
+      idb.setItem(key, store[key]); // Save to local storage
     }
   }, [JSON.stringify(store), isStoreLoaded]); // add isStoreLoaded as dependency
 
