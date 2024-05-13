@@ -4,6 +4,7 @@
   "main": "dist/index.cjs",
   "module": "dist/index.ts",
   "type": "module",
+  "version": "0.0.0",
   "exports": {
     ".": {
       "import": {
