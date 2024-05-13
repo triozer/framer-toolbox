@@ -21,6 +21,10 @@
       "require": "./dist/*.css"
     }
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "dev": "tsup --watch --onSuccess 'tsc -d'",
     "build": "tsup"
