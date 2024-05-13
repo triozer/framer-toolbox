@@ -7,6 +7,10 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 jobs:
   release:
     name: 🚀 Release
@@ -32,7 +36,7 @@ jobs:
       - name: 🎈 Get pnpm store directory
         id: get-pnpm-cache-dir
         run: |
-          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+          echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
 
       - name: 🔆 Cache pnpm modules
         uses: actions/cache@v3
