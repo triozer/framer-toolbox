@@ -211,7 +211,6 @@ export function App() {
         title="Count"
         value={count}
         onChange={(e) => {
-          console.log(e);
           setStoreValue("count", parseInt(e));
         }}
         min={mode === "hues" ? 1 : 2}

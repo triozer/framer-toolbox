@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { InputGroup } from "../input-group";
 import { icons } from "@/components/icons";
 
+import "../../../styles/number-controls.css";
+
 type NumberControlsProps = {
   title: string;
   stepper?: boolean;
@@ -50,15 +52,7 @@ const NumberControls: React.FC<NumberControlsProps> = ({
       <input type="number" {...props} value={value} onChange={handleChange} />
       {stepper && (
         <div
-          className="input-background"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1px 1fr",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            color: "#999999",
-          }}
+         className="number-controls stepper"
         >
           <i
             style={{
@@ -81,7 +75,7 @@ const NumberControls: React.FC<NumberControlsProps> = ({
               );
             }}
           />
-          <div style={{ height: "50%", backgroundColor: "#E3E3E3" }} />
+          <div className="divider" />
           <i
             style={{
               width: "100%",
