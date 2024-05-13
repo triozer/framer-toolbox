@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { InputGroup } from "../input-group";
+import { icons } from "@/components/icons";
 
 type NumberControlsProps = {
   title: string;
@@ -49,28 +50,51 @@ const NumberControls: React.FC<NumberControlsProps> = ({
       <input type="number" {...props} value={value} onChange={handleChange} />
       {stepper && (
         <div
+          className="input-background"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 2px 1fr",
+            gridTemplateColumns: "1fr 1px 1fr",
+            justifyContent: "center",
             alignItems: "center",
             width: "100%",
+            color: "#999999",
           }}
         >
-          <div
-            onClick={() =>
+          <i
+            style={{
+              width: "100%",
+              height: "100%",
+              maskImage: `url(${icons.minus})`,
+              maskRepeat: "no-repeat",
+              maskPosition: "center",
+              backgroundColor: "currentColor",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              if (props.disabled) return;
+
               setValue((prev) =>
                 Math.max(
                   +(props.min ?? Number.MIN_SAFE_INTEGER),
                   prev - +(props.step ?? 1)
                 )
-              )
-            }
-          >
-            -
-          </div>
-          <div style={{ height: "75%", backgroundColor: "red" }} />
-          <div
+              );
+            }}
+          />
+          <div style={{ height: "50%", backgroundColor: "#E3E3E3" }} />
+          <i
+            style={{
+              width: "100%",
+              height: "100%",
+              maskImage: `url(${icons.plus})`,
+              maskRepeat: "no-repeat",
+              maskPosition: "center",
+              backgroundColor: "currentColor",
+              cursor: "pointer",
+            }}
             onClick={() => {
+              if (props.disabled) return;
+
               setValue((prev) =>
                 Math.min(
                   +(props.max ?? Number.MAX_SAFE_INTEGER),
@@ -78,9 +102,7 @@ const NumberControls: React.FC<NumberControlsProps> = ({
                 )
               );
             }}
-          >
-            +
-          </div>
+          />
         </div>
       )}
       {slider && (

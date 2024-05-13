@@ -96,10 +96,6 @@ export function App() {
     });
   };
 
-  if (!isStoreLoaded) {
-    return;
-  }
-
   return (
     <FramerPlugin autoResize={true}>
       <div
@@ -214,11 +210,16 @@ export function App() {
       <NumberControls
         title="Count"
         value={count}
-        onChange={(e) => setStoreValue("count", parseInt(e))}
+        onChange={(e) => {
+          console.log(e);
+          setStoreValue("count", parseInt(e));
+        }}
         min={mode === "hues" ? 1 : 2}
         max={6}
         disabled={scheme === "mono"}
+        stepper={true}
       />
+
       <InputGroup title="Scheme">
         <select
           value={scheme}

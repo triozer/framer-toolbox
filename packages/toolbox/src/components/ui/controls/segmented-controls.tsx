@@ -12,7 +12,8 @@ import "../../../styles/segmented-controls.css";
  */
 type SegmentedControlItem<Value> = {
   value: Value;
-  label: string;
+  label?: string;
+  icon?: string;
 };
 
 /**
@@ -24,7 +25,7 @@ type SegmentedControlItem<Value> = {
  * @extends React.HTMLProps<HTMLDivElement> - Additional props for the div element
  */
 type SegmentedControlsProps<Value> = {
-  title: string;
+  title?: string;
   items: SegmentedControlItem<Value>[];
   defaultValue?: string;
   value?: Value | null;
@@ -110,7 +111,15 @@ function SegmentedControls<T>({
             onClick={() => handleChange(item.value)}
             className={item.value === selectedValue ? "selected" : ""}
           >
-            {item.label}
+            {item.icon ? (
+              <i
+                style={{
+                  maskImage: `url(${item.icon})`,
+                }}
+              />
+            ) : (
+              item.label
+            )}
           </span>
         ))}
         <motion.div

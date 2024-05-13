@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 
 import { InputGroup } from "../input-group";
-import { type Icon } from "@/components/icons";
+import { icons, type Icon } from "@/components/icons";
 
 type TextControlsProps = {
   title?: string;
@@ -22,7 +22,7 @@ const TextControls: React.FC<TextControlsProps> = ({
       icon
         ? {
             paddingLeft: 30,
-            backgroundImage: `url(/icons/${icon}.svg)`,
+            backgroundImage: `url(${icons[icon]})`,
             backgroundSize: 12,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "10px 50%",
