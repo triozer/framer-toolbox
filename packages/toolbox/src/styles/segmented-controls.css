@@ -69,6 +69,14 @@
   font-weight: 600;
 }
 
+.segmented-controls i {
+  width: 14px;
+  height: 14px;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background: currentColor;
+}
+
 .segmented-controls .indicator {
   position: absolute;
   background-color: var(

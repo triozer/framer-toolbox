@@ -67,6 +67,7 @@ export function useAutoSizer(options: Options) {
   }, [pluginDimensions, updatePluginDimensions]);
 
   useLayoutEffect(() => {
+    if (!options.enableUIResizing) return;
     if (!ref.current) return;
 
     ref.current.style.width = "fit-content";

@@ -74,6 +74,12 @@ a {
 
 /* Elements */
 
+.input-background {
+  background: var(--framer-color-bg-tertiary);
+  border-radius: 8px;
+  height: 30px;
+}
+
 input,
 button,
 textarea,

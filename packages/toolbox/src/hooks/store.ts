@@ -7,12 +7,13 @@ export function useStore<StoreType extends {}>(
   initState: StoreType
 ) {
   let storeId = useRef<string>();
+  const queue = useRef<Array<() => void>>([]);
 
   try {
     const { id } = useFramerPlugin();
     storeId.current = id;
   } catch (error) {
-    console.error(
+    console.warn(
       "useStore must be used within a FramerPluginProvider. Defaulting to plugin id (by fetch call)."
     );
     fetch("/framer.json")
@@ -33,42 +34,55 @@ export function useStore<StoreType extends {}>(
   const [isStoreLoaded, setStoreLoaded] = useState(false);
 
   useEffect(() => {
-    let storedData: StoreType = initState;
-
     idb.ready().then(() => {
-      idb
-        .iterate((value, key) => {
-          storedData = { ...storedData, [key]: value };
-        })
-        .then(() => {
-          setStore(storedData);
-          setStoreLoaded(true);
-        });
+      setStoreLoaded(true);
     });
-  }, []);
+  }, [idb]);
 
   useEffect(() => {
-    if (!isStoreLoaded) return; // If the store is not loaded, we don't want to write to IndexedDB yet
+    if (!isStoreLoaded) return;
 
     for (const key in store) {
       if (store[key] === undefined) {
         idb.removeItem(key);
         continue;
       }
-      idb.setItem(key, store[key]); // Save to local storage
+
+      idb.setItem(key, store[key]);
     }
-  }, [JSON.stringify(store), isStoreLoaded]); // add isStoreLoaded as dependency
+  }, [JSON.stringify(store), isStoreLoaded]);
+
+  useEffect(() => {
+    if (isStoreLoaded) {
+      idb.iterate((value, key) => {
+        setStore((prev) => ({
+          ...prev,
+          [key]: value,
+        }));
+      });
+      queue.current.forEach((action) => action());
+      queue.current = [];
+    }
+  }, [isStoreLoaded]);
 
   const setState = (value: Partial<StoreType>) => {
-    if (Object.keys(value).length === Object.keys(store).length) {
-      setStore(value as StoreType);
-      return;
-    }
+    const action = () => {
+      if (Object.keys(value).length === Object.keys(store).length) {
+        setStore(value as StoreType);
+        return;
+      }
 
-    setStore({
-      ...store,
-      ...value,
-    });
+      setStore({
+        ...store,
+        ...value,
+      });
+    };
+
+    if (!isStoreLoaded) {
+      queue.current.push(action);
+    } else {
+      action();
+    }
   };
 
   const setKeyValue = <Key extends keyof StoreType>(
