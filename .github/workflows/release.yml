@@ -19,18 +19,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: ".nvmrc"
-          cache: pnpm
-          registry-url: https://registry.npmjs.org
+
+      - name: Setup pnpm config
+        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: 🏗️ Build
+      - name: Build
         id: build
         run: |
           pnpm build:packages
 
-      - name: 📣 Create Release Pull Request or Publish to npm
+      - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
