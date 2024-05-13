@@ -1,0 +1,29 @@
+.number-controls {
+  --framer-number-control-background-color: #f3f3f3;
+  --framer-number-control-item-text-color: #999999;
+  --framer-number-control-divider-color: #e6e6e6;
+}
+
+[data-framer-theme="dark"] .number-controls {
+  --framer-number-control-background-color: #2b2b2b;
+  --framer-number-control-item-text-color: #999999;
+  --framer-number-control-divider-color: #444444;
+}
+
+.number-controls.stepper {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 100%;
+  color: var(--framer-number-control-item-text-color);
+  background-color: var(--framer-number-control-background-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.number-controls.stepper .divider {
+  height: 50%;
+  background-color: var(--framer-number-control-divider-color)
+}
