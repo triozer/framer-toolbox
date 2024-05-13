@@ -9,29 +9,49 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: Release
+    name: 🚀 Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+      - name: ⬇️ Checkout Repo
+        id: checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v3
+      - name: 🟢 Setup Node.js 20
+        id: setup-node
+        uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
 
-      - name: Setup pnpm config
-        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
+      - name: 🥡 Setup pnpm
+        id: setup-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ matrix.pnpm-version }}
+          run_install: false
 
-      - name: Install Dependencies
+      - name: 🎈 Get pnpm store directory
+        id: get-pnpm-cache-dir
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - name: 🔆 Cache pnpm modules
+        uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: ${{ steps.get-pnpm-cache-dir.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: 🧩 Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build
+      - name: 🏗️ Build
         id: build
         run: |
           pnpm build:packages
 
-      - name: Create Release Pull Request or Publish to npm
+      - name: 📣 Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
