@@ -1,7 +1,6 @@
 # .gitgnore
 
 node_modules
-pnpm-lock.yaml
 
 build
 coverage
