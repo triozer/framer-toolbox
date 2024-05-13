@@ -12,10 +12,13 @@
   "scripts": {
     "build:packages": "pnpm -r --filter='./packages/*' run build",
     "build:examples": "pnpm -r --filter='./examples/*' run build",
-    "build": "pnpm run build:packages && pnpm run build:examples"
+    "build": "pnpm run build:packages && pnpm run build:examples",
+    "ci:publish": "changeset publish",
+    "ci:version": "changeset version"
   },
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.1.1+sha1.09ada6cd05003e0ced25fb716f9fda4063ec2e3b",
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@microsoft/api-extractor": "^7.43.1",
     "@types/react": "^18",
     "@types/react-dom": "^18",
