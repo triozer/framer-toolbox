@@ -1,5 +1,11 @@
 # basic-plugin
 
+## 0.0.3
+
+### Patch Changes
+
+- [#29](https://github.com/triozer/framer-toolbox/pull/29) [`513173d`](https://github.com/triozer/framer-toolbox/commit/513173dc068fd0ee194246df5b97a12a1c02a5ed) Thanks [@triozer](https://github.com/triozer)! - Center content
+
 ## 0.0.2
 
 ### Patch Changes
