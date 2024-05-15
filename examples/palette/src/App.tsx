@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
-import { framer, withBackgroundColor } from "framer-plugin";
+import { useEffect } from "react"
+import { motion } from "framer-motion"
+import { framer, withBackgroundColor } from "framer-plugin"
 import {
   COLOR_SCHEMES,
   COLOR_VARIATIONS,
@@ -8,8 +8,8 @@ import {
   ColorSchemeType,
   ColorVariationType,
   generateColorSet,
-} from "./utils/color";
-import "./App.css";
+} from "./utils/color"
+import "./App.css"
 import {
   FramerPlugin,
   InputGroup,
@@ -19,18 +19,18 @@ import {
   useStore,
   capitalizeWords,
   Button,
-} from "@triozer/framer-toolbox";
-import * as htmlToImage from "html-to-image";
+} from "@triozer/framer-toolbox"
+import * as htmlToImage from "html-to-image"
 
 export function App() {
   const [store, _, setStoreValue, isStoreLoaded] = useStore<{
-    count: number;
-    scheme: ColorSchemeType;
-    variation: ColorVariationType;
-    colors: ColorData[];
-    mode: "hues" | "gradient";
-    showColorDetails: boolean;
-    detailsOpen: boolean;
+    count: number
+    scheme: ColorSchemeType
+    variation: ColorVariationType
+    colors: ColorData[]
+    mode: "hues" | "gradient"
+    showColorDetails: boolean
+    detailsOpen: boolean
   }>("store", {
     count: 2,
     scheme: "mono",
@@ -39,62 +39,62 @@ export function App() {
     mode: "hues",
     showColorDetails: true,
     detailsOpen: false,
-  });
+  })
 
-  const { count, scheme, variation, colors, mode, showColorDetails } = store;
+  const { count, scheme, variation, colors, mode, showColorDetails } = store
 
-  const selection = useSelection();
+  const selection = useSelection()
 
   useEffect(() => {
     if (scheme === "mono") {
-      setStoreValue("count", 2);
-      return;
+      setStoreValue("count", 2)
+      return
     }
 
     if (scheme === "tetrade") {
-      setStoreValue("count", 4);
-      return;
+      setStoreValue("count", 4)
+      return
     }
 
     if (scheme === "triade") {
-      setStoreValue("count", 3);
-      return;
+      setStoreValue("count", 3)
+      return
     }
-  }, [scheme]);
+  }, [scheme])
 
   useEffect(() => {
     if (scheme === "mono" && count !== 2) {
-      setStoreValue("count", 2);
-      return;
+      setStoreValue("count", 2)
+      return
     }
 
-    setStoreValue("colors", generateColorSet({ count, scheme, variation }));
-  }, [count, scheme, variation]);
+    setStoreValue("colors", generateColorSet({ count, scheme, variation }))
+  }, [count, scheme, variation])
 
   useEffect(() => {
     if (isStoreLoaded && colors.length === 0) {
-      setStoreValue("colors", generateColorSet({ count, scheme, variation }));
+      setStoreValue("colors", generateColorSet({ count, scheme, variation }))
     }
-  }, [colors]);
+  }, [colors])
 
   useEffect(() => {
     if (mode === "gradient") {
       if (count < 2) {
-        setStoreValue("count", 2);
+        setStoreValue("count", 2)
       }
     }
-  }, [mode]);
+  }, [mode])
 
   const updateSelectionColor = (color: ColorData) => {
     selection.forEach((node) => {
       if (withBackgroundColor(node)) {
         node.setAttributes({
           backgroundColor: color.hex,
-        });
-        return;
+        })
+        return
       }
-    });
-  };
+    })
+  }
 
   return (
     <FramerPlugin autoResize={true}>
@@ -139,7 +139,7 @@ export function App() {
                   : "center",
             }}
             onClick={() => {
-              updateSelectionColor(color);
+              updateSelectionColor(color)
             }}
           >
             {showColorDetails && (
@@ -211,7 +211,7 @@ export function App() {
         title="Count"
         value={count}
         onChange={(e) => {
-          setStoreValue("count", parseInt(e));
+          setStoreValue("count", parseInt(e))
         }}
         min={mode === "hues" ? 1 : 2}
         max={6}
@@ -223,7 +223,7 @@ export function App() {
         <select
           value={scheme}
           onChange={(e) => {
-            setStoreValue("scheme", e.target.value as ColorSchemeType);
+            setStoreValue("scheme", e.target.value as ColorSchemeType)
           }}
         >
           {COLOR_SCHEMES.toSorted().map((scheme) => (
@@ -238,7 +238,7 @@ export function App() {
         <select
           value={variation}
           onChange={(e) => {
-            setStoreValue("variation", e.target.value as ColorVariationType);
+            setStoreValue("variation", e.target.value as ColorVariationType)
           }}
         >
           {COLOR_VARIATIONS.toSorted().map((variation) => (
@@ -265,6 +265,8 @@ export function App() {
         onChange={(value: boolean) => setStoreValue("showColorDetails", value)}
       />
 
+      <hr />
+
       <div
         style={{
           display: "grid",
@@ -276,15 +278,15 @@ export function App() {
         <Button
           variant="secondary"
           onClick={async () => {
-            const node = document.getElementById("colors");
-            if (!node) return;
+            const node = document.getElementById("colors")
+            if (!node) return
 
-            const image = await htmlToImage.toPng(node);
+            const image = await htmlToImage.toPng(node)
 
             framer.addImage({
               name: "Palette",
               image,
-            });
+            })
           }}
         >
           Export
@@ -295,12 +297,12 @@ export function App() {
             setStoreValue(
               "colors",
               generateColorSet({ count, scheme, variation })
-            );
+            )
           }}
         >
           Generate
         </Button>
       </div>
     </FramerPlugin>
-  );
+  )
 }

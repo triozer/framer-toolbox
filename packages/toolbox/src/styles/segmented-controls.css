@@ -22,7 +22,7 @@
   justify-content: center;
   width: 100%;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: visible;
   background-color: var(--framer-segmented-control-background-color);
   padding: 2px;
   height: 30px;

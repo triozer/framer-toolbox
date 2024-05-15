@@ -1,16 +1,16 @@
-import React, { useEffect, useMemo } from "react";
-import { useAutoSizer } from "../hooks/auto-sizer";
-import { type UIOptions, framer } from "framer-plugin";
-import { useFramerPlugin } from "../providers/framer-plugin";
+import React, { useEffect } from "react"
+import { useAutoSizer } from "../hooks/auto-sizer"
+import { type UIOptions, framer } from "framer-plugin"
+import { useFramerPlugin } from "../providers/framer-plugin"
 
 type FramerPluginRealProps = {
-  name: string;
-  padding: React.CSSProperties["padding"];
-  gap: React.CSSProperties["gap"];
-  autoResize: boolean;
-  uiOptions: Omit<UIOptions, "title">;
-  showOnMounted: boolean;
-};
+  name: string
+  padding: React.CSSProperties["padding"]
+  gap: React.CSSProperties["gap"]
+  autoResize: boolean
+  uiOptions: Omit<UIOptions, "title">
+  showOnMounted: boolean
+}
 
 const defaultProps: FramerPluginRealProps = {
   name: "Framer Plugin",
@@ -23,12 +23,12 @@ const defaultProps: FramerPluginRealProps = {
     width: 240,
     height: 95,
   },
-};
+}
 
 type FramerPluginProps = {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 } & Partial<FramerPluginRealProps> &
-  React.HTMLAttributes<HTMLDivElement>;
+  React.HTMLAttributes<HTMLDivElement>
 
 const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
   (
@@ -44,7 +44,7 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     },
     ref
   ) => {
-    const { name: configName } = useFramerPlugin();
+    const { name: configName } = useFramerPlugin()
 
     const mergedProps: FramerPluginRealProps = {
       name: name ?? configName,
@@ -56,7 +56,7 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
         ...defaultProps.uiOptions,
         ...uiOptions,
       },
-    };
+    }
 
     const { ref: mainRef } = useAutoSizer({
       enableUIResizing: mergedProps.autoResize,
@@ -64,16 +64,16 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
         width: mergedProps.uiOptions.width ?? defaultProps.uiOptions.width!,
         height: mergedProps.uiOptions.height ?? defaultProps.uiOptions.height!,
       },
-    });
+    })
 
     useEffect(() => {
       if (mergedProps.showOnMounted) {
         framer.showUI({
           title: mergedProps.name,
           ...mergedProps.uiOptions,
-        });
+        })
       }
-    }, []);
+    }, [mergedProps.name, mergedProps.showOnMounted, mergedProps.uiOptions])
 
     return (
       <main
@@ -92,8 +92,8 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
       >
         {children}
       </main>
-    );
+    )
   }
-);
+)
 
-export { FramerPlugin };
+export { FramerPlugin }
