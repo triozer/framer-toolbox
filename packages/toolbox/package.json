@@ -1,26 +1,21 @@
 {
   "name": "@triozer/framer-toolbox",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.0.0",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
-    "./dist/*.css": {
-      "import": "./dist/*.css",
-      "require": "./dist/*.css"
-    }
+    "./index.css": "./dist/index.css",
+    "./package.json": "./package.json"
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.ts",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src/index.ts"
+  ],
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -32,16 +27,14 @@
   "peerDependencies": {
     "framer-plugin": "^0",
     "react": "^18",
-    "react-dom": "^18",
-    "typescript": "^5.0.0"
+    "react-dom": "^18"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "classnames": "^2.5.1",
     "framer-motion": "^11.1.7",
     "localforage": "^1.10.0",
-    "react-router-dom": "^6.23.0"
-  },
-  "devDependencies": {
-    "@types/react-router-dom": "^5.3.3"
+    "react-router-dom": "^6.23.0",
+    "typescript": "^5.0.0"
   }
 }
