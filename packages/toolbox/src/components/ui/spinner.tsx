@@ -1,40 +1,40 @@
-import "../../styles/spinner.css";
+import '../../styles/spinner.css'
 
 export interface SpinnerProps {
   /** Size of the spinner */
-  size?: "normal" | "medium" | "large";
+  size?: 'normal' | 'medium' | 'large'
   /** Set the spinner to have a static position inline with other content */
-  inline?: boolean;
-  className?: string;
-  inheritColor?: boolean;
+  inline?: boolean
+  className?: string
+  inheritColor?: boolean
 }
 
-function styleForSize(size: SpinnerProps["size"]) {
+function styleForSize(size: SpinnerProps['size']) {
   switch (size) {
-    case "normal":
-      return "normalStyle";
-    case "medium":
-      return "mediumStyle";
-    case "large":
-      return "largeStyle";
+    case 'normal':
+      return 'normalStyle'
+    case 'medium':
+      return 'mediumStyle'
+    case 'large':
+      return 'largeStyle'
   }
 }
 
-const Spinner = ({
+function Spinner({
   size,
   inline = false,
   inheritColor,
   className,
   ...rest
-}: SpinnerProps) => {
+}: SpinnerProps) {
   return (
     <div
       className={`spin baseStyle ${styleForSize(size)} ${
-        inheritColor ? "buttonWithDepthSpinner" : ""
-      } ${!inline ? "centeredStyle" : ""}`}
+        inheritColor ? 'buttonWithDepthSpinner' : ''
+      } ${!inline ? 'centeredStyle' : ''} ${className || ''}`}
       {...rest}
     />
-  );
+  )
 };
 
-export { Spinner };
+export { Spinner }

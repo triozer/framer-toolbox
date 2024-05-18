@@ -1,23 +1,29 @@
 {
   "name": "@triozer/toolbox-monorepo",
-  "private": true,
   "type": "module",
-  "engines": {
-    "node": "^18.0.0 || >=20.0.0"
-  },
+  "private": true,
+  "packageManager": "pnpm@9.1.1+sha1.09ada6cd05003e0ced25fb716f9fda4063ec2e3b",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/triozer/framer-toolbox.git"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
   },
   "scripts": {
     "build:packages": "pnpm -r --filter='./packages/*' run build",
     "build:examples": "pnpm -r --filter='./examples/*' run build",
     "build": "pnpm run build:packages && pnpm run build:examples",
     "ci:publish": "changeset publish",
-    "ci:version": "changeset version"
+    "ci:version": "changeset version",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
-  "packageManager": "pnpm@9.1.1+sha1.09ada6cd05003e0ced25fb716f9fda4063ec2e3b",
+  "dependencies": {
+    "@changesets/changelog-github": "^0.5.0"
+  },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.18.1",
     "@changesets/cli": "^2.27.1",
     "@microsoft/api-extractor": "^7.43.1",
     "@types/react": "^18",
@@ -26,6 +32,7 @@
     "@typescript-eslint/parser": "^7",
     "@vitejs/plugin-react-swc": "^3",
     "eslint": "^8",
+    "eslint-plugin-format": "^0.1.1",
     "eslint-plugin-react-hooks": "^4",
     "eslint-plugin-react-refresh": "^0",
     "framer-motion": "^11.1.7",
@@ -35,8 +42,5 @@
     "typescript": "^5.4.5",
     "vite": "^5",
     "vite-plugin-framer": "^0"
-  },
-  "dependencies": {
-    "@changesets/changelog-github": "^0.5.0"
   }
 }

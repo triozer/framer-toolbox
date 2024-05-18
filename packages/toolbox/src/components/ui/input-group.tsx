@@ -1,24 +1,25 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react'
 
-import "../../styles/input-group.css";
+import '../../styles/input-group.css'
+import { capitalizeWords } from '@/utils/string'
 
-type InputGroupProps = {
-  title?: string;
-  children: React.ReactNode;
-};
+interface InputGroupProps {
+  title?: string
+  children: React.ReactNode
+}
 
 const InputGroup: React.FC<InputGroupProps> = ({ title, children }) => {
   const hasMultipleChildren = useMemo(
     () => React.Children.count(children) > 1,
-    [children]
-  );
+    [children],
+  )
 
   return (
-    <div className={`input-group ${!hasMultipleChildren ? "full" : ""}`}>
-      {title && <label>{title}</label>}
+    <div className={`input-group ${!hasMultipleChildren ? 'full' : ''}`}>
+      {title && <label>{capitalizeWords(title)}</label>}
       {children}
     </div>
-  );
-};
+  )
+}
 
-export { InputGroup };
+export { InputGroup }
