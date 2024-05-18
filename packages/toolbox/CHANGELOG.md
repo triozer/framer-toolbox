@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.1.10
+
+### Patch Changes
+
+- [`9f8d9f2`](https://github.com/triozer/framer-toolbox/commit/9f8d9f26da6413698a507607157dd2e1dfe1b1d0) Thanks [@triozer](https://github.com/triozer)! - Bon!
+
 ## 0.1.8
 
 ### Patch Changes
