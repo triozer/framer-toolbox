@@ -2,27 +2,19 @@
   "compilerOptions": {
     "target": "ESNext",
     "jsx": "react-jsx",
-    // Enable latest features
     "lib": ["ESNext", "DOM"],
     "moduleDetection": "force",
-
-    // Paths
     "baseUrl": ".",
     "module": "ESNext",
-    // Bundler mode
     "moduleResolution": "bundler",
     "paths": {
       "@/*": ["src/*"]
     },
     "allowImportingTsExtensions": true,
     "allowJs": true,
-
-    // Best practices
     "strict": true,
     "noFallthroughCasesInSwitch": true,
-
     "noPropertyAccessFromIndexSignature": false,
-    // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "declaration": true,
