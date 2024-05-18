@@ -7,6 +7,7 @@ export default defineConfig([
     format: ['esm'],
     dts: true,
     sourcemap: true,
+    minify: true,
     clean: true,
     loader: {
       '.css': 'local-css',
