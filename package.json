@@ -15,7 +15,7 @@
     "build:examples": "pnpm -r --filter='./examples/*' run build",
     "build": "pnpm run build:packages && pnpm run build:examples",
     "changesets": "changeset",
-    "ci:publish": "changeset publish",
+    "ci:publish": "pnpm -r --filter='./packages/*' publish",
     "ci:version": "changeset version",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
