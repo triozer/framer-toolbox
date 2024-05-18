@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react'
+import cx from 'classnames'
 
-import '../../styles/input-group.css'
+import classes from './input-group.module.css'
+
 import { capitalizeWords } from '@/utils/string'
 
 interface InputGroupProps {
@@ -15,8 +17,8 @@ const InputGroup: React.FC<InputGroupProps> = ({ title, children }) => {
   )
 
   return (
-    <div className={`input-group ${!hasMultipleChildren ? 'full' : ''}`}>
-      {title && <label>{capitalizeWords(title)}</label>}
+    <div className={cx(classes.inputGroup, { [classes.full]: !hasMultipleChildren })}>
+      {title && <label className={cx({ [classes.inputGroupHasLabel]: true })}>{capitalizeWords(title)}</label>}
       {children}
     </div>
   )

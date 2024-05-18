@@ -1,6 +1,9 @@
-import React, { useMemo } from 'react'
+import React from 'react'
+import cx from 'classnames'
 
 import { InputGroup } from '../input-group'
+import classes from './text-controls.module.css'
+
 import { type IconType, icons } from '@/components/icons'
 
 type TextControlsProps = {
@@ -17,20 +20,6 @@ const TextControls: React.FC<TextControlsProps> = ({
   type = 'text',
   ...props
 }) => {
-  const withIconStyle = useMemo<React.CSSProperties>(
-    () =>
-      icon
-        ? {
-            paddingLeft: 30,
-            backgroundImage: `url(${icons[icon]})`,
-            backgroundSize: 12,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: '10px 50%',
-          }
-        : {},
-    [icon],
-  )
-
   return (
     <InputGroup title={title}>
       <input
@@ -38,8 +27,9 @@ const TextControls: React.FC<TextControlsProps> = ({
         type={type}
         style={{
           ...props.style,
-          ...withIconStyle,
+          ...icon && { backgroundImage: `url(${icons[icon]})` },
         }}
+        className={cx(classes.input, props.className)}
       />
     </InputGroup>
   )

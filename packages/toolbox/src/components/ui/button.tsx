@@ -1,6 +1,8 @@
-import { type IconType, icons } from '../icons'
+import React from 'react'
+import cx from 'classnames'
 
-import '../../styles/button.css'
+import { type IconType, icons } from '../icons'
+import classes from './button.module.css'
 
 type ButtonProps = {
   icon?: IconType
@@ -11,26 +13,19 @@ type ButtonProps = {
 const Button: React.FC<ButtonProps> = ({
   icon,
   children,
-  variant,
+  variant = 'primary',
   ...props
 }) => {
   return (
     <button
-      className={`framer-button-${variant ?? 'primary'} ${
-        icon ? 'framer-button-icon' : ''
-      }`}
+      className={cx(classes.button, classes[variant], { [classes.buttonIcon]: !!icon })}
       {...props}
     >
       {icon && (
         <i
+          className={classes.icon}
           style={{
-            display: 'block',
-            width: 16,
-            height: 16,
             maskImage: `url(${icons[icon]})`,
-            maskRepeat: 'no-repeat',
-            maskPosition: 'center',
-            background: 'currentColor',
           }}
         />
       )}

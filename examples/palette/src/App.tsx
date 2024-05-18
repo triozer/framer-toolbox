@@ -9,6 +9,7 @@ import {
   ListControls,
   NumberControls,
   SegmentedControls,
+  Separator,
   capitalizeWords,
   useSelection,
   useStore,
@@ -249,7 +250,7 @@ export function App() {
         onChange={(value: boolean) => setStoreValue('autoGenerate', value)}
       />
 
-      <hr />
+      <Separator />
 
       <div
         style={{

@@ -1,15 +1,13 @@
-import '../../../separator.css'
+import classes from './separator.module.css'
 
-type SeparatorProps = {
-  variant: 'inline' | 'block'
-} & React.HTMLAttributes<HTMLHRElement>
+type SeparatorProps = React.HTMLAttributes<HTMLHRElement>
 
 const Separator: React.FC<SeparatorProps> = ({
-  variant,
   ...props
 }) => {
   return (
     <hr
+      className={classes.separator}
       style={{
         ...props.style,
       }}

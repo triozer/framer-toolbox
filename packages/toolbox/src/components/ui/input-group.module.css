@@ -1,4 +1,4 @@
-.input-group {
+.inputGroup {
   display: grid;
   align-items: center;
   height: 30px;
@@ -9,23 +9,23 @@
   user-select: none;
 }
 
-.input-group:has(label) {
+.inputGroup > * {
+  width: 100%;
+}
+
+.full > :nth-child(2) {
+  grid-column: 2 / -1;
+}
+
+.inputGroup:has(label) {
   grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(62px, 1fr));
 }
 
-.input-group label {
+label {
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--framer-color-text-secondary);
   padding-left: 15px;
-}
-
-.input-group > * {
-  width: 100%;
-}
-
-.input-group.full > :nth-child(2) {
-  grid-column: 2 / -1;
 }

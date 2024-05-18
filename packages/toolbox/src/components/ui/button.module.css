@@ -1,0 +1,49 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary {
+  color: var(--framer-color-text-reversed);
+  background-color: var(--framer-color-tint);
+}
+
+.primary:hover,
+.primary:focus {
+  background-color: var(--framer-color-tint-dark);
+}
+
+.primary:active {
+  background-color: var(--framer-color-tint-extra-dark, #0077ff);
+}
+
+[data-framer-theme='dark'] .primary:active {
+  background-color: var(--framer-color-tint-extra-dark, #0077ff);
+}
+
+.destructive {
+  color: #fff;
+  background-color: #ff3366;
+}
+
+.destructive:hover,
+.destructive:focus {
+  color: #fff;
+  background-color: #e15;
+}
+
+.buttonIcon {
+  display: block;
+  width: 30px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+}
+
+.icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background: currentColor;
+}

@@ -36,6 +36,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "framer-motion": "^11.1.7",
     "localforage": "^1.10.0",
     "react-router-dom": "^6.23.0"
