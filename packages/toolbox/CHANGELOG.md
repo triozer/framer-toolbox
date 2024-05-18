@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.1.7
+
+### Patch Changes
+
+- [#48](https://github.com/triozer/framer-toolbox/pull/48) [`7aeacf1`](https://github.com/triozer/framer-toolbox/commit/7aeacf10f871d898939772e06bcb7d54e242337c) Thanks [@triozer](https://github.com/triozer)! - Try building from the CI
+
 ## 0.1.5
 
 ### Patch Changes
