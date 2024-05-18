@@ -21,12 +21,10 @@
   "main": "dist/index.cjs",
   "module": "dist/index.ts",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "directory": "./dist"
   },
   "scripts": {
     "dev": "tsup --watch --onSuccess 'tsc -d'",
