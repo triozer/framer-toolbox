@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.1.5
+
+### Patch Changes
+
+- [#46](https://github.com/triozer/framer-toolbox/pull/46) [`4eb9829`](https://github.com/triozer/framer-toolbox/commit/4eb982959ef2f16fb8a5c1899db6daa75c566d57) Thanks [@triozer](https://github.com/triozer)! - Do not ignore dist as now it should only have the needed files
+
 ## 0.1.4
 
 ### Patch Changes
