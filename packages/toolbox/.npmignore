@@ -1,7 +1,0 @@
-# Ignore everything
-*
-
-src/**/*
-!src/index.ts
-
-!README.md
