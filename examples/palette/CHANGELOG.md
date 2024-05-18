@@ -1,5 +1,14 @@
 # palette
 
+## 0.0.4
+
+### Patch Changes
+
+- [#35](https://github.com/triozer/framer-toolbox/pull/35) [`89984ad`](https://github.com/triozer/framer-toolbox/commit/89984adc89755292cbb1274d6d6d8f73da1fe09b) Thanks [@triozer](https://github.com/triozer)! - Initial alpha release of Framer Toolbox with core tools, enhanced UI, performance improvements, and CI for linting/building.
+
+- Updated dependencies [[`89984ad`](https://github.com/triozer/framer-toolbox/commit/89984adc89755292cbb1274d6d6d8f73da1fe09b)]:
+  - @triozer/framer-toolbox@0.1.0
+
 ## 0.0.3
 
 ### Patch Changes
