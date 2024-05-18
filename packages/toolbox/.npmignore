@@ -3,7 +3,7 @@
 src/**/*
 dist/**/*
 
-!README.nd
+!README.md
 
 # Include only the specified files from the src and dist directories
 !src/index.ts
