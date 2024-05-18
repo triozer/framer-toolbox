@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import cx from 'classnames'
+
 import { InputGroup } from '../input-group'
 
-import '../../../styles/segmented-controls.css'
+import classes from './segmented-controls.module.css'
 import { capitalizeWords } from '@/utils/string'
 
 /**
@@ -67,8 +69,9 @@ function SegmentedControls<T = boolean>({
 }: SegmentedControlsProps<T>) {
   const segmentedControlsRef = useRef<HTMLDivElement>(null)
   const [selectedValue, setSelectedValue] = useState(
-    defaultValue ?? value ?? items.length > 0 ? items[0].value : false,
+    value ?? defaultValue ?? items.length > 0 ? items[0].value : false,
   )
+  console.log(selectedValue)
 
   const padding = useMemo(() => {
     if (!segmentedControlsRef.current) {
@@ -121,28 +124,31 @@ function SegmentedControls<T = boolean>({
 
   return (
     <InputGroup title={title}>
-      <div ref={segmentedControlsRef} className="segmented-controls">
+      <div ref={segmentedControlsRef} className={classes.segmentedControls}>
         {items.map((item, idx) => (
           <span
             key={`${title}-${item.value}`}
             onClick={() => handleChange(item.value)}
-            className={item.value === selectedValue ? 'selected' : ''}
+            className={cx({ [classes.selected]: item.value === selectedValue })}
           >
             {item.icon
               ? (
                 <i
+                  className={classes.icon}
                   style={{
                     maskImage: `url(${item.icon})`,
                   }}
                 />
                 )
               : (
-                  capitalizeWords(item.label ? item.label : idx === 0 ? 'Yes' : idx === 1 ? 'No' : `${item.value}`)
+                  capitalizeWords(
+                    item.label ? item.label : idx === 0 ? 'Yes' : idx === 1 ? 'No' : `${item.value}`,
+                  )
                 )}
           </span>
         ))}
         <motion.div
-          className="indicator"
+          className={classes.indicator}
           initial={animateX}
           animate={animateX}
           style={indicatorDimensions}

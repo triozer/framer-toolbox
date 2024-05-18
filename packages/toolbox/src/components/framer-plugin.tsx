@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react'
 import { type UIOptions, framer } from 'framer-plugin'
+import cx from 'classnames'
+
 import { useAutoSizer } from '../hooks/auto-sizer'
 import { useFramerPlugin } from '../providers'
+
+import classes from './framer-plugin.module.css'
 
 interface FramerPluginRealProps {
   name: string
@@ -79,14 +83,10 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
       <main
         {...props}
         ref={mergedProps.autoResize ? mainRef : ref}
+        className={cx(classes.framerPlugin, props.className)}
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'start',
           padding: mergedProps.padding,
           gap: mergedProps.gap,
-          width: '100%',
-          height: '100%',
           ...props.style,
         }}
       >

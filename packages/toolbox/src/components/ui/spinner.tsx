@@ -1,4 +1,6 @@
-import '../../styles/spinner.css'
+import cx from 'classnames'
+
+import classes from './spinner.module.css'
 
 export interface SpinnerProps {
   /** Size of the spinner */
@@ -6,32 +8,38 @@ export interface SpinnerProps {
   /** Set the spinner to have a static position inline with other content */
   inline?: boolean
   className?: string
-  inheritColor?: boolean
+  color?: React.CSSProperties['color']
 }
 
 function styleForSize(size: SpinnerProps['size']) {
   switch (size) {
     case 'normal':
-      return 'normalStyle'
+      return classes.normalSize
     case 'medium':
-      return 'mediumStyle'
+      return classes.mediumSize
     case 'large':
-      return 'largeStyle'
+      return classes.largeSize
   }
 }
 
 function Spinner({
   size,
   inline = false,
-  inheritColor,
+  color,
   className,
   ...rest
 }: SpinnerProps) {
   return (
     <div
-      className={`spin baseStyle ${styleForSize(size)} ${
-        inheritColor ? 'buttonWithDepthSpinner' : ''
-      } ${!inline ? 'centeredStyle' : ''} ${className || ''}`}
+      className={cx(
+        className,
+        classes.spin,
+        classes.baseStyle,
+        styleForSize(size),
+        !color && classes.buttonWithDepthSpinner,
+        !inline && classes.centeredStyle,
+      )}
+      {...color && { style: { color } }}
       {...rest}
     />
   )

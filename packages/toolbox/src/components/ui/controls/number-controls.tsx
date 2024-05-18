@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import cx from 'classnames' // to combine class names
 
 import { InputGroup } from '../input-group'
-import { icons } from '@/components/icons'
+import classes from './number-controls.module.css'
 
-import '../../../styles/number-controls.css'
+import { icons } from '@/components/icons'
 
   type NumberControlsProps = {
     title: string
@@ -62,18 +63,11 @@ const NumberControls: React.FC<NumberControlsProps> = ({
     <InputGroup title={title}>
       <input type="number" {...props} value={currentValue} onChange={e => handleChange(e.target.valueAsNumber)} />
       {stepper && (
-        <div
-          className="number-controls stepper"
-        >
+        <div className={cx(classes.numberControls, classes.stepper)}>
           <i
+            className={classes.icon}
             style={{
-              width: '100%',
-              height: '100%',
               maskImage: `url(${icons.minus})`,
-              maskRepeat: 'no-repeat',
-              maskPosition: 'center',
-              backgroundColor: 'currentColor',
-              cursor: 'pointer',
             }}
             onClick={() => {
               if (props.disabled)
@@ -87,16 +81,11 @@ const NumberControls: React.FC<NumberControlsProps> = ({
               )
             }}
           />
-          <div className="divider" />
+          <div className={classes.divider} />
           <i
+            className={classes.icon}
             style={{
-              width: '100%',
-              height: '100%',
               maskImage: `url(${icons.plus})`,
-              maskRepeat: 'no-repeat',
-              maskPosition: 'center',
-              backgroundColor: 'currentColor',
-              cursor: 'pointer',
             }}
             onClick={() => {
               if (props.disabled)

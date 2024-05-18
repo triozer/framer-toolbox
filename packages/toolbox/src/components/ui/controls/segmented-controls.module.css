@@ -1,4 +1,4 @@
-.segmented-controls {
+.segmentedControls {
   --framer-segmented-control-background-color: #f3f3f3;
   --framer-segmented-control-item-background-selected-color: #ffffff;
   --framer-segmented-control-item-text-color: #999999;
@@ -7,7 +7,7 @@
   --framer-segmented-control-divider-color: #e6e6e6;
 }
 
-[data-framer-theme='dark'] .segmented-controls {
+[data-framer-theme='dark'] .segmentedControls {
   --framer-segmented-control-background-color: #2b2b2b;
   --framer-segmented-control-item-background-selected-color: #555555;
   --framer-segmented-control-item-text-color: #999999;
@@ -16,7 +16,7 @@
   --framer-segmented-control-divider-color: #444444;
 }
 
-.segmented-controls {
+.segmentedControls {
   position: relative;
   display: flex;
   justify-content: center;
@@ -29,7 +29,7 @@
   color: var(--framer-segmented-control-item-text-color);
 }
 
-.segmented-controls span {
+.segmentedControls span {
   position: relative;
   display: flex;
   justify-content: center;
@@ -44,7 +44,7 @@
 }
 
 /*
-.segmented-controls span::before {
+.segmentedControls span::before {
   position: absolute;
   content: "";
   width: 1px;
@@ -55,21 +55,21 @@
   opacity: 0.5;
 }
 
-.segmented-controls span:first-child::before,
-.segmented-controls span:last-child::before {
+.segmentedControls span:first-child::before,
+.segmentedControls span:last-child::before {
   display: none;
 } */
 
-.segmented-controls span:hover {
+.segmentedControls span:hover {
   color: var(--framer-segmented-control-item-text-hover-color);
 }
 
-.segmented-controls span.selected {
+.selected {
   color: var(--framer-segmented-control-item-text-selected-color);
   font-weight: 600;
 }
 
-.segmented-controls i {
+.icon {
   width: 14px;
   height: 14px;
   mask-repeat: no-repeat;
@@ -77,7 +77,7 @@
   background: currentColor;
 }
 
-.segmented-controls .indicator {
+.indicator {
   position: absolute;
   background-color: var(
     --framer-segmented-control-item-background-selected-color
