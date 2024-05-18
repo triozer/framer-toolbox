@@ -43,7 +43,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: 🪄 Lint
-        run: pnpm lint
+        run: pnpm lint 
 
       - name: 🏗️ Build
         id: build
