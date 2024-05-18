@@ -1,5 +1,14 @@
 # palette
 
+## 0.0.5
+
+### Patch Changes
+
+- [#38](https://github.com/triozer/framer-toolbox/pull/38) [`db358df`](https://github.com/triozer/framer-toolbox/commit/db358df320b04099075b91dd3231dde7fab36b5c) Thanks [@triozer](https://github.com/triozer)! - Use CSS modules
+
+- Updated dependencies [[`db358df`](https://github.com/triozer/framer-toolbox/commit/db358df320b04099075b91dd3231dde7fab36b5c)]:
+  - @triozer/framer-toolbox@0.1.1
+
 ## 0.0.4
 
 ### Patch Changes

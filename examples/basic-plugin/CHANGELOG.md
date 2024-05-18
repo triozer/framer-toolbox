@@ -1,5 +1,12 @@
 # basic-plugin
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`db358df`](https://github.com/triozer/framer-toolbox/commit/db358df320b04099075b91dd3231dde7fab36b5c)]:
+  - @triozer/framer-toolbox@0.1.1
+
 ## 0.0.5
 
 ### Patch Changes
