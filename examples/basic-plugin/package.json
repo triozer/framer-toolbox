@@ -1,8 +1,8 @@
 {
   "name": "basic-plugin",
-  "private": true,
-  "version": "0.0.4",
   "type": "module",
+  "version": "0.0.4",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=${PREFIX_BASE_PATH:+/$npm_package_name}/",

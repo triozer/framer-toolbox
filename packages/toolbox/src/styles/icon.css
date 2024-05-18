@@ -1,0 +1,13 @@
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: currentColor;
+}
+
+/* Optional: Add default size if not provided */
+.icon::before {
+  content: '';
+  display: block;
+  width: 1em;
+  height: 1em;
+}

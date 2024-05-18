@@ -1,25 +1,25 @@
-import React, { useEffect } from "react"
-import { useAutoSizer } from "../hooks/auto-sizer"
-import { type UIOptions, framer } from "framer-plugin"
-import { useFramerPlugin } from "../providers/framer-plugin"
+import React, { useEffect } from 'react'
+import { type UIOptions, framer } from 'framer-plugin'
+import { useAutoSizer } from '../hooks/auto-sizer'
+import { useFramerPlugin } from '../providers'
 
-type FramerPluginRealProps = {
+interface FramerPluginRealProps {
   name: string
-  padding: React.CSSProperties["padding"]
-  gap: React.CSSProperties["gap"]
+  padding: React.CSSProperties['padding']
+  gap: React.CSSProperties['gap']
   autoResize: boolean
-  uiOptions: Omit<UIOptions, "title">
+  uiOptions: Omit<UIOptions, 'title'>
   showOnMounted: boolean
 }
 
 const defaultProps: FramerPluginRealProps = {
-  name: "Framer Plugin",
-  padding: "0 15px 15px 15px",
-  gap: "10px",
+  name: 'Framer Plugin',
+  padding: '0 15px 15px 15px',
+  gap: '10px',
   autoResize: true,
   showOnMounted: true,
   uiOptions: {
-    position: "top right",
+    position: 'top right',
     width: 240,
     height: 95,
   },
@@ -28,7 +28,7 @@ const defaultProps: FramerPluginRealProps = {
 type FramerPluginProps = {
   children?: React.ReactNode
 } & Partial<FramerPluginRealProps> &
-  React.HTMLAttributes<HTMLDivElement>
+React.HTMLAttributes<HTMLDivElement>
 
 const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
   (
@@ -42,12 +42,12 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
       uiOptions,
       ...props
     },
-    ref
+    ref,
   ) => {
-    const { name: configName } = useFramerPlugin()
+    const plugin = useFramerPlugin()
 
     const mergedProps: FramerPluginRealProps = {
-      name: name ?? configName,
+      name: name ?? plugin?.name ?? defaultProps.name,
       padding: padding ?? defaultProps.padding,
       gap: gap ?? defaultProps.gap,
       autoResize: autoResize ?? defaultProps.autoResize,
@@ -73,27 +73,27 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
           ...mergedProps.uiOptions,
         })
       }
-    }, [mergedProps.name, mergedProps.showOnMounted, mergedProps.uiOptions])
+    }, [])
 
     return (
       <main
         {...props}
         ref={mergedProps.autoResize ? mainRef : ref}
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "start",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'start',
           padding: mergedProps.padding,
           gap: mergedProps.gap,
-          width: "100%",
-          height: "100%",
+          width: '100%',
+          height: '100%',
           ...props.style,
         }}
       >
         {children}
       </main>
     )
-  }
+  },
 )
 
 export { FramerPlugin }

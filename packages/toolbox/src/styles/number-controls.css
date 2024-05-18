@@ -4,7 +4,7 @@
   --framer-number-control-divider-color: #e6e6e6;
 }
 
-[data-framer-theme="dark"] .number-controls {
+[data-framer-theme='dark'] .number-controls {
   --framer-number-control-background-color: #2b2b2b;
   --framer-number-control-item-text-color: #999999;
   --framer-number-control-divider-color: #444444;
@@ -25,5 +25,5 @@
 
 .number-controls.stepper .divider {
   height: 50%;
-  background-color: var(--framer-number-control-divider-color)
+  background-color: var(--framer-number-control-divider-color);
 }

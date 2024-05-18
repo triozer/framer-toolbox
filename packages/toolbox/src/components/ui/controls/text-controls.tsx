@@ -1,20 +1,20 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react'
 
-import { InputGroup } from "../input-group";
-import { icons, type Icon } from "@/components/icons";
+import { InputGroup } from '../input-group'
+import { type IconType, icons } from '@/components/icons'
 
 type TextControlsProps = {
-  title?: string;
-  icon?: Icon;
+  title?: string
+  icon?: IconType
 } & React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
->;
+>
 
 const TextControls: React.FC<TextControlsProps> = ({
   title,
   icon,
-  type = "text",
+  type = 'text',
   ...props
 }) => {
   const withIconStyle = useMemo<React.CSSProperties>(
@@ -24,12 +24,12 @@ const TextControls: React.FC<TextControlsProps> = ({
             paddingLeft: 30,
             backgroundImage: `url(${icons[icon]})`,
             backgroundSize: 12,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "10px 50%",
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: '10px 50%',
           }
         : {},
-    [icon]
-  );
+    [icon],
+  )
 
   return (
     <InputGroup title={title}>
@@ -42,7 +42,7 @@ const TextControls: React.FC<TextControlsProps> = ({
         }}
       />
     </InputGroup>
-  );
-};
+  )
+}
 
-export { TextControls };
+export { TextControls }

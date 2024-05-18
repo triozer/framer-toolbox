@@ -1,26 +1,30 @@
-import { useEffect } from "react"
-import { motion } from "framer-motion"
-import { framer, withBackgroundColor } from "framer-plugin"
+import { useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { framer, withBackgroundColor } from 'framer-plugin'
+import * as htmlToImage from 'html-to-image'
+
 import {
-  COLOR_SCHEMES,
-  COLOR_VARIATIONS,
+  Button,
+  FramerPlugin,
+  ListControls,
+  NumberControls,
+  SegmentedControls,
+  capitalizeWords,
+  useSelection,
+  useStore,
+} from '@triozer/framer-toolbox'
+
+import type {
   ColorData,
   ColorSchemeType,
   ColorVariationType,
-  generateColorSet,
-} from "./utils/color"
-import "./App.css"
+} from './utils/color'
 import {
-  FramerPlugin,
-  InputGroup,
-  NumberControls,
-  SegmentedControls,
-  useSelection,
-  useStore,
-  capitalizeWords,
-  Button,
-} from "@triozer/framer-toolbox"
-import * as htmlToImage from "html-to-image"
+  COLOR_SCHEMES,
+  COLOR_VARIATIONS,
+  generateColorSet,
+} from './utils/color'
+import './App.css'
 
 export function App() {
   const [store, _, setStoreValue, isStoreLoaded] = useStore<{
@@ -28,62 +32,56 @@ export function App() {
     scheme: ColorSchemeType
     variation: ColorVariationType
     colors: ColorData[]
-    mode: "hues" | "gradient"
+    mode: 'hues' | 'gradient'
     showColorDetails: boolean
     detailsOpen: boolean
-  }>("store", {
+    autoGenerate: boolean
+  }>('store', {
     count: 2,
-    scheme: "mono",
-    variation: "hard",
+    scheme: 'analogic',
+    variation: 'hard',
     colors: [],
-    mode: "hues",
+    mode: 'hues',
     showColorDetails: true,
     detailsOpen: false,
+    autoGenerate: true,
   })
 
-  const { count, scheme, variation, colors, mode, showColorDetails } = store
+  const { count, scheme, variation, colors, mode, showColorDetails, autoGenerate } = store
 
   const selection = useSelection()
 
   useEffect(() => {
-    if (scheme === "mono") {
-      setStoreValue("count", 2)
+    if (!isStoreLoaded)
       return
-    }
 
-    if (scheme === "tetrade") {
-      setStoreValue("count", 4)
-      return
-    }
-
-    if (scheme === "triade") {
-      setStoreValue("count", 3)
-      return
-    }
+    if (scheme === 'mono' && count !== 2)
+      setStoreValue('count', 2)
+    else if (scheme === 'tetrade' && count !== 4)
+      setStoreValue('count', 4)
+    else if (scheme === 'triade' && count !== 3)
+      setStoreValue('count', 3)
   }, [scheme])
 
   useEffect(() => {
-    if (scheme === "mono" && count !== 2) {
-      setStoreValue("count", 2)
-      return
-    }
-
-    setStoreValue("colors", generateColorSet({ count, scheme, variation }))
-  }, [count, scheme, variation])
-
-  useEffect(() => {
-    if (isStoreLoaded && colors.length === 0) {
-      setStoreValue("colors", generateColorSet({ count, scheme, variation }))
-    }
-  }, [colors])
-
-  useEffect(() => {
-    if (mode === "gradient") {
-      if (count < 2) {
-        setStoreValue("count", 2)
-      }
-    }
+    if (mode === 'gradient' && count !== 2)
+      setStoreValue('count', 2)
   }, [mode])
+
+  useEffect(() => {
+    if (!autoGenerate || !isStoreLoaded)
+      return
+
+    setStoreValue('colors', generateColorSet({ count, scheme, variation }))
+  }, [scheme, count, variation])
+
+  useEffect(() => {
+    if (colors.length === 0 && isStoreLoaded)
+      setStoreValue('colors', generateColorSet({ count, scheme, variation }))
+  }, [])
+
+  if (!isStoreLoaded)
+    return null
 
   const updateSelectionColor = (color: ColorData) => {
     selection.forEach((node) => {
@@ -91,7 +89,6 @@ export function App() {
         node.setAttributes({
           backgroundColor: color.hex,
         })
-        return
       }
     })
   }
@@ -101,42 +98,42 @@ export function App() {
       <div
         id="colors"
         style={{
-          display: "grid",
+          display: 'grid',
           gridTemplateColumns: `repeat(${colors.length}, minmax(100px, 1fr))`,
           // width: "100%",
-          minWidth: "300px",
-          borderRadius: "8px",
-          overflow: "hidden",
+          minWidth: '300px',
+          borderRadius: '8px',
+          overflow: 'hidden',
           background:
-            mode === "gradient"
+            mode === 'gradient'
               ? `linear-gradient(to right, ${colors
-                  .map((color) => color.hex)
-                  .join(", ")})`
-              : "transparent",
-          backgroundBlendMode: "soft-light",
-          backdropFilter: mode === "gradient" ? "blur(10px)" : "none",
+                  .map(color => color.hex)
+                  .join(', ')})`
+              : 'transparent',
+          backgroundBlendMode: 'soft-light',
+          backdropFilter: mode === 'gradient' ? 'blur(10px)' : 'none',
         }}
       >
         {colors.map((color, index) => (
           <motion.div
             key={index}
             style={{
-              height: "200px",
-              backgroundColor: mode === "hues" ? color.hex : "transparent",
-              display: "flex",
-              justifyContent: "space-between",
-              flexDirection: "column",
-              color: color.luminance > 0.5 ? "black" : "white",
-              width: "100%",
-              cursor: "pointer",
-              padding: "16px",
+              height: '200px',
+              backgroundColor: mode === 'hues' ? color.hex : 'transparent',
+              display: 'flex',
+              justifyContent: 'space-between',
+              flexDirection: 'column',
+              color: color.luminance > 0.5 ? 'black' : 'white',
+              width: '100%',
+              cursor: 'pointer',
+              padding: '16px',
               fontWeight: 600,
               textAlign:
                 index === 0
-                  ? "left"
+                  ? 'left'
                   : index === colors.length - 1
-                  ? "right"
-                  : "center",
+                    ? 'right'
+                    : 'center',
             }}
             onClick={() => {
               updateSelectionColor(color)
@@ -146,18 +143,18 @@ export function App() {
               <>
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
+                    display: 'flex',
+                    alignItems: 'center',
                     alignSelf:
                       index === 0
-                        ? "flex-start"
+                        ? 'flex-start'
                         : index === colors.length - 1
-                        ? "flex-end"
-                        : "center",
-                    gap: "4px",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
+                          ? 'flex-end'
+                          : 'center',
+                    gap: '4px',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
                   }}
                 >
                   <svg
@@ -174,12 +171,15 @@ export function App() {
                       </g>
                     </g>
                   </svg>
-                  <span>{color.ratio}:1</span>
+                  <span>
+                    {color.ratio}
+                    :1
+                  </span>
                 </div>
                 <div
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
+                    display: 'flex',
+                    flexDirection: 'column',
                   }}
                 >
                   <span>{color.name}</span>
@@ -196,95 +196,80 @@ export function App() {
         value={mode}
         items={[
           {
-            value: "hues",
-            label: "Hues",
+            value: 'hues',
+            label: 'Hues',
           },
           {
-            value: "gradient",
-            label: "Gradient",
+            value: 'gradient',
+            label: 'Gradient',
           },
         ]}
-        onChange={(value: "hues" | "gradient") => setStoreValue("mode", value)}
+        onChange={(value: 'hues' | 'gradient') => setStoreValue('mode', value)}
       />
 
       <NumberControls
         title="Count"
         value={count}
-        onChange={(e) => {
-          setStoreValue("count", parseInt(e))
-        }}
-        min={mode === "hues" ? 1 : 2}
+        onChange={e => setStoreValue('count', e)}
+        min={mode === 'hues' ? 1 : 2}
         max={6}
-        disabled={scheme === "mono"}
+        disabled={scheme === 'mono'}
         stepper={true}
       />
 
-      <InputGroup title="Scheme">
-        <select
-          value={scheme}
-          onChange={(e) => {
-            setStoreValue("scheme", e.target.value as ColorSchemeType)
-          }}
-        >
-          {COLOR_SCHEMES.toSorted().map((scheme) => (
-            <option key={scheme} value={scheme}>
-              {capitalizeWords(scheme)}
-            </option>
-          ))}
-        </select>
-      </InputGroup>
+      <ListControls
+        title="Scheme"
+        items={[...COLOR_SCHEMES].sort().map(scheme => ({
+          value: scheme,
+          label: capitalizeWords(scheme),
+        }))}
+        value={scheme}
+        onChange={(value: ColorSchemeType) => setStoreValue('scheme', value)}
+      />
 
-      <InputGroup title="Variation">
-        <select
-          value={variation}
-          onChange={(e) => {
-            setStoreValue("variation", e.target.value as ColorVariationType)
-          }}
-        >
-          {COLOR_VARIATIONS.toSorted().map((variation) => (
-            <option key={variation} value={variation}>
-              {capitalizeWords(variation)}
-            </option>
-          ))}
-        </select>
-      </InputGroup>
+      <ListControls
+        title="Variation"
+        items={[...COLOR_VARIATIONS].sort().map(variation => ({
+          value: variation,
+          label: capitalizeWords(variation),
+        }))}
+        value={variation}
+        onChange={(value: ColorVariationType) => setStoreValue('variation', value)}
+      />
 
       <SegmentedControls
         title="Show Details"
         value={showColorDetails}
-        items={[
-          {
-            value: true,
-            label: "Yes",
-          },
-          {
-            value: false,
-            label: "No",
-          },
-        ]}
-        onChange={(value: boolean) => setStoreValue("showColorDetails", value)}
+        onChange={(value: boolean) => setStoreValue('showColorDetails', value)}
+      />
+
+      <SegmentedControls
+        title="Auto Generate"
+        value={autoGenerate}
+        onChange={(value: boolean) => setStoreValue('autoGenerate', value)}
       />
 
       <hr />
 
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "10px",
-          width: "100%",
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '10px',
+          width: '100%',
         }}
       >
         <Button
           variant="secondary"
           onClick={async () => {
-            const node = document.getElementById("colors")
-            if (!node) return
+            const node = document.getElementById('colors')
+            if (!node)
+              return
 
             const image = await htmlToImage.toPng(node)
 
             framer.addImage({
-              name: "Palette",
+              name: 'Palette',
               image,
             })
           }}
@@ -295,8 +280,8 @@ export function App() {
           variant="primary"
           onClick={() => {
             setStoreValue(
-              "colors",
-              generateColorSet({ count, scheme, variation })
+              'colors',
+              generateColorSet({ count, scheme, variation }),
             )
           }}
         >

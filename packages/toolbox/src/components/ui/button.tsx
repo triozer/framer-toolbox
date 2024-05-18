@@ -1,12 +1,12 @@
-import { icons, type Icon } from "../icons";
+import { type IconType, icons } from '../icons'
 
-import "../../styles/button.css";
+import '../../styles/button.css'
 
 type ButtonProps = {
-  icon?: Icon;
-  children?: React.ReactNode;
-  variant?: "primary" | "secondary" | "destructive";
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+  icon?: IconType
+  children?: React.ReactNode
+  variant?: 'primary' | 'secondary' | 'destructive'
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 const Button: React.FC<ButtonProps> = ({
   icon,
@@ -16,27 +16,27 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`framer-button-${variant ?? "primary"} ${
-        icon ? "framer-button-icon" : ""
+      className={`framer-button-${variant ?? 'primary'} ${
+        icon ? 'framer-button-icon' : ''
       }`}
       {...props}
     >
       {icon && (
         <i
           style={{
-            display: "block",
+            display: 'block',
             width: 16,
             height: 16,
             maskImage: `url(${icons[icon]})`,
-            maskRepeat: "no-repeat",
-            maskPosition: "center",
-            background: "currentColor",
+            maskRepeat: 'no-repeat',
+            maskPosition: 'center',
+            background: 'currentColor',
           }}
         />
       )}
       {children && <span>{children}</span>}
     </button>
-  );
-};
+  )
+}
 
-export { Button };
+export { Button }

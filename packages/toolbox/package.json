@@ -1,8 +1,5 @@
 {
   "name": "@triozer/framer-toolbox",
-  "types": "dist/index.d.ts",
-  "main": "dist/index.cjs",
-  "module": "dist/index.ts",
   "type": "module",
   "version": "0.0.3",
   "exports": {
@@ -21,6 +18,9 @@
       "require": "./dist/*.css"
     }
   },
+  "main": "dist/index.cjs",
+  "module": "dist/index.ts",
+  "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
