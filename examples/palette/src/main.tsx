@@ -1,4 +1,4 @@
-import '@triozer/framer-toolbox/dist/index.css'
+import '@triozer/framer-toolbox/index.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'

@@ -1,0 +1,12 @@
+# Ignore everything
+*
+src/**/*
+dist/**/*
+
+!README.nd
+
+# Include only the specified files from the src and dist directories
+!src/index.ts
+!dist/index.d.ts
+!dist/index.css
+!dist/index.js

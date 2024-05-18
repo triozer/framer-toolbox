@@ -74,7 +74,7 @@ importers:
     dependencies:
       '@triozer/framer-toolbox':
         specifier: workspace:*
-        version: link:../../packages/toolbox/dist
+        version: link:../../packages/toolbox
       framer-motion:
         specifier: ^11.1.7
         version: 11.1.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -132,7 +132,7 @@ importers:
     dependencies:
       '@triozer/framer-toolbox':
         specifier: workspace:*
-        version: link:../../packages/toolbox/dist
+        version: link:../../packages/toolbox
       clsx:
         specifier: ^2.1.0
         version: 2.1.1
@@ -212,35 +212,34 @@ importers:
 
   packages/toolbox:
     dependencies:
-      classnames:
-        specifier: ^2.5.1
-        version: 2.5.1
-      framer-motion:
-        specifier: ^11.1.7
-        version: 11.1.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
         specifier: ^0
         version: 0.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      localforage:
-        specifier: ^1.10.0
-        version: 1.10.0
       react:
         specifier: ^18
         version: 18.3.1
       react-dom:
         specifier: ^18
         version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react-router-dom':
+        specifier: ^5.3.3
+        version: 5.3.3
+      classnames:
+        specifier: ^2.5.1
+        version: 2.5.1
+      framer-motion:
+        specifier: ^11.1.7
+        version: 11.1.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      localforage:
+        specifier: ^1.10.0
+        version: 1.10.0
       react-router-dom:
         specifier: ^6.23.0
         version: 6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       typescript:
         specifier: ^5.0.0
         version: 5.4.5
-    devDependencies:
-      '@types/react-router-dom':
-        specifier: ^5.3.3
-        version: 5.3.3
-    publishDirectory: ./dist
 
 packages:
 
