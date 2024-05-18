@@ -19,4 +19,5 @@ bun dev
 To see the results, open Framer and ensure the "Plugin Beta" preference is enabled. Then open the plugins menu from the toolbar, and select "Open Development Plugin"
 
 Learn more: https://developers.framer.wiki/
+
 # colors.framer
