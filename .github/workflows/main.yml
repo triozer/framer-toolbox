@@ -55,9 +55,6 @@ jobs:
         id: build
         run: pnpm build
 
-      - name: 🧪 Show publish info
-        run: pnpm ci:publish --dry-run
-
   publish:
     name: 📦 Publish
     runs-on: ubuntu-latest

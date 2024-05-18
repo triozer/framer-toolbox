@@ -13,7 +13,8 @@
   "main": "src/index.ts",
   "types": "dist/index.d.ts",
   "files": [
-    "dist/*"
+    "dist",
+    "src/index.ts"
   ],
   "publishConfig": {
     "access": "public",
