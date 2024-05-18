@@ -1,5 +1,12 @@
 # palette
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`4eb9829`](https://github.com/triozer/framer-toolbox/commit/4eb982959ef2f16fb8a5c1899db6daa75c566d57)]:
+  - @triozer/framer-toolbox@0.1.5
+
 ## 0.0.2
 
 ### Patch Changes
