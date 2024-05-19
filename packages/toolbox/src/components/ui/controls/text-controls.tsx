@@ -13,7 +13,7 @@ type TextControlsProps = {
 } & Omit<React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
->, 'type'>
+>, 'onChange' | 'type'>
 
 const TextControls: React.FC<TextControlsProps> = ({
   title,

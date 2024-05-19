@@ -1,33 +1,16 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import cx from 'classnames'
-
 import { InputGroup } from '../input-group'
-
 import classes from './segmented-controls.module.css'
 import { capitalizeWords } from '@/utils/string'
 
-/**
- * Type definition for a segmented control item
- *
- * @property {string | boolean} value - The value of the item
- * @property {string} [label] - The label of the item
- */
 interface SegmentedControlItem<Value> {
   value: Value
   label?: string
   icon?: string
 }
 
-/**
- * Props for the SegmentedControls component
- *
- * @property {SegmentedControlItem[]} items - Array of segmented control items
- * @property {string} defaultValue - The default selected value
- * @property {(value: string) => void} onChange - Callback function when the selected value changes
- * @property {boolean} disabled - Whether the input is disabled
- * @extends React.HTMLProps<HTMLDivElement> - Additional props for the div element
- */
 type SegmentedControlsProps<Value> = {
   title?: string
   items?: SegmentedControlItem<Value>[]
@@ -40,29 +23,15 @@ type SegmentedControlsProps<Value> = {
   'onChange'
 >
 
-/**
- * SegmentedControls component
- *
- * A custom React component for segmented controls with animated indicator
- *
- * @param props - Props for the component
- * @param props.title - The title of the input group
- * @param props.items - Array of segmented control items
- * @param props.value - The selected value
- * @param props.defaultValue - The default selected value
- * @param props.disabled - Whether the input is disabled
- * @param props.onChange - Callback function when the selected value changes
- * @returns The rendered component
- */
-function SegmentedControls<T = boolean>({
+function SegmentedControls<Value>({
   title,
   items = [
     {
-      value: true as T,
+      value: true as Value,
       label: 'Yes',
     },
     {
-      value: false as T,
+      value: false as Value,
       label: 'No',
     },
   ],
@@ -70,11 +39,9 @@ function SegmentedControls<T = boolean>({
   defaultValue,
   disabled,
   onChange,
-}: SegmentedControlsProps<T>) {
+}: SegmentedControlsProps<Value>) {
   const segmentedControlsRef = useRef<HTMLDivElement>(null)
-  const [selectedValue, setSelectedValue] = useState(
-    value ?? defaultValue ?? items.length > 0 ? items[0].value : false,
-  )
+  const [selectedValue, setSelectedValue] = useState(value ?? defaultValue ?? (items.length > 0 ? items[0].value : false))
 
   const padding = useMemo(() => {
     if (!segmentedControlsRef.current) {
@@ -113,7 +80,7 @@ function SegmentedControls<T = boolean>({
     }
   }, [selectedValue, items, padding])
 
-  const handleChange = (value: T) => {
+  const handleChange = (value: Value) => {
     if (disabled)
       return
 
