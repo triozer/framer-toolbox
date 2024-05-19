@@ -1,5 +1,5 @@
 ---
-"basic-plugin": patch
+"basic": patch
 "@triozer/framer-toolbox": patch
 ---
 
