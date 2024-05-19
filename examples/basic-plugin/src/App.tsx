@@ -15,10 +15,18 @@ import {
 } from '@triozer/framer-toolbox'
 import { useState } from 'react'
 
+type Resizable = 'both' | 'width' | 'height' | 'none'
+
 export function App() {
-  const { store, setStoreValue, isStoreLoaded } = useStore('my-plugin-store', {
+  const { store, setStoreValue, isStoreLoaded } = useStore<{
+    autoResize: boolean
+    resizable: Resizable
+    text: string
+    number: number
+    list: string
+  }>('my-plugin-store', {
     autoResize: false,
-    resizable: false,
+    resizable: 'both',
     text: 'Framer Toolbox',
     number: 0,
     list: 'item1',
@@ -42,7 +50,7 @@ export function App() {
     <FramerPlugin
       autoResize={autoResize}
       uiOptions={{
-        resizable,
+        resizable: resizable === 'both' ? true : resizable === 'none' ? false : resizable,
       }}
     >
       <SegmentedControls
@@ -64,12 +72,12 @@ export function App() {
         title="Resizable"
         value={resizable}
         items={[
-          { label: 'Both', value: true },
+          { label: 'Both', value: 'both' },
           { label: 'Width', value: 'width' },
           { label: 'Height', value: 'height' },
-          { label: 'No', value: false },
+          { label: 'None', value: 'none' },
         ]}
-        onChange={value => setStoreValue('resizable', value)}
+        onChange={value => setStoreValue('resizable', value as Resizable)}
       />
       <SegmentedControls
         title="Icons"
