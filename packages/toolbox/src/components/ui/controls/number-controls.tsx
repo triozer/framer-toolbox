@@ -7,7 +7,9 @@ import classes from './number-controls.module.css'
 import { icons } from '@/components/icons'
 
   type NumberControlsProps = {
-    title: string
+    title?: string
+    value?: number
+    defaultValue?: number
     stepper?: boolean
     slider?: boolean
     onChange?: (value: number) => void
@@ -16,7 +18,7 @@ import { icons } from '@/components/icons'
       React.InputHTMLAttributes<HTMLInputElement>,
       HTMLInputElement
     >,
-    'onChange'
+    'onChange' | 'value' | 'defaultValue'
   >
 
 const NumberControls: React.FC<NumberControlsProps> = ({
@@ -45,10 +47,10 @@ const NumberControls: React.FC<NumberControlsProps> = ({
   }
 
   useEffect(() => {
-    if (currentValue === +(value ?? 0))
+    if (value === undefined || currentValue === value)
       return
 
-    setCurrentValue(+(value ?? 0))
+    setCurrentValue(value)
   }, [value])
 
   if (!stepper && !slider) {

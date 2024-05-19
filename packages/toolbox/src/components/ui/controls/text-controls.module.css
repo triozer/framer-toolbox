@@ -1,5 +1,5 @@
 .withIcon {
-  padding-left: 30px;
+  padding-left: 30px !important;
   background-size: 12px;
   background-repeat: no-repeat;
   background-position: 10px 50%;

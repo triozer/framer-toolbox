@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { type UIOptions, framer } from 'framer-plugin'
+import React, { useEffect, useRef, useState } from 'react'
+import type { UIOptions } from 'framer-plugin'
 import cx from 'classnames'
 
 import { useAutoSizer } from '../hooks/auto-sizer'
@@ -9,8 +9,6 @@ import classes from './framer-plugin.module.css'
 
 interface FramerPluginRealProps {
   name: string
-  padding: React.CSSProperties['padding']
-  gap: React.CSSProperties['gap']
   autoResize: boolean
   uiOptions: Omit<UIOptions, 'title'>
   showOnMounted: boolean
@@ -18,9 +16,7 @@ interface FramerPluginRealProps {
 
 const defaultProps: FramerPluginRealProps = {
   name: 'Framer Plugin',
-  padding: '0 15px 15px 15px',
-  gap: '10px',
-  autoResize: true,
+  autoResize: false,
   showOnMounted: true,
   uiOptions: {
     position: 'top right',
@@ -39,8 +35,6 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     {
       children,
       name,
-      padding,
-      gap,
       autoResize,
       showOnMounted,
       uiOptions,
@@ -50,45 +44,71 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
   ) => {
     const plugin = useFramerPlugin()
 
-    const mergedProps: FramerPluginRealProps = {
+    const hasMountedOnce = useRef(false)
+
+    const [mergedProps, setMergedProps] = useState(() => ({
+      ...defaultProps,
+      ...plugin,
       name: name ?? plugin?.name ?? defaultProps.name,
-      padding: padding ?? defaultProps.padding,
-      gap: gap ?? defaultProps.gap,
       autoResize: autoResize ?? defaultProps.autoResize,
       showOnMounted: showOnMounted ?? defaultProps.showOnMounted,
       uiOptions: {
         ...defaultProps.uiOptions,
         ...uiOptions,
       },
-    }
-
-    const { ref: mainRef } = useAutoSizer({
-      enableUIResizing: mergedProps.autoResize,
-      defaultSize: {
-        width: mergedProps.uiOptions.width ?? defaultProps.uiOptions.width!,
-        height: mergedProps.uiOptions.height ?? defaultProps.uiOptions.height!,
-      },
-    })
+    }))
 
     useEffect(() => {
-      if (mergedProps.showOnMounted) {
-        framer.showUI({
-          title: mergedProps.name,
-          ...mergedProps.uiOptions,
-        })
+      setMergedProps(prevProps => ({
+        ...prevProps,
+        name: name ?? plugin?.name ?? defaultProps.name,
+        autoResize: autoResize ?? defaultProps.autoResize,
+        showOnMounted: showOnMounted ?? defaultProps.showOnMounted,
+        uiOptions: {
+          ...prevProps.uiOptions,
+          ...uiOptions,
+        },
+      }))
+    }, [
+      name,
+      autoResize,
+      showOnMounted,
+      uiOptions,
+      plugin,
+    ])
+
+    const { ref: mainRef } = useAutoSizer(
+      {
+        enabled: mergedProps.autoResize,
+        options: {
+          width: mergedProps.uiOptions.width!,
+          height: mergedProps.uiOptions.height!,
+          resizable: mergedProps.uiOptions.resizable,
+          minWidth: mergedProps.uiOptions.minWidth,
+          minHeight: mergedProps.uiOptions.minHeight,
+        },
+      },
+    )
+
+    useEffect(() => {
+      if (mergedProps.autoResize && mergedProps.uiOptions.resizable)
+        return
+
+      if (mergedProps.showOnMounted && !hasMountedOnce.current) {
+        plugin.showUI(mergedProps.uiOptions)
+        hasMountedOnce.current = true
       }
-    }, [])
+    }, [mergedProps.showOnMounted])
+
+    useEffect(() => {
+      plugin.showUI({ resizable: mergedProps.uiOptions.resizable })
+    }, [mergedProps.uiOptions.resizable])
 
     return (
       <main
-        {...props}
         ref={mergedProps.autoResize ? mainRef : ref}
+        {...props}
         className={cx(classes.framerPlugin, props.className)}
-        style={{
-          padding: mergedProps.padding,
-          gap: mergedProps.gap,
-          ...props.style,
-        }}
       >
         {children}
       </main>
