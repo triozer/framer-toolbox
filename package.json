@@ -12,15 +12,15 @@
   },
   "scripts": {
     "build:packages": "pnpm -r --filter='./packages/*' run build",
-    "build:examples": "pnpm -r --filter='./examples/*' run build",
-    "build": "pnpm run build:packages && pnpm run build:examples",
+    "build:plugins": "pnpm -r --filter='./plugins/*' run build",
+    "build": "pnpm run build:packages && pnpm run build:plugins",
     "changesets": "changeset",
     "ci:publish": "changeset publish",
     "ci:version": "changeset version",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "lint:packages": "eslint packages --max-warnings=0",
-    "lint:examples": "eslint examples --max-warnings=0"
+    "lint:plugins": "eslint plugins --max-warnings=0"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.5.0"
