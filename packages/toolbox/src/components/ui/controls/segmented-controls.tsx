@@ -31,7 +31,7 @@ interface SegmentedControlItem<Value> {
 type SegmentedControlsProps<Value> = {
   title?: string
   items?: SegmentedControlItem<Value>[]
-  defaultValue?: Value | null
+  defaultValue?: Value
   value?: Value | null
   onChange?: (value: Value) => void
   disabled?: boolean

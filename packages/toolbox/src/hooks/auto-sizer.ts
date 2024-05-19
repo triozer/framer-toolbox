@@ -2,16 +2,18 @@ import type { UIOptions as FramerUIOptions } from 'framer-plugin'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { type Dimensions, asNumberOr, useDebounce, useFramerPlugin } from '..'
 
-function getNodeDimensions(parent: HTMLElement | DocumentFragment, element: HTMLElement, height: number): Dimensions {
+function getNodeDimensions(parent: HTMLElement, element: HTMLElement): Dimensions {
   const style = getComputedStyle(element)
 
   element.dataset.framerPluginDuplicate = 'true'
   element.style.visibility = 'hidden'
   element.style.position = 'absolute'
   element.style.width = 'min-content'
+  element.style.height = 'min-content'
 
   parent.appendChild(element)
   const width = element.clientWidth
+  const height = element.clientWidth
   element.remove()
 
   return {
@@ -111,13 +113,15 @@ export function useAutoSizer({ enabled, options }: Options) {
     let childsHeight = gapY + paddingY
 
     for (const child of Array.from(ref.current.children)) {
-      const dimensions = getNodeDimensions(ref.current!, child.cloneNode(true) as HTMLElement, child.clientHeight)
+      const childStyle = getComputedStyle(child)
+      const dimensions = getNodeDimensions(ref.current!, child.cloneNode(true) as HTMLElement)
+
       const childWidth = dimensions.width + gapX + paddingX
 
       if (childWidth > childsMinWidth)
         childsMinWidth = childWidth
 
-      childsHeight += dimensions.height
+      childsHeight += child.clientHeight + asNumberOr(childStyle.marginTop) + asNumberOr(childStyle.marginBottom)
     }
 
     switch (options.resizable) {

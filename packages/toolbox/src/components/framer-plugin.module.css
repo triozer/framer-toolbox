@@ -4,4 +4,6 @@
   align-items: start;
   width: 100%;
   height: 100%;
+  padding: 0 15px 15px 15px;
+  row-gap: 10px;
 }
