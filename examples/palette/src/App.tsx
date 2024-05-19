@@ -27,8 +27,42 @@ import {
 } from './utils/color'
 import './App.css'
 
+function getTextAlign(index: number, length: number) {
+  switch (length) {
+    case 1:
+      return 'center'
+    case 2:
+      return index === 0 ? 'left' : 'right'
+    case 3:
+      return index === 0 ? 'left' : index === 2 ? 'center' : 'right'
+    case 4:
+      return index % 2 === 0 ? 'left' : 'right'
+    case 5:
+      return index % 3 === 0 ? 'left' : index === 1 ? 'center' : 'right'
+    case 6:
+      return index % 3 === 0 ? 'left' : (index % 3 === 2 ? 'right' : 'center')
+  }
+}
+
+function getAlignSelf(index: number, length: number) {
+  switch (length) {
+    case 1:
+      return 'center'
+    case 2:
+      return index === 0 ? 'flex-start' : 'flex-end'
+    case 3:
+      return index === 0 ? 'flex-start' : index === 2 ? 'center' : 'flex-end'
+    case 4:
+      return index % 2 === 0 ? 'flex-start' : 'flex-end'
+    case 5:
+      return index % 3 === 0 ? 'flex-start' : index === 1 ? 'center' : 'flex-end'
+    case 6:
+      return index % 3 === 0 ? 'flex-start' : (index % 3 === 2 ? 'flex-end' : 'center')
+  }
+}
+
 export function App() {
-  const [store, _, setStoreValue, isStoreLoaded] = useStore<{
+  const { store, setStore, setStoreValue, isStoreLoaded } = useStore<{
     count: number
     scheme: ColorSchemeType
     variation: ColorVariationType
@@ -52,34 +86,26 @@ export function App() {
 
   const selection = useSelection()
 
-  useEffect(() => {
-    if (!isStoreLoaded)
-      return
-
-    if (scheme === 'mono' && count !== 2)
-      setStoreValue('count', 2)
-    else if (scheme === 'tetrade' && count !== 4)
-      setStoreValue('count', 4)
-    else if (scheme === 'triade' && count !== 3)
-      setStoreValue('count', 3)
-  }, [scheme])
-
-  useEffect(() => {
-    if (mode === 'gradient' && count !== 2)
-      setStoreValue('count', 2)
-  }, [mode])
-
-  useEffect(() => {
+  const generateColors = (options: {
+    count: number
+    scheme: ColorSchemeType
+    variation: ColorVariationType
+  }) => {
     if (!autoGenerate || !isStoreLoaded)
       return
 
-    setStoreValue('colors', generateColorSet({ count, scheme, variation }))
-  }, [scheme, count, variation])
+    setStoreValue('colors', generateColorSet(options))
+  }
 
   useEffect(() => {
-    if (colors.length === 0 && isStoreLoaded)
-      setStoreValue('colors', generateColorSet({ count, scheme, variation }))
-  }, [])
+    if (isStoreLoaded && autoGenerate)
+      generateColors({ count, scheme, variation })
+  }, [count, scheme, variation, autoGenerate, isStoreLoaded])
+
+  useEffect(() => {
+    if (mode === 'gradient' && count === 1)
+      setStoreValue('count', 2)
+  }, [mode])
 
   if (!isStoreLoaded)
     return null
@@ -95,22 +121,21 @@ export function App() {
   }
 
   return (
-    <FramerPlugin autoResize={true}>
+    <FramerPlugin autoResize={true} uiOptions={{ resizable: 'width' }}>
       <div
         id="colors"
         style={{
-          display: 'grid',
-          gridTemplateColumns: `repeat(${colors.length}, minmax(100px, 1fr))`,
-          // width: "100%",
-          minWidth: '300px',
+          display: 'flex',
+          flexWrap: 'wrap',
+          width: '100%',
+          minWidth: '330px',
+          height: '275px',
           borderRadius: '8px',
           overflow: 'hidden',
           background:
-            mode === 'gradient'
-              ? `linear-gradient(to right, ${colors
-                  .map(color => color.hex)
-                  .join(', ')})`
-              : 'transparent',
+      mode === 'gradient'
+        ? `linear-gradient(to right, ${colors.map(color => color.hex).join(', ')})`
+        : 'transparent',
           backgroundBlendMode: 'soft-light',
           backdropFilter: mode === 'gradient' ? 'blur(10px)' : 'none',
         }}
@@ -118,23 +143,35 @@ export function App() {
         {colors.map((color, index) => (
           <motion.div
             key={index}
+            {...(showColorDetails ? {} : { title: `${color.ratio}:1\n${color.name}\n${color.hex}` })}
             style={{
-              height: '200px',
               backgroundColor: mode === 'hues' ? color.hex : 'transparent',
               display: 'flex',
               justifyContent: 'space-between',
               flexDirection: 'column',
               color: color.luminance > 0.5 ? 'black' : 'white',
-              width: '100%',
               cursor: 'pointer',
               padding: '16px',
               fontWeight: 600,
-              textAlign:
-                index === 0
-                  ? 'left'
-                  : index === colors.length - 1
-                    ? 'right'
-                    : 'center',
+              textAlign: getTextAlign(index, colors.length),
+              width: (() => {
+                switch (colors.length) {
+                  case 1:
+                    return '100%'
+                  case 2:
+                    return '50%'
+                  case 3:
+                    return index === 2 ? '100%' : '50%'
+                  case 4:
+                    return '50%'
+                  case 5:
+                    return index < 3 ? '33.33%' : '50%'
+                  case 6:
+                  default:
+                    return '33.33%'
+                }
+              })(),
+              height: colors.length > 2 ? '50%' : '100%',
             }}
             onClick={() => {
               updateSelectionColor(color)
@@ -146,12 +183,7 @@ export function App() {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    alignSelf:
-                      index === 0
-                        ? 'flex-start'
-                        : index === colors.length - 1
-                          ? 'flex-end'
-                          : 'center',
+                    alignSelf: getAlignSelf(index, colors.length),
                     gap: '4px',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -210,7 +242,7 @@ export function App() {
 
       <NumberControls
         title="Count"
-        value={count}
+        value={scheme === 'mono' ? 2 : count}
         onChange={e => setStoreValue('count', e)}
         min={mode === 'hues' ? 1 : 2}
         max={6}
@@ -225,7 +257,36 @@ export function App() {
           label: capitalizeWords(scheme),
         }))}
         value={scheme}
-        onChange={(value: ColorSchemeType) => setStoreValue('scheme', value)}
+        onChange={(value: ColorSchemeType) => {
+          if (value === 'mono') {
+            setStore({
+              ...store,
+              scheme: 'mono',
+              count: 2,
+            })
+            return
+          }
+
+          if (value === 'tetrade') {
+            setStore({
+              ...store,
+              scheme: 'tetrade',
+              count: 4,
+            })
+            return
+          }
+
+          if (value === 'triade') {
+            setStore({
+              ...store,
+              scheme: 'triade',
+              count: 3,
+            })
+            return
+          }
+
+          setStoreValue('scheme', value)
+        }}
       />
 
       <ListControls
