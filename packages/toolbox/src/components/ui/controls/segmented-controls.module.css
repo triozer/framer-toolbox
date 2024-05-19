@@ -65,7 +65,7 @@
 }
 
 .selected {
-  color: var(--framer-segmented-control-item-text-selected-color);
+  color: var(--framer-segmented-control-item-text-selected-color) !important;
   font-weight: 600;
 }
 

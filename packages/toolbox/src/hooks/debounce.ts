@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+
+import type { DebouncedFunc } from 'lodash'
+import lodashDebounce from 'lodash.debounce'
 
 /**
  * A hook that debounces a value.
@@ -8,7 +11,7 @@ import { useEffect, useState } from 'react'
  *
  * @returns The debounced value.
  */
-export function useDebounce<T>(value: T, delay: number) {
+export function useDebounceValue<T>(value: T, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
   useEffect(() => {
@@ -20,4 +23,24 @@ export function useDebounce<T>(value: T, delay: number) {
   }, [value, delay])
 
   return debouncedValue
+}
+
+export function useDebounce<T extends unknown[], S>(callback: (...args: T) => S, delay: number = 1000): DebouncedFunc<(...arg: T) => S> {
+  const ref = useRef(callback)
+
+  useEffect(() => {
+    ref.current = callback
+  }, [callback])
+
+  const debouncedCallback = useMemo(() => {
+    // pass arguments to callback function
+    const func = (...arg: T) => {
+      return ref.current(...arg)
+    }
+
+    return lodashDebounce(func, delay)
+    // or just debounce(ref.current, delay)
+  }, [delay])
+
+  return debouncedCallback
 }

@@ -1,11 +1,10 @@
 import React from 'react'
 import cx from 'classnames'
 
-import { type IconType, icons } from '../icons'
 import classes from './button.module.css'
 
 type ButtonProps = {
-  icon?: IconType
+  icon?: string
   children?: React.ReactNode
   variant?: 'primary' | 'secondary' | 'destructive'
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
@@ -25,7 +24,7 @@ const Button: React.FC<ButtonProps> = ({
         <i
           className={classes.icon}
           style={{
-            maskImage: `url(${icons[icon]})`,
+            maskImage: `url(${icon})`,
           }}
         />
       )}

@@ -3,8 +3,8 @@
 main {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  align-items: start;
+  padding: 0 15px 15px 15px;
   height: 100%;
+  row-gap: 10px;
 }

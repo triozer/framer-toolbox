@@ -17,8 +17,8 @@ const InputGroup: React.FC<InputGroupProps> = ({ title, children }) => {
   )
 
   return (
-    <div className={cx(classes.inputGroup, { [classes.full]: !hasMultipleChildren })}>
-      {title && <label className={cx({ [classes.inputGroupHasLabel]: true })}>{capitalizeWords(title)}</label>}
+    <div className={cx(classes.inputGroup, !hasMultipleChildren && classes.full)}>
+      {title && <label title={capitalizeWords(title)}>{capitalizeWords(title)}</label>}
       {children}
     </div>
   )

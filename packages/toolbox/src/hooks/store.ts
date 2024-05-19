@@ -2,10 +2,17 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import localforage from 'localforage'
 import { useFramerPlugin } from '../providers'
 
-export function useStore<StoreType extends object>(
+interface StoreReturn<Store extends object> {
+  store: Store
+  setStore: (value: Partial<Store>) => void
+  setStoreValue: <Key extends keyof Store>(key: Key, value: Store[Key]) => void
+  isStoreLoaded: boolean
+}
+
+export function useStore<Store extends object>(
   name: string,
-  initState: StoreType,
-) {
+  initState: Store,
+): StoreReturn<Store> {
   const storeId = useRef<string>()
 
   const plugin = useFramerPlugin()
@@ -28,13 +35,13 @@ export function useStore<StoreType extends object>(
     })
   }, [name, storeId.current])
 
-  const [store, setStore] = useState<StoreType>(initState)
+  const [store, setStore] = useState<Store>(initState)
   const [isStoreLoaded, setStoreLoaded] = useState(false)
 
   const isInternalUpdate = useRef(false)
 
   useEffect(() => {
-    let storedData: StoreType = initState
+    let storedData: Store = initState
 
     idb.ready().then(() => {
       idb
@@ -67,19 +74,19 @@ export function useStore<StoreType extends object>(
     }
   }, [store]) // add isStoreLoaded as dependency
 
-  const setState = (value: Partial<StoreType>) => {
+  const setState = (value: Partial<Store>) => {
     setStore({
       ...store,
       ...value,
     })
   }
 
-  const setKeyValue = <Key extends keyof StoreType>(
+  const setStoreValue = <Key extends keyof Store>(
     key: Key,
-    value: StoreType[Key],
+    value: Store[Key],
   ) => {
-    setState({ [key]: value } as unknown as Partial<StoreType>)
+    setState({ [key]: value } as unknown as Partial<Store>)
   }
 
-  return [store as StoreType, setState, setKeyValue, isStoreLoaded] as const
+  return { store, setStore: setState, setStoreValue, isStoreLoaded }
 }

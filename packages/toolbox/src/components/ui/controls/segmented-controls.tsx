@@ -25,14 +25,16 @@ interface SegmentedControlItem<Value> {
  * @property {SegmentedControlItem[]} items - Array of segmented control items
  * @property {string} defaultValue - The default selected value
  * @property {(value: string) => void} onChange - Callback function when the selected value changes
+ * @property {boolean} disabled - Whether the input is disabled
  * @extends React.HTMLProps<HTMLDivElement> - Additional props for the div element
  */
 type SegmentedControlsProps<Value> = {
   title?: string
   items?: SegmentedControlItem<Value>[]
-  defaultValue?: string
+  defaultValue?: Value
   value?: Value | null
   onChange?: (value: Value) => void
+  disabled?: boolean
 } & Omit<
   React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
   'onChange'
@@ -48,6 +50,7 @@ type SegmentedControlsProps<Value> = {
  * @param props.items - Array of segmented control items
  * @param props.value - The selected value
  * @param props.defaultValue - The default selected value
+ * @param props.disabled - Whether the input is disabled
  * @param props.onChange - Callback function when the selected value changes
  * @returns The rendered component
  */
@@ -65,13 +68,13 @@ function SegmentedControls<T = boolean>({
   ],
   value,
   defaultValue,
+  disabled,
   onChange,
 }: SegmentedControlsProps<T>) {
   const segmentedControlsRef = useRef<HTMLDivElement>(null)
   const [selectedValue, setSelectedValue] = useState(
     value ?? defaultValue ?? items.length > 0 ? items[0].value : false,
   )
-  console.log(selectedValue)
 
   const padding = useMemo(() => {
     if (!segmentedControlsRef.current) {
@@ -111,6 +114,9 @@ function SegmentedControls<T = boolean>({
   }, [selectedValue, items, padding])
 
   const handleChange = (value: T) => {
+    if (disabled)
+      return
+
     if (value === selectedValue)
       return
 
@@ -119,7 +125,12 @@ function SegmentedControls<T = boolean>({
   }
 
   useEffect(() => {
-    setSelectedValue(value ?? false)
+    if (value === undefined || value === null) {
+      setSelectedValue(defaultValue ?? items[0].value)
+      return
+    }
+
+    setSelectedValue(value)
   }, [value])
 
   return (
