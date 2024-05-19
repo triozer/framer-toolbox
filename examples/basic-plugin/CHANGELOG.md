@@ -1,5 +1,16 @@
 # basic-plugin
 
+## 0.1.0
+
+### Minor Changes
+
+- [#54](https://github.com/triozer/framer-toolbox/pull/54) [`20ea308`](https://github.com/triozer/framer-toolbox/commit/20ea30820c29830de3aa54b98df878204be78e5f) Thanks [@triozer](https://github.com/triozer)! - New basic-plugin, showcasing everything possible.
+
+### Patch Changes
+
+- Updated dependencies [[`20ea308`](https://github.com/triozer/framer-toolbox/commit/20ea30820c29830de3aa54b98df878204be78e5f)]:
+  - @triozer/framer-toolbox@0.1.12
+
 ## 0.0.7
 
 ### Patch Changes
