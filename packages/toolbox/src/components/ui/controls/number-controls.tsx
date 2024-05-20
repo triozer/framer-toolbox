@@ -1,27 +1,59 @@
 import React, { useEffect, useState } from 'react'
-import cx from 'classnames' // to combine class names
+import cx from 'classnames'
 
 import { InputGroup } from '../input-group'
 import classes from './number-controls.module.css'
 
 import { icons } from '@/components/icons'
 
-  type NumberControlsProps = {
-    title?: string
-    value?: number
-    defaultValue?: number
-    stepper?: boolean
-    slider?: boolean
-    onChange?: (value: number) => void
-  } & Omit<
-    React.DetailedHTMLProps<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      HTMLInputElement
-    >,
-    'onChange' | 'value' | 'defaultValue'
-  >
+/** @public */
+export type FilteredNumberInputProps = Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange' | 'value' | 'defaultValue'>
 
-const NumberControls: React.FC<NumberControlsProps> = ({
+/**
+ * The props of the NumberControls component.s
+ *
+ * @see {@link FilteredNumberInputProps} for the props of the input element.
+ *
+ * @public
+ */
+export interface NumberControlsProps extends FilteredNumberInputProps {
+  /** The title of the number controls. */
+  title?: string
+  /** The value of the number controls. */
+  value?: number
+  /** The default value of the number controls. */
+  defaultValue?: number
+  /** Whether to show the stepper controls. */
+  stepper?: boolean
+  /** Whether to show the slider control. */
+  slider?: boolean
+  /**
+   * The callback function that is triggered when the value changes.
+   *
+   * @param value - The new value of the number controls.
+   */
+  onChange?: (value: number) => void
+}
+
+/**
+ * A component that renders an input element for number controls with optional stepper and slider features.
+ *
+ * @example
+ * ```tsx
+ * // Render number controls with stepper
+ * <NumberControls title="Quantity" stepper onChange={handleQuantityChange} />
+ *
+ * // Render number controls with a default value and custom step
+ * <NumberControls defaultValue={10} step={2} onChange={handleQuantityChange} />
+ *
+ * // Render number controls with a title and disabled state
+ * <NumberControls title="Quantity" disabled />
+ * ```
+ *
+ * @public
+ * @kind component
+ */
+export const NumberControls: React.FC<NumberControlsProps> = ({
   title,
   defaultValue,
   stepper = false,
@@ -114,5 +146,3 @@ const NumberControls: React.FC<NumberControlsProps> = ({
     </InputGroup>
   )
 }
-
-export { NumberControls }

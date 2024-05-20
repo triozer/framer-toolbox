@@ -5,25 +5,87 @@ import { InputGroup } from '../input-group'
 import classes from './segmented-controls.module.css'
 import { capitalizeWords } from '@/utils/string'
 
-interface SegmentedControlItem<Value> {
+/**
+ * An item in the segmented controls.
+ *
+ * @public
+ */
+export interface SegmentedControlItem<Value> {
+  /**
+   * The value of the item.
+   */
   value: Value
+  /**
+   * The label of the item.
+   */
   label?: string
+  /**
+   * The icon of the item.
+   */
   icon?: string
 }
 
-type SegmentedControlsProps<Value> = {
+/**
+ * The props of the SegmentedControls component.
+ *
+ * @typeParam Value - The type of the value of the segmented controls.
+ *
+ * @public
+ */
+export interface SegmentedControlsProps<Value> {
+  /** The title of the segmented controls. */
   title?: string
+  /**
+   * The list of selectable items.
+   *
+   * @see {@link SegmentedControlItem}
+   *
+   * @defaultValue \[\{ value: true, label: 'Yes' \}, \{ value: false, label: 'No' \}\]
+   */
   items?: SegmentedControlItem<Value>[]
+  /** The default value of the segmented controls. */
   defaultValue?: Value
+  /** The value of the segmented controls. */
   value?: Value | null
+  /**
+   * The callback function that is triggered when the value changes.
+   *
+   * @param value - The new value of the segmented controls.
+   */
   onChange?: (value: Value) => void
+  /** Whether the segmented controls are disabled. */
   disabled?: boolean
-} & Omit<
-  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-  'onChange'
->
+}
 
-function SegmentedControls<Value>({
+/**
+ * A component that renders a set of selectable items with an indicator for the selected item.
+ *
+ * @remarks
+ * If no value is provided, the default value is set to the first item in the list.
+ * If no items are provided, the default items are set to 'Yes' and 'No' and their respective boolean values.
+ *
+ * @typeParam Value - The type of the value of the segmented controls.
+ *
+ * @example
+ * ```tsx
+ * // Render segmented controls with default items
+ * <SegmentedControls title="Choose an option" onChange={handleSegmentChange} />
+ *
+ * // Render segmented controls with custom items
+ * const items = [
+ *   { value: 'option1', label: 'Option 1', icon: 'path/to/icon1.svg' },
+ *   { value: 'option2', label: 'Option 2', icon: 'path/to/icon2.svg' },
+ * ];
+ * <SegmentedControls items={items} value="option1" onChange={handleSegmentChange} />
+ *
+ * // Render segmented controls with a title and disabled state
+ * <SegmentedControls title="Choose an option" disabled />
+ * ```
+ *
+ * @public
+ * @kind component
+ */
+export function SegmentedControls<Value>({
   title,
   items = [
     {
@@ -135,5 +197,3 @@ function SegmentedControls<Value>({
     </InputGroup>
   )
 }
-
-export { SegmentedControls, type SegmentedControlItem }

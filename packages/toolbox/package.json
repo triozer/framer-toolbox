@@ -22,7 +22,10 @@
   },
   "scripts": {
     "dev": "tsup --watch --onSuccess 'tsc -d'",
-    "build": "tsup"
+    "build": "tsup",
+    "generate:docs:api": "pnpm build && pnpm api-extractor run --local --verbose",
+    "generate:docs:json": "pnpm tsup scripts/index.ts -d scripts --no-config && node scripts/index.cjs",
+    "generate:docs": "pnpm generate:docs:api && pnpm generate:docs:json"
   },
   "peerDependencies": {
     "framer-plugin": "^0",
@@ -30,6 +33,10 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.43.7",
+    "@microsoft/api-extractor-model": "^7.28.17",
+    "@microsoft/tsdoc": "^0.14.2",
+    "@microsoft/tsdoc-config": "^0.16.2",
     "@types/lodash": "^4.17.4",
     "@types/lodash.debounce": "^4.0.9",
     "@types/react-router-dom": "^5.3.3",

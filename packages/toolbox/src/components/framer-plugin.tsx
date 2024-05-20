@@ -7,14 +7,43 @@ import { useFramerPlugin } from '../providers'
 
 import classes from './framer-plugin.module.css'
 
-interface FramerPluginRealProps {
+/**
+ * The properties of the FramerPlugin component.
+ *
+ * @public
+ */
+export interface FramerPluginProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The name of the plugin.
+   *
+   * @remarks
+   * If set, it will override the name from the plugin provider.
+   */
   name: string
+  /**
+   * Whether the plugin should auto resize.
+   *
+   * @defaultValue false
+   */
   autoResize: boolean
+  /**
+   * The options of the UI interface.
+   *
+   * @defaultValue \{ position: 'top right', width: 240, height: 95 \}
+   */
   uiOptions: Omit<UIOptions, 'title'>
+  /**
+   * Whether the plugin should show on mounted.
+   *
+   * @defaultValue true
+   */
   showOnMounted: boolean
 }
 
-const defaultProps: FramerPluginRealProps = {
+/**
+ * Default properties for the FramerPlugin component.
+ */
+const defaultProps: Omit<FramerPluginProps, keyof React.HTMLAttributes<HTMLDivElement>> = {
   name: 'Framer Plugin',
   autoResize: false,
   showOnMounted: true,
@@ -25,11 +54,22 @@ const defaultProps: FramerPluginRealProps = {
   },
 }
 
-type FramerPluginProps = {
-  children?: React.ReactNode
-} & Partial<FramerPluginRealProps> &
-React.HTMLAttributes<HTMLDivElement>
-
+/**
+ * A component that integrates with Framer to provide plugin functionality.
+ *
+ * @remarks
+ * When using this component, it manages padding and gap for UI interface.
+ *
+ * @example
+ * ```tsx
+ * <FramerPlugin name="My Plugin" autoResize={true} showOnMounted={false} uiOptions={{ position: 'bottom left', width: 300, height: 100 }}>
+ *   <div>Plugin Content</div>
+ * </FramerPlugin>
+ * ```
+ *
+ * @public
+ * @kind component
+ */
 const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
   (
     {
@@ -83,7 +123,7 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
         options: {
           width: mergedProps.uiOptions.width!,
           height: mergedProps.uiOptions.height!,
-          resizable: mergedProps.uiOptions.resizable,
+          resizable: mergedProps.uiOptions.resizable ?? false,
           minWidth: mergedProps.uiOptions.minWidth,
           minHeight: mergedProps.uiOptions.minHeight,
         },
