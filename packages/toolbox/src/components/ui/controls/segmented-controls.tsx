@@ -70,16 +70,17 @@ export interface SegmentedControlsProps<Value> {
  * ```tsx
  * // Render segmented controls with default items
  * <SegmentedControls title="Choose an option" onChange={handleSegmentChange} />
+ * ```
  *
+ * @example
+ * ```tsx
  * // Render segmented controls with custom items
  * const items = [
  *   { value: 'option1', label: 'Option 1', icon: 'path/to/icon1.svg' },
  *   { value: 'option2', label: 'Option 2', icon: 'path/to/icon2.svg' },
  * ];
- * <SegmentedControls items={items} value="option1" onChange={handleSegmentChange} />
  *
- * // Render segmented controls with a title and disabled state
- * <SegmentedControls title="Choose an option" disabled />
+ * <SegmentedControls items={items} value="option1" onChange={handleSegmentChange} />
  * ```
  *
  * @public

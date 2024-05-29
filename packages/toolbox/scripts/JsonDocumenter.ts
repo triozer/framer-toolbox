@@ -21,6 +21,7 @@ import {
   ApiItemKind,
   ApiReturnTypeMixin,
 } from '@microsoft/api-extractor-model'
+import hash from 'object-hash'
 
 interface IJsonApiItemParamType {
   type: string
@@ -30,9 +31,11 @@ interface IJsonApiItemParamType {
 }
 
 interface IJsonApiItemBase {
+  id: string
+  hash: string
   name: string
   description: string
-  examples?: string[]
+  examples?: string
   remarks?: string[]
   kind: IJsonApiItemKind
   see?: string[]
@@ -51,6 +54,15 @@ interface IJsonApiItemFunction extends IJsonApiItemBase {
 
 type IJsonApiItemKind = 'component' | 'hook' | 'utility'
 type IJsonApiItem = IJsonApiItemComponent | IJsonApiItemFunction
+
+function generateId() {
+  const timestamp = (new Date().getTime() / 1000 | 0).toString(16)
+  const oid = timestamp + 'xxxxxxxxxxxxxxxx'
+    .replace(/x/g, _ => (Math.random() * 16 | 0).toString(16))
+    .toLowerCase()
+
+  return oid
+}
 
 export class JsonDocumenter {
   private readonly _apiModel: ApiModel
@@ -77,7 +89,7 @@ export class JsonDocumenter {
         apiItem => this._namesToFilter.length === 0 || this._namesToFilter.includes(apiItem.displayName),
       )
 
-      for (const apiMember of packageMembers) {
+      for (const apiMember of [...packageMembers].reverse()) {
         // Extract the @kind value from the API item
         const kindValue = this._getKindFromApiItem(apiMember)
 
@@ -119,6 +131,7 @@ export class JsonDocumenter {
 
   private _generateJsonApiItem(apiItem: ApiItem, kind: IJsonApiItemKind): IJsonApiItem {
     const output: Partial<IJsonApiItem> = {
+      id: generateId(),
       name: apiItem.displayName,
       kind,
     }
@@ -141,7 +154,11 @@ export class JsonDocumenter {
             block => block.blockTag.tagNameWithUpperCase === StandardTags.see.tagNameWithUpperCase,
           )
 
-          output.examples = exampleBlocks.map(exampleBlock => this._renderMarkdown(exampleBlock.content))
+          output.examples = JSON.stringify(exampleBlocks.map((exampleBlock) => {
+            const codeBlock = exampleBlock.content.getChildNodes().filter(node => node.kind === DocNodeKind.FencedCode)[0] as DocFencedCode
+
+            return codeBlock.code.trim()
+          }))
           output.see = seeBlocks.map(seeBlock => this._renderMarkdown(seeBlock.content))
         }
       }
@@ -162,7 +179,11 @@ export class JsonDocumenter {
       }
     }
 
-    return output as IJsonApiItem
+    return {
+      id: output.id,
+      hash: hash(output),
+      ...output,
+    } as IJsonApiItem
   }
 
   private _getPropsFromComponent(apiItem: ApiItem, kind: IJsonApiItemKind): ApiInterface | null {
@@ -231,6 +252,7 @@ export class JsonDocumenter {
 
   private _renderMarkdown(docSection: DocSection): string {
     const builder: StringBuilder = new StringBuilder()
+
     for (const node of docSection.nodes) {
       if (node.kind === DocNodeKind.Paragraph)
         builder.append(this._renderParagraph(node as DocParagraph))
@@ -241,11 +263,13 @@ export class JsonDocumenter {
       else
         builder.append(node.toString())
     }
+
     return builder.toString()
   }
 
   private _renderParagraph(node: DocParagraph): string {
     const builder: StringBuilder = new StringBuilder()
+
     for (const childNode of node.getChildNodes()) {
       switch (childNode.kind) {
         case DocNodeKind.CodeSpan:
@@ -265,18 +289,26 @@ export class JsonDocumenter {
           builder.append(childNode.toString())
       }
     }
+
     return builder.toString()
   }
 
   private _renderFencedCode(node: DocFencedCode): string {
     const builder: StringBuilder = new StringBuilder()
+
     builder.append('```')
+
     if (node.language)
       builder.append(node.language)
 
     builder.append('\n')
     builder.append(node.code)
-    builder.append('\n```')
+
+    if (!node.code.endsWith('\n'))
+      builder.append('\n')
+
+    builder.append('```')
+
     return builder.toString()
   }
 }

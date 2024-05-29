@@ -19,25 +19,25 @@ export interface FramerPluginProps extends React.HTMLAttributes<HTMLDivElement> 
    * @remarks
    * If set, it will override the name from the plugin provider.
    */
-  name: string
+  name?: string
   /**
    * Whether the plugin should auto resize.
    *
    * @defaultValue false
    */
-  autoResize: boolean
+  autoResize?: boolean
   /**
    * The options of the UI interface.
    *
    * @defaultValue \{ position: 'top right', width: 240, height: 95 \}
    */
-  uiOptions: Omit<UIOptions, 'title'>
+  uiOptions?: Omit<UIOptions, 'title'>
   /**
    * Whether the plugin should show on mounted.
    *
    * @defaultValue true
    */
-  showOnMounted: boolean
+  showOnMounted?: boolean
 }
 
 /**
@@ -75,9 +75,9 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     {
       children,
       name,
-      autoResize,
-      showOnMounted,
-      uiOptions,
+      autoResize = defaultProps.autoResize,
+      showOnMounted = defaultProps.showOnMounted,
+      uiOptions = defaultProps.uiOptions,
       ...props
     },
     ref,
@@ -90,8 +90,8 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
       ...defaultProps,
       ...plugin,
       name: name ?? plugin?.name ?? defaultProps.name,
-      autoResize: autoResize ?? defaultProps.autoResize,
-      showOnMounted: showOnMounted ?? defaultProps.showOnMounted,
+      autoResize,
+      showOnMounted,
       uiOptions: {
         ...defaultProps.uiOptions,
         ...uiOptions,
@@ -102,8 +102,8 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
       setMergedProps(prevProps => ({
         ...prevProps,
         name: name ?? plugin?.name ?? defaultProps.name,
-        autoResize: autoResize ?? defaultProps.autoResize,
-        showOnMounted: showOnMounted ?? defaultProps.showOnMounted,
+        autoResize,
+        showOnMounted,
         uiOptions: {
           ...prevProps.uiOptions,
           ...uiOptions,
@@ -119,7 +119,7 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
 
     const { ref: mainRef } = useAutoSizer(
       {
-        enabled: mergedProps.autoResize,
+        enabled: mergedProps.autoResize!,
         options: {
           width: mergedProps.uiOptions.width!,
           height: mergedProps.uiOptions.height!,

@@ -26,10 +26,16 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
  * ```tsx
  * // Render a primary button with text
  * <Button variant="primary">Click Me</Button>
+ * ```
  *
+ * @example
+ * ```tsx
  * // Render a secondary button with an icon
  * <Button icon="https://example.com/icon.svg" variant="secondary" />
+ * ```
  *
+ * @example
+ * ```tsx
  * // Render a destructive button with icon and text
  * <Button icon="https://example.com/warning-icon.svg" variant="destructive">
  *   Delete

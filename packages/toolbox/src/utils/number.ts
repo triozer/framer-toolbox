@@ -7,9 +7,25 @@
  * @example
  * ```tsx
  * asNumberOr("42");        // Returns 42
+ * ```
+ * 
+ * @example
+ * ```tsx
  * asNumberOr("123.45");    // Returns 123.45
+ * ```
+ *
+ * @example
+ * ```tsx
  * asNumberOr("abc", 10);   // Returns 10
+ * ```
+ *
+ * @example
+ * ```tsx
  * asNumberOr("NaN");       // Returns 0
+ * ```
+ *
+ * @example
+ * ```tsx
  * asNumberOr("NaN", 5);    // Returns 5
  * ```
  *

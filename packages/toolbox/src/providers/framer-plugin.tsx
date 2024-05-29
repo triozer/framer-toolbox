@@ -27,6 +27,14 @@ export const FramerPluginContext = createContext<FramerPluginContextType | null>
 /**
  * The provider component for Framer Plugin context, managing plugin state and providing context values.
  *
+ * @example
+ * ```tsx
+ * // In your main.tsx
+ * <FramerPluginProvider>
+ *  <App />
+ * </FramerPluginProvider>
+ * ```
+ *
  * @public
  * @kind component
  */

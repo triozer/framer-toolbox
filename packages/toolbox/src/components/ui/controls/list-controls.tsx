@@ -66,19 +66,18 @@ export interface ListControlsProps<Value> extends SelectFilteredProps {
  *
  * @example
  * ```tsx
- * // Render a dropdown with default items
+ * <ListControls title="Select an option" onChange={handleOptionChange} />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Render list controls with custom items
  * const items = [
  *   { value: 'option1', label: 'Option 1' },
  *   { value: 'option2', label: 'Option 2' },
  * ];
  *
  * <ListControls title="Select an option" items={items} onChange={handleOptionChange} />
- *
- * // Render a dropdown with a default value
- * <ListControls title="Select an option" items={items} defaultValue="option1" />
- *
- * // Render a dropdown with a title and disabled state
- * <ListControls title="Select an option" items={items} disabled />
  * ```
  *
  * @public

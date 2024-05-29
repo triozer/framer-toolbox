@@ -93,8 +93,8 @@ export function useAutoSizer({ enabled, options }: AutoSizerOptions): AutoSizerR
   const isCurrentlyResizing = useRef(false)
 
   const [pluginDimensions, setPluginDimensions] = useState<Dimensions>({
-    width: options.width,
-    height: options.height,
+    width: options.minWidth ?? options.width,
+    height: options.minHeight ?? options.height,
   })
 
   const updatePluginDimensions = async (type: 'auto' | 'manual' = 'manual', dimensions: Omit<Options, 'resizable'>) => {

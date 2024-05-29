@@ -43,10 +43,16 @@ export interface TextControlsProps extends FilteredTextInputProps {
  * ```tsx
  * // Render an input with a title and an icon
  * <TextControls title="Username" icon="user" onChange={handleInputChange} />
+ * ```
  *
+ * @example
+ * ```tsx
  * // Render an input with a default value
  * <TextControls defaultValue="Default text" />
+ * ```
  *
+ * @example
+ * ```tsx
  * // Render an input with additional HTML attributes
  * <TextControls placeholder="Enter text here" className="custom-input" />
  * ```

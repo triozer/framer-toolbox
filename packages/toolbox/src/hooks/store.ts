@@ -30,8 +30,17 @@ export interface StoreReturn<Store extends object> {
  * @example
  * ```tsx
  * const { store, setStore, setStoreValue, isStoreLoaded } = useStore('myStore', { id: 'value1', name: 'value2' })
- *
  * const { id, name } = store
+ *
+ * setStore({ id: 'new value' })
+ * ```
+ *
+ * @example
+ * ```tsx
+ * const { store, setStore, setStoreValue, isStoreLoaded } = useStore('myStore', { id: 'value1', name: 'value2' })
+ * const { id, name } = store
+ *
+ * setStoreValue('name', 'new value')
  * ```
  *
  * @public

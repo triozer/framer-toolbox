@@ -44,10 +44,16 @@ export interface IconProps extends React.HTMLAttributes<HTMLElement> {
  * ```tsx
  * // Render an icon from a predefined type
  * <Icon icon="home" size={24} color="blue" />
+ * ```
  *
+ * @example
+ * ```tsx
  * // Render an icon from a URL
  * <Icon iconUrl="https://example.com/icon.svg" size={32} />
+ * ```
  *
+ * @example
+ * ```tsx
  * // Render an icon with additional class names and styles
  * <Icon icon="settings" className="my-icon" style={{ margin: '10px' }} />
  * ```

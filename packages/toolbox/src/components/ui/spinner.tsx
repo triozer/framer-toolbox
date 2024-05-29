@@ -7,7 +7,7 @@ import classes from './spinner.module.css'
  *
  * @public
  */
-export interface SpinnerProps {
+export interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The size of the spinner.
    *
@@ -20,8 +20,6 @@ export interface SpinnerProps {
    * @defaultValue false
    */
   inline?: boolean
-  /** The class name of the spinner. */
-  className?: string
   /**
    * The color of the spinner.
    *
@@ -57,13 +55,12 @@ const Spinner: React.FC<SpinnerProps> = ({
   size,
   inline = false,
   color = 'currentColor',
-  className,
-  ...rest
+  ...props
 }) => {
   return (
     <div
       className={cx(
-        className,
+        props.className,
         classes.spin,
         classes.baseStyle,
         styleForSize(size),
@@ -71,7 +68,7 @@ const Spinner: React.FC<SpinnerProps> = ({
         !inline && classes.centeredStyle,
       )}
       {...color && { style: { color } }}
-      {...rest}
+      {...props}
     />
   )
 }

@@ -10,14 +10,6 @@ import { FramerPluginContext, type FramerPluginContextType } from './framer-plug
  *
  * @remarks
  * If context is not available, the hook will return default values for the plugin context. This is to prevent the component from crashing when used outside of the provider.
- * ```tsx
- * {
- *   id: null,
- *   name: null,
- *   isLoaded: true,
- *   showUI: framer.showUI,
- * }
- * ```
  *
  * @example
  * ```tsx

@@ -40,14 +40,20 @@ export interface NumberControlsProps extends FilteredNumberInputProps {
  *
  * @example
  * ```tsx
+ * // Render number controls with a title and disabled state
+ * <NumberControls title="Quantity" />
+ * ```
+ *
+ * @example
+ * ```tsx
  * // Render number controls with stepper
  * <NumberControls title="Quantity" stepper onChange={handleQuantityChange} />
+ * ```
  *
+ * @example
+ * ```tsx
  * // Render number controls with a default value and custom step
  * <NumberControls defaultValue={10} step={2} onChange={handleQuantityChange} />
- *
- * // Render number controls with a title and disabled state
- * <NumberControls title="Quantity" disabled />
  * ```
  *
  * @public
