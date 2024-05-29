@@ -8,7 +8,7 @@
  * ```tsx
  * asNumberOr("42");        // Returns 42
  * ```
- * 
+ *
  * @example
  * ```tsx
  * asNumberOr("123.45");    // Returns 123.45
