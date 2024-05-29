@@ -6,12 +6,15 @@ import lodashDebounce from 'lodash.debounce'
 /**
  * A hook that debounces a value.
  *
- * @param value The value to debounce.
- * @param delay The delay in milliseconds.
+ * @example
+ * ```tsx
+ * const debouncedValue = useDebounceValue(inputValue, 500)
+ * ```
  *
- * @returns The debounced value.
+ * @public
+ * @kind hook
  */
-export function useDebounceValue<T>(value: T, delay: number) {
+export function useDebounceValue<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
   useEffect(() => {
@@ -25,6 +28,17 @@ export function useDebounceValue<T>(value: T, delay: number) {
   return debouncedValue
 }
 
+/**
+ * A hook that debounces a callback function.
+ *
+ * @example
+ * ```tsx
+ * const debouncedSave = useDebounce(saveFunction, 300)
+ * ```
+ *
+ * @public
+ * @kind hook
+ */
 export function useDebounce<T extends unknown[], S>(callback: (...args: T) => S, delay: number = 1000): DebouncedFunc<(...arg: T) => S> {
   const ref = useRef(callback)
 
@@ -33,13 +47,11 @@ export function useDebounce<T extends unknown[], S>(callback: (...args: T) => S,
   }, [callback])
 
   const debouncedCallback = useMemo(() => {
-    // pass arguments to callback function
     const func = (...arg: T) => {
       return ref.current(...arg)
     }
 
     return lodashDebounce(func, delay)
-    // or just debounce(ref.current, delay)
   }, [delay])
 
   return debouncedCallback

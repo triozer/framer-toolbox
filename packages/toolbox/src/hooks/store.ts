@@ -2,13 +2,50 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import localforage from 'localforage'
 import { useFramerPlugin } from '../providers'
 
-interface StoreReturn<Store extends object> {
+/**
+ * The return type of the useStore hook.
+ *
+ * @typeParam Store - The type of the store.
+ *
+ * @public
+ */
+export interface StoreReturn<Store extends object> {
+  /** The store object. */
   store: Store
+  /** The function to set the store object. */
   setStore: (value: Partial<Store>) => void
+  /** The function to set a value in the store object. */
   setStoreValue: <Key extends keyof Store>(key: Key, value: Store[Key]) => void
+  /** Whether the store is loaded. */
   isStoreLoaded: boolean
 }
 
+/**
+ * A hook to manage a local store using IndexedDB via `localforage`.
+ *
+ * @typeParam Store - The type of the store.
+ * @param name - The name of the store.
+ * @param initState - The initial state of the store.
+ *
+ * @example
+ * ```tsx
+ * const { store, setStore, setStoreValue, isStoreLoaded } = useStore('myStore', { id: 'value1', name: 'value2' })
+ * const { id, name } = store
+ *
+ * setStore({ id: 'new value' })
+ * ```
+ *
+ * @example
+ * ```tsx
+ * const { store, setStore, setStoreValue, isStoreLoaded } = useStore('myStore', { id: 'value1', name: 'value2' })
+ * const { id, name } = store
+ *
+ * setStoreValue('name', 'new value')
+ * ```
+ *
+ * @public
+ * @kind hook
+ */
 export function useStore<Store extends object>(
   name: string,
   initState: Store,

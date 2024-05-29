@@ -1,4 +1,3 @@
-import type { UIOptions as FramerUIOptions } from 'framer-plugin'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { type Dimensions, asNumberOr, useDebounce, useFramerPlugin } from '..'
 
@@ -22,44 +21,83 @@ function getNodeDimensions(parent: HTMLElement, element: HTMLElement): Dimension
   }
 }
 
-interface UIOptions {
-  resizable: FramerUIOptions['resizable']
+/**
+ * The options of the UI interface.
+ *
+ * @public
+ */
+export interface Options {
+  /** The position of the UI interface. */
+  resizable: boolean | 'width' | 'height'
+  /** The min width of the UI interface. */
   minWidth?: number
+  /** The min height of the UI interface. */
   minHeight?: number
+  /** The width of the UI interface. */
   width: number
+  /** The height of the UI interface. */
   height: number
 }
 
 /**
- * Options for the responsive sizer.
+ * Options for the useAutoSizer hook.
+ *
+ * @public
  */
-interface Options {
-  /**
-   * Whether to enable UI resizing.
-   */
+export interface AutoSizerOptions {
+  /** Whether the auto sizer is enabled. */
   enabled: boolean
-  options: UIOptions
+  /**
+   * The options of the UI interface.
+   *
+   * @see {@link Options}
+   */
+  options: Options
+}
+
+/**
+ * The return type of the useAutoSizer hook.
+ *
+ * @public
+ */
+export interface AutoSizerReturn {
+  /** The reference of the element to resize. */
+  ref: React.MutableRefObject<HTMLDivElement | null>
+  /**
+   * The dimensions of the plugin.
+   *
+   * @see {@link Dimensions}
+   */
+  pluginDimensions: Dimensions
+  /** The function to update the plugin dimensions. */
+  updatePluginDimensions: (type: 'auto' | 'manual', dimensions: Omit<Options, 'resizable'>) => Promise<void>
 }
 
 /**
  * A hook that enables responsive sizing for an element.
  *
- * @param {Options} options - The options for the responsive sizer.
- * @returns An object containing the element reference and the element size.
+ * @example
+ * ```tsx
+ * const { ref, pluginDimensions, updatePluginDimensions } = useAutoSizer({ enabled: true, options: { resizable: true, width: 300, height: 400 } })
+ * ```
+ *
+ * @public
+ * @kind hook
  */
-export function useAutoSizer({ enabled, options }: Options) {
+export function useAutoSizer({ enabled, options }: AutoSizerOptions): AutoSizerReturn {
   const plugin = useFramerPlugin()
+
   const ref = useRef<HTMLDivElement>(null)
 
   const haveBeenResized = useRef(false)
   const isCurrentlyResizing = useRef(false)
 
-  const [pluginDimensions, setPluginDimensions] = useState({
-    width: options.width,
-    height: options.height,
+  const [pluginDimensions, setPluginDimensions] = useState<Dimensions>({
+    width: options.minWidth ?? options.width,
+    height: options.minHeight ?? options.height,
   })
 
-  const updatePluginDimensions = async (type: 'auto' | 'manual' = 'manual', dimensions: Omit<UIOptions, 'resizable'>) => {
+  const updatePluginDimensions = async (type: 'auto' | 'manual' = 'manual', dimensions: Omit<Options, 'resizable'>) => {
     if (type === 'manual' || (type === 'auto' && enabled)) {
       isCurrentlyResizing.current = true
 

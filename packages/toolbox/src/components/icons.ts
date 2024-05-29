@@ -1,3 +1,8 @@
+/**
+ * Base 64 encoded SVG icons used in the application.
+ *
+ * @public
+ */
 export const icons = {
   'search':
     'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiI+PHBhdGggZD0iTSA1IDAgQyA3Ljc2MSAwIDEwIDIuMjM5IDEwIDUgQyAxMCA2LjA0NiA5LjY3OSA3LjAxNyA5LjEzIDcuODE5IEwgMTEuMTY0IDkuODU0IEMgMTEuNDU3IDEwLjE0NiAxMS40NTcgMTAuNjIxIDExLjE2NCAxMC45MTQgQyAxMC44NzEgMTEuMjA3IDEwLjM5NiAxMS4yMDcgMTAuMTA0IDEwLjkxNCBMIDguMTA3IDguOTE4IEMgNy4yNTQgOS41OTUgNi4xNzQgMTAgNSAxMCBDIDIuMjM5IDEwIDAgNy43NjEgMCA1IEMgMCAyLjIzOSAyLjIzOSAwIDUgMCBaIE0gMS41IDUgQyAxLjUgNi45MzMgMy4wNjcgOC41IDUgOC41IEMgNi45MzMgOC41IDguNSA2LjkzMyA4LjUgNSBDIDguNSAzLjA2NyA2LjkzMyAxLjUgNSAxLjUgQyAzLjA2NyAxLjUgMS41IDMuMDY3IDEuNSA1IFoiIGZpbGw9IiM5OTkiPjwvcGF0aD48L3N2Zz4=',
@@ -16,4 +21,9 @@ export const icons = {
     'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxwYXRoIGQ9Ik0gMS41IDYuNSBMIDYuNSAxLjUiIGZpbGw9InRyYW5zcGFyZW50IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlPSIjOTk5OTk5IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjwvcGF0aD48cGF0aCBkPSJNIDYuNSA2LjUgTCAxLjUgMS41IiBmaWxsPSJ0cmFuc3BhcmVudCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZT0iIzk5OTk5OSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48L3BhdGg+PC9zdmc+',
 }
 
+/**
+ * The available icon types.
+ *
+ * @public
+ */
 export type IconType = keyof typeof icons

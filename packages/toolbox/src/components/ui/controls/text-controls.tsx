@@ -6,16 +6,61 @@ import classes from './text-controls.module.css'
 
 import { type IconType, icons } from '@/components/icons'
 
-type TextControlsProps = {
-  title?: string
-  icon?: IconType
-  onChange?: (value: string) => void
-} & Omit<React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
+/** @public */
+export type FilteredTextInputProps = Omit<React.DetailedHTMLProps<
+React.InputHTMLAttributes<HTMLInputElement>,
+HTMLInputElement
 >, 'onChange' | 'type'>
 
-const TextControls: React.FC<TextControlsProps> = ({
+/**
+ * The props of the TextControls component.
+ *
+ * @see {@link FilteredTextInputProps} for the props of the input element.
+ *
+ * @public
+ */
+export interface TextControlsProps extends FilteredTextInputProps {
+  /** The title of the text controls. */
+  title?: string
+  /**
+   * The icon of the text controls.
+   *
+   * @see {@link IconType}
+   */
+  icon?: IconType
+  /**
+   * The callback function that is triggered when the value changes.
+   *
+   * @param value - The new value of the text controls.
+   */
+  onChange?: (value: string) => void
+}
+
+/**
+ * A component that renders an input element with optional title and icon.
+ *
+ * @example
+ * ```tsx
+ * // Render an input with a title and an icon
+ * <TextControls title="Username" icon="user" onChange={handleInputChange} />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Render an input with a default value
+ * <TextControls defaultValue="Default text" />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Render an input with additional HTML attributes
+ * <TextControls placeholder="Enter text here" className="custom-input" />
+ * ```
+ *
+ * @public
+ * @kind component
+ */
+export const TextControls: React.FC<TextControlsProps> = ({
   title,
   icon,
   onChange,
@@ -52,5 +97,3 @@ const TextControls: React.FC<TextControlsProps> = ({
     </InputGroup>
   )
 }
-
-export { TextControls }

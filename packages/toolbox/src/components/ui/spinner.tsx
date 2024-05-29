@@ -2,12 +2,29 @@ import cx from 'classnames'
 
 import classes from './spinner.module.css'
 
-export interface SpinnerProps {
-  /** Size of the spinner */
+/**
+ * The props of the Spinner component.
+ *
+ * @public
+ */
+export interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The size of the spinner.
+   *
+   * @defaultValue 'normal'
+   */
   size?: 'normal' | 'medium' | 'large'
-  /** Set the spinner to have a static position inline with other content */
+  /**
+   * Whether the spinner is inline.
+   *
+   * @defaultValue false
+   */
   inline?: boolean
-  className?: string
+  /**
+   * The color of the spinner.
+   *
+   * @defaultValue 'currentColor'
+   */
   color?: React.CSSProperties['color']
 }
 
@@ -22,17 +39,28 @@ function styleForSize(size: SpinnerProps['size']) {
   }
 }
 
-function Spinner({
+/**
+ * A spinner component to indicate loading state.
+ *
+ * @example
+ * ```tsx
+ * <Spinner size="normal" />
+ * <Spinner size="normal" color="yellow" />
+ * ```
+ *
+ * @public
+ * @kind component
+ */
+const Spinner: React.FC<SpinnerProps> = ({
   size,
   inline = false,
-  color,
-  className,
-  ...rest
-}: SpinnerProps) {
+  color = 'currentColor',
+  ...props
+}) => {
   return (
     <div
       className={cx(
-        className,
+        props.className,
         classes.spin,
         classes.baseStyle,
         styleForSize(size),
@@ -40,9 +68,9 @@ function Spinner({
         !inline && classes.centeredStyle,
       )}
       {...color && { style: { color } }}
-      {...rest}
+      {...props}
     />
   )
-};
+}
 
 export { Spinner }

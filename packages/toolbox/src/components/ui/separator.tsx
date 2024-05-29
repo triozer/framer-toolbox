@@ -1,7 +1,23 @@
 import classes from './separator.module.css'
 
-type SeparatorProps = React.HTMLAttributes<HTMLHRElement>
+/**
+ * The props of the Separator component.
+ *
+ * @public
+ */
+export interface SeparatorProps extends React.HTMLAttributes<HTMLHRElement> {}
 
+/**
+ * A component that renders a horizontal separator line (`<hr>` element) with customizable styles.
+ *
+ * @example
+ * ```tsx
+ * <Separator style={{ margin: '20px 0', borderColor: 'red' }} />
+ * ```
+ *
+ * @public
+ * @kind component
+ */
 const Separator: React.FC<SeparatorProps> = ({
   ...props
 }) => {

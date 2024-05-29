@@ -6,6 +6,9 @@ build
 coverage
 dist
 
+packages/toolbox/docs
+dist
+
 .DS_Store
 .env
 .env.local
