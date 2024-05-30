@@ -1,7 +1,7 @@
 {
   "name": "@triozer/framer-toolbox",
   "type": "module",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
