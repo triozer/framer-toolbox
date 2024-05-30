@@ -1,5 +1,14 @@
 # palette
 
+## 0.1.1
+
+### Patch Changes
+
+- [#61](https://github.com/triozer/framer-toolbox/pull/61) [`edfc95c`](https://github.com/triozer/framer-toolbox/commit/edfc95c9722f89fa3fc27d758aa83c8e28aef341) Thanks [@triozer](https://github.com/triozer)! - Update framer-plugin to v0.2.1
+
+- Updated dependencies [[`edfc95c`](https://github.com/triozer/framer-toolbox/commit/edfc95c9722f89fa3fc27d758aa83c8e28aef341), [`aa0e1d7`](https://github.com/triozer/framer-toolbox/commit/aa0e1d7b2c13d409753698714ae94d6ea8858937)]:
+  - @triozer/framer-toolbox@0.1.13
+
 ## 0.1.0
 
 ### Minor Changes
