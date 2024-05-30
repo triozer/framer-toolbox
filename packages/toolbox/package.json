@@ -28,7 +28,7 @@
     "generate:docs": "pnpm generate:docs:api && pnpm generate:docs:json"
   },
   "peerDependencies": {
-    "framer-plugin": "^0",
+    "framer-plugin": "^0.2.1",
     "react": "^18",
     "react-dom": "^18"
   },
