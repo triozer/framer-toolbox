@@ -85,8 +85,8 @@ importers:
   packages/toolbox:
     dependencies:
       framer-plugin:
-        specifier: ^0
-        version: 0.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.2.1
+        version: 0.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^18
         version: 18.3.1
@@ -2273,12 +2273,6 @@ packages:
         optional: true
       react-dom:
         optional: true
-
-  framer-plugin@0.1.8:
-    resolution: {integrity: sha512-ivGcT6vlaqZjjd3XSfO3fEB6WSCQTEhKsO6QGPJQwmxSIsV3rL2INzup3GRJq4esku8K2T+PePZthaWxAO5Z2Q==}
-    peerDependencies:
-      react: ^18.2.0
-      react-dom: ^18.2.0
 
   framer-plugin@0.2.1:
     resolution: {integrity: sha512-9wEr1NYjnsMu9ykAr2a/Y7vjgao/9RjGglABsAe44ddt6r/MIjtwCT1OncMYXfmXldkBumw0scQZRbFpuLdufg==}
@@ -6096,11 +6090,6 @@ snapshots:
     dependencies:
       tslib: 2.6.2
     optionalDependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
-  framer-plugin@0.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
