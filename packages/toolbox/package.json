@@ -2,6 +2,7 @@
   "name": "@triozer/framer-toolbox",
   "type": "module",
   "version": "0.1.12",
+  "homepage": "https://toolbox.framer.wiki",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
