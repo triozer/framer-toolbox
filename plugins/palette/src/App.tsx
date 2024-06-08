@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { framer, withBackgroundColor } from 'framer-plugin'
+import { framer } from 'framer-plugin'
 import * as htmlToImage from 'html-to-image'
 
 import {
@@ -11,7 +11,6 @@ import {
   SegmentedControls,
   Separator,
   capitalizeWords,
-  useSelection,
   useStore,
 } from '@triozer/framer-toolbox'
 
@@ -84,8 +83,6 @@ export function App() {
 
   const { count, scheme, variation, colors, mode, showColorDetails, autoGenerate } = store
 
-  const selection = useSelection()
-
   const generateColors = (options: {
     count: number
     scheme: ColorSchemeType
@@ -109,16 +106,6 @@ export function App() {
 
   if (!isStoreLoaded)
     return null
-
-  const updateSelectionColor = (color: ColorData) => {
-    selection.forEach((node) => {
-      if (withBackgroundColor(node)) {
-        node.setAttributes({
-          backgroundColor: color.hex,
-        })
-      }
-    })
-  }
 
   return (
     <FramerPlugin autoResize={true} uiOptions={{ resizable: 'width' }}>
@@ -172,9 +159,6 @@ export function App() {
                 }
               })(),
               height: colors.length > 2 ? '50%' : '100%',
-            }}
-            onClick={() => {
-              updateSelectionColor(color)
             }}
           >
             {showColorDetails && (
