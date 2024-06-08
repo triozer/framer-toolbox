@@ -6,8 +6,8 @@ build
 coverage
 dist
 
+plugins/docs
 packages/toolbox/docs
-dist
 
 .DS_Store
 .env
