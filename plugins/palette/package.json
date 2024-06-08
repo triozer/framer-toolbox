@@ -15,7 +15,7 @@
     "color-scheme": "^1.0.1",
     "dom-to-svg": "^0.12.2",
     "framer-motion": "^11.1.7",
-    "framer-plugin": "^0.1.8",
+    "framer-plugin": "^0.2.4",
     "hex-rgb": "^5.0.0",
     "html-to-image": "^1.11.11",
     "ntc-ts": "^0.0.8",
