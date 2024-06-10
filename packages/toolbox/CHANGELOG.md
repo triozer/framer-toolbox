@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.1.14
+
+### Patch Changes
+
+- [#62](https://github.com/triozer/framer-toolbox/pull/62) [`7950119`](https://github.com/triozer/framer-toolbox/commit/7950119f5bde3cbbd3b6254e020191a4eb482fc8) Thanks [@triozer](https://github.com/triozer)! - Update framer-plugin version
+
 ## 0.1.13
 
 ### Patch Changes
