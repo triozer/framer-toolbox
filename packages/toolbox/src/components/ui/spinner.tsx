@@ -45,6 +45,10 @@ function styleForSize(size: SpinnerProps['size']) {
  * @example
  * ```tsx
  * <Spinner size="normal" />
+ * ```
+ *
+ * @example
+ * ```tsx
  * <Spinner size="normal" color="yellow" />
  * ```
  *

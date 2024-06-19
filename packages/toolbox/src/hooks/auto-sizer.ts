@@ -163,10 +163,6 @@ export function useAutoSizer({ enabled, options }: AutoSizerOptions): AutoSizerR
     }
 
     switch (options.resizable) {
-      case true: {
-        updatePluginDimensions('auto', { width, height, minWidth: childsMinWidth, minHeight: childsHeight })
-        break
-      }
       case 'width': {
         updatePluginDimensions('auto', { width, height: childsHeight, minWidth: childsMinWidth, minHeight: childsHeight })
         break
@@ -176,7 +172,22 @@ export function useAutoSizer({ enabled, options }: AutoSizerOptions): AutoSizerR
         break
       }
       default: {
-        updatePluginDimensions('auto', { width: childsMinWidth, height: childsHeight, minWidth: childsMinWidth, minHeight: childsHeight })
+        const isWidthSet = !Number.isNaN(asNumberOr(ref.current.style.width, Number.NaN))
+        const isHeightSet = !Number.isNaN(asNumberOr(ref.current.style.height, Number.NaN))
+
+        if (isWidthSet && isHeightSet) {
+          updatePluginDimensions('auto', { width, height, minWidth: childsMinWidth, minHeight: childsHeight })
+        }
+        else if (isWidthSet) {
+          updatePluginDimensions('auto', { width, height: childsHeight, minWidth: childsMinWidth, minHeight: childsHeight })
+        }
+        else if (isHeightSet) {
+          updatePluginDimensions('auto', { width: childsMinWidth, height, minWidth: childsMinWidth, minHeight: childsHeight })
+        }
+        else {
+          updatePluginDimensions('auto', { width: childsMinWidth, height: childsHeight, minWidth: childsMinWidth, minHeight: childsHeight })
+        }
+
         break
       }
     }
