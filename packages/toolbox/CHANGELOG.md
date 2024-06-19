@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.2.0
+
+### Minor Changes
+
+- [#64](https://github.com/triozer/framer-toolbox/pull/64) [`e9f1c08`](https://github.com/triozer/framer-toolbox/commit/e9f1c088781d1271f49c180ccd94b0ed0db54b71) Thanks [@triozer](https://github.com/triozer)! - Add support for CSS width
+
 ## 0.1.14
 
 ### Patch Changes
