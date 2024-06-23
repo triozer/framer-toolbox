@@ -101,13 +101,22 @@ export function useAutoSizer({ enabled, options }: AutoSizerOptions): AutoSizerR
     if (type === 'manual' || (type === 'auto' && enabled)) {
       isCurrentlyResizing.current = true
 
+      const width = Math.max(dimensions.width, options.minWidth ?? 0)
+      const height = Math.max(dimensions.height, options.minHeight ?? 0)
+
       setPluginDimensions({
-        width: dimensions.width,
-        height: dimensions.height,
+        width,
+        height,
       })
 
+      const minWidth = Math.max(options.minWidth ?? 0, dimensions.minWidth ?? 0) || undefined
+      const minHeight = Math.max(options.minHeight ?? 0, dimensions.minHeight ?? 0) || undefined
+
       await plugin.showUI({
-        ...dimensions,
+        width,
+        height,
+        minHeight,
+        minWidth,
         resizable: options.resizable,
       })
 

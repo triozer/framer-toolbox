@@ -51,7 +51,10 @@ export function App() {
       autoResize={autoResize}
       uiOptions={{
         resizable: resizable === 'both' ? true : resizable === 'none' ? false : resizable,
+        minHeight: 300,
+        minWidth: 500,
       }}
+      showOnMounted={false}
     >
       <SegmentedControls
         title="Auto Resize"
