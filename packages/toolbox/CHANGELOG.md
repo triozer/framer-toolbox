@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.2.2
+
+### Patch Changes
+
+- [#68](https://github.com/triozer/framer-toolbox/pull/68) [`4c8b34e`](https://github.com/triozer/framer-toolbox/commit/4c8b34e9ce58c3464181af5457d7c0e54e17ba91) Thanks [@triozer](https://github.com/triozer)! - Pass events to the onChange methods for controls.
+
 ## 0.2.1
 
 ### Patch Changes
