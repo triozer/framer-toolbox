@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.2.1
+
+### Patch Changes
+
+- [#66](https://github.com/triozer/framer-toolbox/pull/66) [`5bc1b21`](https://github.com/triozer/framer-toolbox/commit/5bc1b21760f676263b362741c550472bcac7f7dc) Thanks [@triozer](https://github.com/triozer)! - Use UI options min width and height
+
 ## 0.2.0
 
 ### Minor Changes
