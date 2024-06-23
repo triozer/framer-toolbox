@@ -51,8 +51,9 @@ export interface SegmentedControlsProps<Value> {
    * The callback function that is triggered when the value changes.
    *
    * @param value - The new value of the segmented controls.
+   * @param event - The event object.
    */
-  onChange?: (value: Value) => void
+  onChange?: (value: Value, event: React.MouseEvent<HTMLSpanElement>) => void
   /** Whether the segmented controls are disabled. */
   disabled?: boolean
 }
@@ -143,15 +144,22 @@ export function SegmentedControls<Value>({
     }
   }, [selectedValue, items, padding])
 
-  const handleChange = (value: Value) => {
-    if (disabled)
+  const handleChange = (event: React.MouseEvent<HTMLSpanElement>, value: Value) => {
+    if (disabled) {
+      event.preventDefault()
+      event.stopPropagation()
       return
+    }
 
     if (value === selectedValue)
       return
 
+    onChange && onChange(value, event)
+
+    if (event.defaultPrevented)
+      return
+
     setSelectedValue(value)
-    onChange && onChange(value)
   }
 
   useEffect(() => {
@@ -169,7 +177,7 @@ export function SegmentedControls<Value>({
         {items.map((item, idx) => (
           <span
             key={`${title}-${item.value}`}
-            onClick={() => handleChange(item.value)}
+            onClick={e => handleChange(e, item.value)}
             className={cx({ [classes.selected]: item.value === selectedValue })}
           >
             {item.icon

@@ -31,8 +31,9 @@ export interface NumberControlsProps extends FilteredNumberInputProps {
    * The callback function that is triggered when the value changes.
    *
    * @param value - The new value of the number controls.
+   * @param event - The event object.
    */
-  onChange?: (value: number) => void
+  onChange?: (value: number, event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent) => void
 }
 
 /**
@@ -70,7 +71,7 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
 }) => {
   const [currentValue, setCurrentValue] = useState(+(value ?? defaultValue ?? 0))
 
-  const handleChange = (newValue: number) => {
+  const handleChange = (newValue: number, event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent) => {
     if (props.min !== undefined)
       newValue = Math.max(+props.min, newValue)
 
@@ -80,8 +81,12 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
     if (currentValue === newValue)
       return
 
+    onChange && onChange(newValue, event)
+
+    if (event.defaultPrevented)
+      return
+
     setCurrentValue(newValue)
-    onChange && onChange(newValue)
   }
 
   useEffect(() => {
@@ -94,14 +99,14 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
   if (!stepper && !slider) {
     return (
       <InputGroup title={title}>
-        <input type="number" {...props} value={currentValue} onChange={e => handleChange(e.target.valueAsNumber)} />
+        <input type="number" {...props} value={currentValue} onChange={e => handleChange(e.target.valueAsNumber, e)} />
       </InputGroup>
     )
   }
 
   return (
     <InputGroup title={title}>
-      <input type="number" {...props} value={currentValue} onChange={e => handleChange(e.target.valueAsNumber)} />
+      <input type="number" {...props} value={currentValue} onChange={e => handleChange(e.target.valueAsNumber, e)} />
       {stepper && (
         <div className={cx(classes.numberControls, classes.stepper)}>
           <i
@@ -109,7 +114,7 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
             style={{
               maskImage: `url(${icons.minus})`,
             }}
-            onClick={() => {
+            onClick={(e) => {
               if (props.disabled)
                 return
 
@@ -118,6 +123,7 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
                   +(props.min ?? Number.MIN_SAFE_INTEGER),
                   currentValue - +(props.step ?? 1),
                 ),
+                e,
               )
             }}
           />
@@ -127,7 +133,7 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
             style={{
               maskImage: `url(${icons.plus})`,
             }}
-            onClick={() => {
+            onClick={(e) => {
               if (props.disabled)
                 return
 
@@ -136,6 +142,7 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
                   +(props.max ?? Number.MAX_SAFE_INTEGER),
                   currentValue + +(props.step ?? 1),
                 ),
+                e,
               )
             }}
           />
@@ -146,7 +153,7 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
           type="range"
           {...props}
           value={currentValue}
-          onChange={e => handleChange(e.target.valueAsNumber)}
+          onChange={e => handleChange(e.target.valueAsNumber, e)}
         />
       )}
     </InputGroup>

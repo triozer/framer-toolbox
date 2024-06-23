@@ -50,8 +50,9 @@ export interface ListControlsProps<Value> extends SelectFilteredProps {
    * The callback function that is triggered when the value changes.
    *
    * @param value - The new value of the list controls.
+   * @param event - The event object.
    */
-  onChange?: (value: Value) => void
+  onChange?: (value: Value, event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 /**
@@ -95,8 +96,13 @@ export function ListControls<Value extends string | number>({
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.target.value as Value
+
+    onChange && onChange(newValue, event)
+
+    if (event.defaultPrevented)
+      return
+
     setSelectedValue(newValue)
-    onChange && onChange(newValue)
   }
 
   useEffect(() => {
