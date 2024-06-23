@@ -32,8 +32,9 @@ export interface TextControlsProps extends FilteredTextInputProps {
    * The callback function that is triggered when the value changes.
    *
    * @param value - The new value of the text controls.
+   * @param event - The event object.
    */
-  onChange?: (value: string) => void
+  onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 /**
@@ -76,9 +77,12 @@ export const TextControls: React.FC<TextControlsProps> = ({
   }, [value])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value
-    setCurrentValue(newValue)
-    onChange && onChange(newValue)
+    onChange && onChange(e.target.value, e)
+
+    if (e.defaultPrevented)
+      return
+
+    setCurrentValue(e.target.value)
   }
 
   return (
