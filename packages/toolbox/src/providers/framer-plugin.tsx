@@ -1,5 +1,5 @@
 import { type UIOptions, framer } from 'framer-plugin'
-import { createContext, useEffect, useRef, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 /**
  * The options of the UI interface.
