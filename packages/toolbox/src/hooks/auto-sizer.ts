@@ -203,9 +203,11 @@ export function useAutoSizer({ enabled, options }: AutoSizerOptions): AutoSizerR
   }, 100)
 
   useLayoutEffect(() => {
+    if (!ref.current)
+      return
     if (!enabled)
       updatePluginDimensions('manual', options)
-  }, [enabled])
+  }, [ref, enabled])
 
   useLayoutEffect(() => {
     if (!enabled)

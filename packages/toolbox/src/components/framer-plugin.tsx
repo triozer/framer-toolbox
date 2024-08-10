@@ -141,8 +141,8 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     }, [mergedProps.showOnMounted])
 
     useEffect(() => {
-      plugin.showUI({ resizable: mergedProps.uiOptions.resizable })
-    }, [mergedProps.uiOptions.resizable])
+      plugin.setUIOptions(mergedProps.uiOptions)
+    }, [mergedProps.uiOptions])
 
     return (
       <main
