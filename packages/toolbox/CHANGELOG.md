@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.3.1
+
+### Patch Changes
+
+- [#72](https://github.com/triozer/framer-toolbox/pull/72) [`d400719`](https://github.com/triozer/framer-toolbox/commit/d4007190dbbea4564f08be0ebfb2d81161ea47e2) Thanks [@triozer](https://github.com/triozer)! - Add a new button clear variant
+
 ## 0.3.0
 
 ### Minor Changes
