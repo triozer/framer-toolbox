@@ -16,7 +16,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    *
    * @defaultValue 'primary'
    */
-  variant?: 'primary' | 'secondary' | 'destructive'
+  variant?: 'primary' | 'secondary' | 'destructive' | 'clear'
 }
 
 /**

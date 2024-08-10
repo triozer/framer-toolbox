@@ -35,6 +35,16 @@
   background-color: #e15;
 }
 
+.clear {
+  backdrop-filter: blur(10px);
+  background-color: #00000080;
+}
+
+.clear:hover,
+.clear:focus {
+  background-color: #0009;
+}
+
 .buttonIcon {
   display: block;
   width: 30px; /* Adjust as needed */
