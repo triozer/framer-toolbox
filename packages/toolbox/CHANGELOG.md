@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.3.0
+
+### Minor Changes
+
+- [#70](https://github.com/triozer/framer-toolbox/pull/70) [`e861778`](https://github.com/triozer/framer-toolbox/commit/e861778822f4a10f7f0f9319d49beecde6f28e2c) Thanks [@triozer](https://github.com/triozer)! - Ignore auto resize hooks if the plugin is not mounted
+
 ## 0.2.2
 
 ### Patch Changes
