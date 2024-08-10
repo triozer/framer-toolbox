@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
 import type { UIOptions } from 'framer-plugin'
 import cx from 'classnames'
 
@@ -117,7 +117,14 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
       plugin,
     ])
 
-    const { ref: mainRef } = useAutoSizer(
+    const mainRef = useRef<HTMLDivElement>(null)
+
+    useImperativeHandle(ref, () => {
+      return mainRef.current!
+    }, [])
+
+    useAutoSizer(
+      mainRef,
       {
         enabled: mergedProps.autoResize!,
         options: {
@@ -131,22 +138,25 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     )
 
     useEffect(() => {
-      if (mergedProps.autoResize && mergedProps.uiOptions.resizable)
+      if (!mergedProps.showOnMounted || hasMountedOnce.current) {
         return
-
-      if (mergedProps.showOnMounted && !hasMountedOnce.current) {
-        plugin.showUI(mergedProps.uiOptions)
-        hasMountedOnce.current = true
       }
+
+      plugin.showUI(mergedProps.uiOptions)
+      hasMountedOnce.current = true
     }, [mergedProps.showOnMounted])
 
     useEffect(() => {
+      if (!mainRef.current) {
+        return
+      }
+
       plugin.showUI({ resizable: mergedProps.uiOptions.resizable })
     }, [mergedProps.uiOptions.resizable])
 
     return (
       <main
-        ref={mergedProps.autoResize ? mainRef : ref}
+        ref={mainRef}
         {...props}
         className={cx(classes.framerPlugin, props.className)}
       >

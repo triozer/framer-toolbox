@@ -54,7 +54,6 @@ export function App() {
         minHeight: 300,
         minWidth: 500,
       }}
-      showOnMounted={false}
     >
       <SegmentedControls
         title="Auto Resize"

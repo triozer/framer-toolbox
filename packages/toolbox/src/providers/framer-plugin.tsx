@@ -57,7 +57,7 @@ export const FramerPluginProvider: React.FC<{
     })()
   }, [])
 
-  const showUI = async (options: UIOptions) => {
+  const showUI = async (options?: UIOptions) => {
     await framer.showUI({
       title: name,
       ...options,
