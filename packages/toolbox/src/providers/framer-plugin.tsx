@@ -15,8 +15,6 @@ export interface FramerPluginContextType {
   isLoaded: boolean
   /** The function to show the UI interface. */
   showUI: (options: UIOptions) => Promise<void>
-  /** The function to set the UI options. */
-  setUIOptions: (options: UIOptions) => void
 }
 
 /**
@@ -48,8 +46,6 @@ export const FramerPluginProvider: React.FC<{
   const [id, setId] = useState<string>()
   const [name, setName] = useState<string>()
 
-  const uiOptions = useRef<UIOptions>({})
-
   useEffect(() => {
     (async () => {
       const config = await fetch('/framer.json').then(res => res.json())
@@ -64,17 +60,12 @@ export const FramerPluginProvider: React.FC<{
   const showUI = async (options?: UIOptions) => {
     await framer.showUI({
       title: name,
-      ...uiOptions.current,
       ...options,
     })
   }
 
-  const setUIOptions = (options: UIOptions) => {
-    uiOptions.current = options
-  }
-
   return (
-    <FramerPluginContext.Provider value={{ id: id!, name: name!, isLoaded, showUI, setUIOptions }}>
+    <FramerPluginContext.Provider value={{ id: id!, name: name!, isLoaded, showUI }}>
       {isLoaded && children}
     </FramerPluginContext.Provider>
   )

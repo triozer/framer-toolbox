@@ -61,8 +61,6 @@ export interface AutoSizerOptions {
  * @public
  */
 export interface AutoSizerReturn {
-  /** The reference of the element to resize. */
-  ref: React.MutableRefObject<HTMLDivElement | null>
   /**
    * The dimensions of the plugin.
    *
@@ -78,16 +76,14 @@ export interface AutoSizerReturn {
  *
  * @example
  * ```tsx
- * const { ref, pluginDimensions, updatePluginDimensions } = useAutoSizer({ enabled: true, options: { resizable: true, width: 300, height: 400 } })
+ * const { pluginDimensions, updatePluginDimensions } = useAutoSizer(ref, { enabled: true, options: { resizable: true, width: 300, height: 400 } })
  * ```
  *
  * @public
  * @kind hook
  */
-export function useAutoSizer({ enabled, options }: AutoSizerOptions): AutoSizerReturn {
+export function useAutoSizer(ref: React.RefObject<HTMLDivElement | null>, { enabled, options }: AutoSizerOptions): AutoSizerReturn {
   const plugin = useFramerPlugin()
-
-  const ref = useRef<HTMLDivElement>(null)
 
   const haveBeenResized = useRef(false)
   const isCurrentlyResizing = useRef(false)
@@ -234,5 +230,5 @@ export function useAutoSizer({ enabled, options }: AutoSizerOptions): AutoSizerR
     }
   }, [ref, enabled, options.resizable])
 
-  return { ref, pluginDimensions, updatePluginDimensions }
+  return { pluginDimensions, updatePluginDimensions }
 }
