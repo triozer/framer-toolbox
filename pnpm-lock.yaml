@@ -335,8 +335,8 @@ importers:
         specifier: ^11.2.10
         version: 11.2.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
-        specifier: ^0.2.6
-        version: 0.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.3.1
+        version: 0.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       hex-rgb:
         specifier: ^5.0.0
         version: 5.0.0
@@ -411,8 +411,8 @@ importers:
         specifier: ^11.2.10
         version: 11.2.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
-        specifier: ^0.2.6
-        version: 0.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.3.1
+        version: 0.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
