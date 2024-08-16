@@ -1,6 +1,6 @@
 {
   "id": "ua37Y0",
   "name": "Framer Toolbox",
-  "modes": ["default"],
+  "modes": ["canvas"],
   "icon": "/icon.svg"
 }
