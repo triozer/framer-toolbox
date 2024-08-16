@@ -201,8 +201,8 @@ importers:
         specifier: ^11.2.10
         version: 11.2.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
-        specifier: ^0.2.6
-        version: 0.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.3.1
+        version: 0.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
@@ -2490,6 +2490,12 @@ packages:
 
   framer-plugin@0.2.6:
     resolution: {integrity: sha512-DpJ7RgG6rrbeVMYQolEwZeliyJO/Lazive/G7pV7SIgMtVTFngkjxOPI89678jTjZUK8CDtvZNpSPw72OOybMQ==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+
+  framer-plugin@0.3.1:
+    resolution: {integrity: sha512-u5N3xPprs1V5sbozvsihPrXIcGM4kzePzQNGwIrt91cxqkkPXxEe5q2Z3S3sE8kZ82wvgffxnaHNRvsI43U5ig==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -6572,6 +6578,11 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   framer-plugin@0.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  framer-plugin@0.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
