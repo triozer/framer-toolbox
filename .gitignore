@@ -6,7 +6,7 @@ build
 coverage
 dist
 
-plugins/docs
+new-plugins
 packages/toolbox/docs
 
 .DS_Store

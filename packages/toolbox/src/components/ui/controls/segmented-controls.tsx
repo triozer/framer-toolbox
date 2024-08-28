@@ -154,7 +154,8 @@ export function SegmentedControls<Value>({
     if (value === selectedValue)
       return
 
-    onChange && onChange(value, event)
+    if (onChange)
+      onChange(value, event)
 
     if (event.defaultPrevented)
       return
@@ -182,12 +183,12 @@ export function SegmentedControls<Value>({
           >
             {item.icon
               ? (
-                <i
-                  className={classes.icon}
-                  style={{
-                    maskImage: `url(${item.icon})`,
-                  }}
-                />
+                  <i
+                    className={classes.icon}
+                    style={{
+                      maskImage: `url(${item.icon})`,
+                    }}
+                  />
                 )
               : (
                   capitalizeWords(

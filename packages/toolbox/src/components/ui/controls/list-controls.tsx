@@ -97,7 +97,8 @@ export function ListControls<Value extends string | number>({
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newValue = event.target.value as Value
 
-    onChange && onChange(newValue, event)
+    if (onChange)
+      onChange(newValue, event)
 
     if (event.defaultPrevented)
       return

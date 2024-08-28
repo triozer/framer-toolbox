@@ -81,7 +81,8 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
     if (currentValue === newValue)
       return
 
-    onChange && onChange(newValue, event)
+    if (onChange)
+      onChange(newValue, event)
 
     if (event.defaultPrevented)
       return

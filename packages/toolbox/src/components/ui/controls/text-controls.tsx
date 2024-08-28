@@ -8,8 +8,8 @@ import { type IconType, icons } from '@/components/icons'
 
 /** @public */
 export type FilteredTextInputProps = Omit<React.DetailedHTMLProps<
-React.InputHTMLAttributes<HTMLInputElement>,
-HTMLInputElement
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
 >, 'onChange' | 'type'>
 
 /**
@@ -77,7 +77,8 @@ export const TextControls: React.FC<TextControlsProps> = ({
   }, [value])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange && onChange(e.target.value, e)
+    if (onChange)
+      onChange(e.target.value, e)
 
     if (e.defaultPrevented)
       return

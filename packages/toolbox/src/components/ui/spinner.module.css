@@ -50,12 +50,10 @@
 
 @keyframes spin {
   0% {
-    transform: translate(var(--spinner-translate), var(--spinner-translate))
-      rotate(0deg);
+    transform: translate(var(--spinner-translate), var(--spinner-translate)) rotate(0deg);
   }
 
   100% {
-    transform: translate(var(--spinner-translate), var(--spinner-translate))
-      rotate(360deg);
+    transform: translate(var(--spinner-translate), var(--spinner-translate)) rotate(360deg);
   }
 }

@@ -79,9 +79,7 @@
 
 .indicator {
   position: absolute;
-  background-color: var(
-    --framer-segmented-control-item-background-selected-color
-  );
+  background-color: var(--framer-segmented-control-item-background-selected-color);
   border-radius: 6px;
   z-index: 0;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
