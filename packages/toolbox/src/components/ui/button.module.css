@@ -4,6 +4,7 @@
   justify-content: center;
   white-space: nowrap;
   min-width: max-content;
+  font-weight: 600;
 }
 
 .primary {
@@ -22,6 +23,20 @@
 
 [data-framer-theme='dark'] .primary:active {
   background-color: var(--framer-color-tint-extra-dark, #0077ff);
+}
+
+.secondary {
+  color: var(--framer-color-text);
+  background-color: var(--framer-color-bg-tertiary);
+}
+
+.secondary:hover,
+.secondary:focus {
+  background-color: var(--framer-color-bg-secondary);
+}
+
+.secondary:active {
+  background-color: #ddd;
 }
 
 .destructive {
