@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.4.1
+
+### Patch Changes
+
+- [#76](https://github.com/triozer/framer-toolbox/pull/76) [`31907aa`](https://github.com/triozer/framer-toolbox/commit/31907aa7d3e154ab7d56ad2a4c0bd8eab0e9a734) Thanks [@triozer](https://github.com/triozer)! - Fix Button secondary variant
+
 ## 0.4.0
 
 ### Minor Changes
