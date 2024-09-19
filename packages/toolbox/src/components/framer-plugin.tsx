@@ -44,7 +44,6 @@ export interface FramerPluginProps extends React.HTMLAttributes<HTMLDivElement> 
  * Default properties for the FramerPlugin component.
  */
 const defaultProps: Omit<FramerPluginProps, keyof React.HTMLAttributes<HTMLDivElement>> = {
-  name: 'Framer Plugin',
   autoResize: false,
   showOnMounted: true,
   uiOptions: {
@@ -89,7 +88,6 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     const [mergedProps, setMergedProps] = useState(() => ({
       ...defaultProps,
       ...plugin,
-      name: name ?? plugin?.name ?? defaultProps.name,
       autoResize,
       showOnMounted,
       uiOptions: {
@@ -101,7 +99,6 @@ const FramerPlugin = React.forwardRef<HTMLDivElement, FramerPluginProps>(
     useEffect(() => {
       setMergedProps(prevProps => ({
         ...prevProps,
-        name: name ?? plugin?.name ?? defaultProps.name,
         autoResize,
         showOnMounted,
         uiOptions: {

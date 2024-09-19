@@ -13,7 +13,7 @@ import { FramerPluginContext, type FramerPluginContextType } from './framer-plug
  *
  * @example
  * ```tsx
- * const { id, name, isLoaded, showUI } = useFramerPlugin()
+ * const { id, isLoaded, showUI } = useFramerPlugin()
  * ```
  *
  * @public
@@ -26,7 +26,6 @@ export function useFramerPlugin(): FramerPluginContextType {
     // In this case, we want to still allow the component to render without crashing
     return {
       id: null,
-      name: null,
       isLoaded: true,
       showUI: framer.showUI,
     } as any as FramerPluginContextType
