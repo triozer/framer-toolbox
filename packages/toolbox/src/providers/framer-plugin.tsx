@@ -9,8 +9,6 @@ import { createContext, useEffect, useState } from 'react'
 export interface FramerPluginContextType {
   /** The ID of the plugin. */
   id: string
-  /** The name of the plugin. */
-  name: string
   /** Whether the plugin is loaded. */
   isLoaded: boolean
   /** The function to show the UI interface. */
@@ -44,14 +42,12 @@ export const FramerPluginProvider: React.FC<{
   const [isLoaded, setIsLoaded] = useState(false)
 
   const [id, setId] = useState<string>()
-  const [name, setName] = useState<string>()
 
   useEffect(() => {
     (async () => {
-      const config = await fetch('/framer.json').then(res => res.json())
+      const config = await fetch('framer.json').then(res => res.json())
 
       setId(config.id)
-      setName(config.name)
 
       setIsLoaded(true)
     })()
@@ -64,7 +60,7 @@ export const FramerPluginProvider: React.FC<{
   }
 
   return (
-    <FramerPluginContext.Provider value={{ id: id!, name: name!, isLoaded, showUI }}>
+    <FramerPluginContext.Provider value={{ id: id!, isLoaded, showUI }}>
       {isLoaded && children}
     </FramerPluginContext.Provider>
   )
