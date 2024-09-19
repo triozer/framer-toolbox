@@ -53,8 +53,8 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={cx(classes.button, classes[variant], { [classes.buttonIcon]: !!icon })}
       {...props}
+      className={cx(classes.button, classes[variant], { [classes.buttonIcon]: !!icon }, props.className)}
     >
       {icon && (
         <i
