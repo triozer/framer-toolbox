@@ -1,0 +1,25 @@
+.back {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 19px;
+  
+  width: 100%;
+}
+
+.backContent {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: var(--framer-color-text, #333);
+  font-weight: 600;
+}
+
+.backContent:hover {
+  cursor: pointer;
+}
+
+.backIcon {
+  color: #999;
+}

@@ -15,6 +15,12 @@ export interface InputGroupProps {
   title?: string
   /** The children of the input group. */
   children: React.ReactNode
+  /**
+   * The boolean to determine if the input group is multiline.
+   *
+   * @defaultValue false
+   */
+  multiline?: boolean
 }
 
 /**
@@ -33,14 +39,14 @@ export interface InputGroupProps {
  * @internal
  * @kind component
  */
-const InputGroup: React.FC<InputGroupProps> = ({ title, children }) => {
+const InputGroup: React.FC<InputGroupProps> = ({ title, children, multiline }) => {
   const hasMultipleChildren = useMemo(
     () => React.Children.count(children) > 1,
     [children],
   )
 
   return (
-    <div className={cx(classes.inputGroup, !hasMultipleChildren && classes.full)}>
+    <div className={cx(classes.inputGroup, !hasMultipleChildren && classes.full, multiline && classes.multiline)}>
       {title && <label title={capitalizeWords(title)}>{capitalizeWords(title)}</label>}
       {children}
     </div>

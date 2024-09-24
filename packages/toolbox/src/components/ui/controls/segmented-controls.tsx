@@ -56,6 +56,8 @@ export interface SegmentedControlsProps<Value> {
   onChange?: (value: Value, event: React.MouseEvent<HTMLSpanElement>) => void
   /** Whether the segmented controls are disabled. */
   disabled?: boolean
+  /** The direction of the segmented controls. */
+  direction?: 'horizontal' | 'vertical'
 }
 
 /**
@@ -103,6 +105,7 @@ export function SegmentedControls<Value>({
   defaultValue,
   disabled,
   onChange,
+  direction = 'horizontal',
 }: SegmentedControlsProps<Value>) {
   const segmentedControlsRef = useRef<HTMLDivElement>(null)
   const [selectedValue, setSelectedValue] = useState(value ?? defaultValue ?? (items.length > 0 ? items[0].value : false))
@@ -128,21 +131,29 @@ export function SegmentedControls<Value>({
   }, [segmentedControlsRef])
 
   const indicatorDimensions = useMemo(() => {
-    return {
-      width: `calc((100% - ${padding.left} - ${padding.right}) / ${items.length})`,
-      height: `calc(100% - ${padding.top} - ${padding.bottom})`,
-    }
-  }, [padding, items.length])
+    return direction === 'horizontal'
+      ? {
+          width: `calc((100% - ${padding.left} - ${padding.right}) / ${items.length})`,
+          height: `calc(100% - ${padding.top} - ${padding.bottom})`,
+        }
+      : {
+          width: `calc(100% - ${padding.left} - ${padding.right})`,
+          height: `calc((100% - ${padding.top} - ${padding.bottom}) / ${items.length})`,
+        }
+  }, [padding, items.length, direction])
 
-  const animateX = useMemo(() => {
-    return {
-      left: `calc(${items.findIndex(
-        item => item.value === selectedValue,
-      )} * (100% - ${padding.left} - ${padding.right}) / ${items.length} + ${
-        padding.left
-      })`,
-    }
-  }, [selectedValue, items, padding])
+  const animatePosition = useMemo(() => {
+    const index = items.findIndex(item => item.value === selectedValue)
+    return direction === 'horizontal'
+      ? {
+          left: `calc(${index} * (100% - ${padding.left} - ${padding.right}) / ${items.length} + ${padding.left})`,
+          top: padding.top,
+        }
+      : {
+          left: padding.left,
+          top: `calc(${index} * (100% - ${padding.top} - ${padding.bottom}) / ${items.length} + ${padding.top})`,
+        }
+  }, [selectedValue, items, padding, direction])
 
   const handleChange = (event: React.MouseEvent<HTMLSpanElement>, value: Value) => {
     if (disabled) {
@@ -173,8 +184,8 @@ export function SegmentedControls<Value>({
   }, [value])
 
   return (
-    <InputGroup title={title}>
-      <div ref={segmentedControlsRef} className={classes.segmentedControls}>
+    <InputGroup title={title} multiline={direction === 'vertical'}>
+      <div ref={segmentedControlsRef} className={cx(classes.segmentedControls, classes[direction])}>
         {items.map((item, idx) => (
           <span
             key={`${title}-${item.value}`}
@@ -199,8 +210,8 @@ export function SegmentedControls<Value>({
         ))}
         <motion.div
           className={classes.indicator}
-          initial={animateX}
-          animate={animateX}
+          initial={animatePosition}
+          animate={animatePosition}
           style={indicatorDimensions}
         />
       </div>
