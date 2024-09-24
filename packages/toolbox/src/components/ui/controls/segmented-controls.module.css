@@ -3,7 +3,7 @@
   --framer-segmented-control-item-background-selected-color: #ffffff;
   --framer-segmented-control-item-text-color: #999999;
   --framer-segmented-control-item-text-hover-color: #888888;
-  --framer-segmented-control-item-text-selected-color: #0099ff;
+  --framer-segmented-control-item-text-selected-color: var(--framer-color-tint, #0077ff);
   --framer-segmented-control-divider-color: #e6e6e6;
 }
 
