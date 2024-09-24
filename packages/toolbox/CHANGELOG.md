@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.4.3
+
+### Patch Changes
+
+- [`eb7770d`](https://github.com/triozer/framer-toolbox/commit/eb7770d0d940c684f92314654cfff0fa73e87a7c) Thanks [@triozer](https://github.com/triozer)! - Add support for Framer tint color in the SegmentedControls
+
 ## 0.4.2
 
 ### Patch Changes
