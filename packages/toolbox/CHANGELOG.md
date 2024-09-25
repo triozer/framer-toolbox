@@ -1,5 +1,17 @@
 # @triozer/framer-toolbox
 
+## 0.4.3
+
+### Patch Changes
+
+- [`eb7770d`](https://github.com/triozer/framer-toolbox/commit/eb7770d0d940c684f92314654cfff0fa73e87a7c) Thanks [@triozer](https://github.com/triozer)! - Add support for Framer tint color in the SegmentedControls
+
+## 0.4.2
+
+### Patch Changes
+
+- [`40e0380`](https://github.com/triozer/framer-toolbox/commit/40e038001141be3ffdad13581163dcc21d34e71b) Thanks [@triozer](https://github.com/triozer)! - Fix API call to framer.json and use className prop in button.tsx
+
 ## 0.4.1
 
 ### Patch Changes
