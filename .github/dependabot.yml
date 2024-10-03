@@ -11,9 +11,7 @@ updates:
         patterns:
           - '*'
     ignore:
-      - dependency-name: '@typescript-eslint/*'
-        update-types: [version-update:semver-major]
-      - dependency-name: eslint
+      - dependency-name: '*'
         update-types: [version-update:semver-major]
 
   - package-ecosystem: npm
@@ -26,9 +24,7 @@ updates:
         patterns:
           - '*'
     ignore:
-      - dependency-name: '@typescript-eslint/*'
-        update-types: [version-update:semver-major]
-      - dependency-name: eslint
+      - dependency-name: '*'
         update-types: [version-update:semver-major]
 
   - package-ecosystem: npm
@@ -41,7 +37,5 @@ updates:
         patterns:
           - '*'
     ignore:
-      - dependency-name: '@typescript-eslint/*'
-        update-types: [version-update:semver-major]
-      - dependency-name: eslint
+      - dependency-name: '*'
         update-types: [version-update:semver-major]
