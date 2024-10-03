@@ -1,9 +1,9 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
+  - package-ecosystem: npm
     directories:
-      - "/packages/toolbox"
-      - "/plugins/palette"
-      - "/plugins/basic"
+      - /packages/toolbox
+      - /plugins/palette
+      - /plugins/basic
     schedule:
-      interval: "daily"
+      interval: daily
