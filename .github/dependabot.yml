@@ -1,41 +1,41 @@
 version: 2
 
 updates:
-  - package-ecosystem: pnpm
+  - package-ecosystem: npm
     directories:
       - /packages/toolbox
     schedule:
       interval: daily
     groups:
-      - toolbox:
-          patterns:
-            - '*'
+      toolbox:
+        patterns:
+          - '*'
     ignore:
       - dependency-name: '*eslint*'
         update-types: ['version-update:semver-major']
 
-  - package-ecosystem: pnpm
+  - package-ecosystem: npm
     directories:
       - /plugins/palette
     schedule:
       interval: daily
     groups:
-      - palette:
-          patterns:
-            - '*'
+      palette:
+        patterns:
+          - '*'
     ignore:
       - dependency-name: '*eslint*'
         update-types: ['version-update:semver-major']
 
-  - package-ecosystem: pnpm
+  - package-ecosystem: npm
     directories:
       - /plugins/basic
     schedule:
       interval: daily
     groups:
-      - basic:
-          patterns:
-            - '*'
+      basic:
+        patterns:
+          - '*'
     ignore:
       - dependency-name: '*eslint*'
         update-types: ['version-update:semver-major']
