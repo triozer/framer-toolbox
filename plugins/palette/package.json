@@ -1,8 +1,9 @@
 {
   "name": "palette",
   "type": "module",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "private": true,
+  "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=${PREFIX_BASE_PATH:+/$npm_package_name}/",
@@ -14,8 +15,8 @@
     "clsx": "^2.1.0",
     "color-scheme": "^1.0.1",
     "dom-to-svg": "^0.12.2",
-    "framer-motion": "^11.2.10",
-    "framer-plugin": "^0",
+    "framer-motion": "^11.10.0",
+    "framer-plugin": "^1",
     "hex-rgb": "^5.0.0",
     "html-to-image": "^1.11.11",
     "ntc-ts": "^0.0.8",
@@ -37,6 +38,6 @@
     "eslint-plugin-react-refresh": "^0",
     "typescript": "^5.3.3",
     "vite": "^5.3.1",
-    "vite-plugin-framer": "^0"
+    "vite-plugin-framer": "^1"
   }
 }

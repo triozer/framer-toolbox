@@ -1,7 +1,8 @@
 {
   "name": "@triozer/framer-toolbox",
   "type": "module",
-  "version": "0.4.3",
+  "version": "0.5.0",
+  "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c",
   "homepage": "https://toolbox.framer.wiki",
   "exports": {
     ".": {
@@ -29,7 +30,7 @@
     "generate:docs": "pnpm generate:docs:api && pnpm generate:docs:json"
   },
   "peerDependencies": {
-    "framer-plugin": "^0",
+    "framer-plugin": "^1",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -43,7 +44,7 @@
     "@types/object-hash": "^3.0.6",
     "@types/react-router-dom": "^5.3.3",
     "classnames": "^2.5.1",
-    "framer-motion": "^11.2.10",
+    "framer-motion": "^11.10.0",
     "localforage": "^1.10.0",
     "lodash.debounce": "^4.0.8",
     "object-hash": "^3.0.0",

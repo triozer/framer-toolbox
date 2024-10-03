@@ -1,0 +1,15 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
+    groups:
+      framer:
+        patterns:
+          - '*'
+    allow:
+      - dependency-name: framer-plugin
+      - dependency-name: framer-motion
+      - dependency-name: vite-plugin-framer
