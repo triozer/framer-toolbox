@@ -1,5 +1,16 @@
 # palette
 
+## 0.3.0
+
+### Minor Changes
+
+- [#85](https://github.com/triozer/framer-toolbox/pull/85) [`2aadf42`](https://github.com/triozer/framer-toolbox/commit/2aadf42da00542e054835ad14fa046d48b4cc5d7) Thanks [@triozer](https://github.com/triozer)! - Update to framer-plugin stable (^1)
+
+### Patch Changes
+
+- Updated dependencies [[`2aadf42`](https://github.com/triozer/framer-toolbox/commit/2aadf42da00542e054835ad14fa046d48b4cc5d7)]:
+  - @triozer/framer-toolbox@0.5.0
+
 ## 0.2.3
 
 ### Patch Changes
