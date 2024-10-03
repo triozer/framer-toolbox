@@ -113,8 +113,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       framer-motion:
-        specifier: ^11.10.0
-        version: 11.10.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^11.11.0
+        version: 11.11.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
@@ -137,8 +137,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toolbox
       framer-motion:
-        specifier: ^11.10.0
-        version: 11.10.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^11.11.0
+        version: 11.11.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
         specifier: ^1
         version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -204,8 +204,8 @@ importers:
         specifier: ^0.12.2
         version: 0.12.2
       framer-motion:
-        specifier: ^11.10.0
-        version: 11.10.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^11.11.0
+        version: 11.11.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
         specifier: ^1
         version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2024,8 +2024,8 @@ packages:
     resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
     engines: {node: '>= 6'}
 
-  framer-motion@11.10.0:
-    resolution: {integrity: sha512-HOEJGdcDBmIipuMpfcrgQfheuRlPM9TySlzaP8WrZVAdBsLzxfeB4XBuFNVc4YO4OTSpac/oAASPJGAPISvVgQ==}
+  framer-motion@11.11.0:
+    resolution: {integrity: sha512-H6Pv12fcXaebinvnLDabTS9vHwtJKAo7XsnVeNLm5t8Yq5LuVvQ3DtL/2yBa2kGmhdIgx9cw8mbj6I8PYx7jPA==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -5325,7 +5325,7 @@ snapshots:
       combined-stream: 1.0.8
       mime-types: 2.1.35
 
-  framer-motion@11.10.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  framer-motion@11.11.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       tslib: 2.7.0
     optionalDependencies:
