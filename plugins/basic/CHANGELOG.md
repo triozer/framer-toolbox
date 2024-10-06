@@ -1,5 +1,14 @@
 # basic-plugin
 
+## 0.3.1
+
+### Patch Changes
+
+- [#100](https://github.com/triozer/framer-toolbox/pull/100) [`7f1fdcf`](https://github.com/triozer/framer-toolbox/commit/7f1fdcfb32145c64e29c54945286279b68701e7c) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump deps
+
+- Updated dependencies [[`7f1fdcf`](https://github.com/triozer/framer-toolbox/commit/7f1fdcfb32145c64e29c54945286279b68701e7c)]:
+  - @triozer/framer-toolbox@0.5.1
+
 ## 0.3.0
 
 ### Minor Changes
