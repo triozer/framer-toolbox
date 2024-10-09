@@ -113,8 +113,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       framer-motion:
-        specifier: ^11.11.1
-        version: 11.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^11.11.7
+        version: 11.11.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
@@ -137,8 +137,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/toolbox
       framer-motion:
-        specifier: ^11.11.1
-        version: 11.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^11.11.7
+        version: 11.11.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
         specifier: ^1
         version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -204,8 +204,8 @@ importers:
         specifier: ^0.12.2
         version: 0.12.2
       framer-motion:
-        specifier: ^11.11.1
-        version: 11.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^11.11.7
+        version: 11.11.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
         specifier: ^1
         version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1909,6 +1909,7 @@ packages:
   eslint@8.57.1:
     resolution: {integrity: sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@10.1.0:
@@ -2024,8 +2025,8 @@ packages:
     resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
     engines: {node: '>= 6'}
 
-  framer-motion@11.11.1:
-    resolution: {integrity: sha512-Ucr9eHSrk0d+l6vyl9fvq6omh/PAWHjS+PlczpsoUdhJo1TuF3ULWJNuAMnpWQ1dGyPOyoUVuYlUKjE/s8dyCA==}
+  framer-motion@11.11.7:
+    resolution: {integrity: sha512-89CgILOXPeG3L7ymOTGrLmf8IiKubYLUN/QkYgQuLvehAHfqgwJbLfCnhuyRI4WTds1TXkUp67A7IJrgRY/j1w==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -5325,7 +5326,7 @@ snapshots:
       combined-stream: 1.0.8
       mime-types: 2.1.35
 
-  framer-motion@11.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  framer-motion@11.11.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       tslib: 2.7.0
     optionalDependencies:
