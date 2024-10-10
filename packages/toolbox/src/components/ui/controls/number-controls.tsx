@@ -78,6 +78,8 @@ export const NumberControls: React.FC<NumberControlsProps> = ({
     if (props.max !== undefined)
       newValue = Math.min(+props.max, newValue)
 
+    newValue = Math.round(newValue * 100) / 100
+
     if (currentValue === newValue)
       return
 

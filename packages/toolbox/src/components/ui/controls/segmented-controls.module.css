@@ -25,8 +25,20 @@
   overflow: visible;
   background-color: var(--framer-segmented-control-background-color);
   padding: 2px;
-  height: 30px;
   color: var(--framer-segmented-control-item-text-color);
+}
+
+.horizontal {
+  flex-direction: row;
+  height: 30px;
+}
+
+.vertical {
+  flex-direction: column;
+  height: min-content;
+  width: 100%;
+
+  text-align: left !important;
 }
 
 .segmentedControls span {
@@ -39,8 +51,9 @@
   cursor: pointer;
   border-radius: 5px;
   border: 1px solid transparent;
-  transition: color 0.2s;
+  transition: color 150ms;
   z-index: 1;
+  padding: 0 4px;
 }
 
 /*
@@ -83,4 +96,10 @@
   border-radius: 6px;
   z-index: 0;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+.vertical span {
+  justify-content: flex-start;
+  padding: 0 10px;
+  height: 30px;
 }
