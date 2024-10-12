@@ -99,6 +99,15 @@ export function App() {
         ]}
         defaultValue="plus"
       />
+      <SegmentedControls
+        direction="vertical"
+        title="Vertical Segmented Controls"
+        items={[
+          { value: 'label-1', label: 'Label 1' },
+          { value: 'label-2', label: 'Label 2' },
+          { value: 'label-3', label: 'Label 3' },
+        ]}
+      />
       <TextControls
         title="Text Controls"
         placeholder="Type something..."
