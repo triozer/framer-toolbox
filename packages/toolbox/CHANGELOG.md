@@ -1,5 +1,11 @@
 # @triozer/framer-toolbox
 
+## 0.6.0
+
+### Minor Changes
+
+- [#114](https://github.com/triozer/framer-toolbox/pull/114) [`eba9d41`](https://github.com/triozer/framer-toolbox/commit/eba9d414a59115571b616b958f63ddf7d719b07d) Thanks [@triozer](https://github.com/triozer)! - Bump framer-plugin peer dependency version
+
 ## 0.5.1
 
 ### Patch Changes
