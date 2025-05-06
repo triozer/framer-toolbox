@@ -76,8 +76,8 @@ importers:
   packages/toolbox:
     dependencies:
       framer-plugin:
-        specifier: ^2
-        version: 2.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^3
+        version: 3.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^18
         version: 18.3.1
@@ -140,8 +140,8 @@ importers:
         specifier: ^11.11.17
         version: 11.11.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
-        specifier: ^2
-        version: 2.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^3
+        version: 3.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       localforage:
         specifier: ^1.10.0
         version: 1.10.0
@@ -207,8 +207,8 @@ importers:
         specifier: ^11.11.17
         version: 11.11.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       framer-plugin:
-        specifier: ^2
-        version: 2.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^3
+        version: 3.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       hex-rgb:
         specifier: ^5.0.0
         version: 5.0.0
@@ -2039,8 +2039,8 @@ packages:
       react-dom:
         optional: true
 
-  framer-plugin@2.0.2:
-    resolution: {integrity: sha512-Sm/7D1SisMp5JfDFb4Tb9omgbsqxNFNrOAMgJj6beIFAEPW7saSgc2sAWM00g1J/jdolOPVtD61S6z3EgqJFDg==}
+  framer-plugin@3.2.0:
+    resolution: {integrity: sha512-KPFjygdYlI3fEqIIR1yElK8XSVe75XxIlWYXOSlYc0oHKI430yANqfmrLHlpdgEyjaf/nJqmjnget4YOvtgvfA==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -5335,7 +5335,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  framer-plugin@2.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  framer-plugin@3.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
